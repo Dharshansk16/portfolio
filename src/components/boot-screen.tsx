@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 export default function BootScreen() {
   const [text, setText] = useState("");
   const [showCursor, setShowCursor] = useState(true);
-  const fullText = "Welcome to Dharshan's DevSpace";
+  const fullText = "Welcome to My DevSpace";
 
   useEffect(() => {
     let index = 0;

@@ -11,7 +11,7 @@ interface AboutAppProps {
 const stats = [
   {
     label: "Lines of Code",
-    value: "10,000+",
+    value: "20,000+",
     icon: Code,
     color: "text-cyan-400",
   },
@@ -27,24 +27,31 @@ const stats = [
     icon: Zap,
     color: "text-purple-400",
   },
-  { label: "Years Learning", value: "2+", icon: Heart, color: "text-pink-400" },
+  { label: "Years Learning", value: "3+", icon: Heart, color: "text-pink-400" },
 ];
 
 const skills = [
+  { name: "python", level: 90, color: "bg-yellow-500" },
+  { name: "django", level: 80, color: "bg-green-500" },
   { name: "React", level: 85, color: "bg-blue-500" },
   { name: "Next.js", level: 80, color: "bg-gray-500" },
   { name: "TypeScript", level: 75, color: "bg-blue-600" },
   { name: "TailwindCSS", level: 90, color: "bg-cyan-500" },
   { name: "Node.js", level: 70, color: "bg-green-500" },
   { name: "MongoDB", level: 65, color: "bg-green-600" },
+  { name: "PostgreSQL", level: 70, color: "bg-purple-500" },
+  { name: "Git", level: 80, color: "bg-orange-500" },
+  { name: "Docker", level: 60, color: "bg-blue-700" },
 ];
 
 const techStack = [
+  "django",
   "React",
   "Next.js",
   "TypeScript",
   "JavaScript",
   "TailwindCSS",
+  "Prisma",
   "Node.js",
   "Express",
   "MongoDB",
