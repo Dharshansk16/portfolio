@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Briefcase, FileText, User, Terminal } from "lucide-react";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import type { AppType } from "@/app/page";
 
 interface DashboardProps {
@@ -43,25 +42,19 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: "linear" }}
       className="min-h-screen flex flex-col items-center justify-center p-8"
     >
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "linear", delay: 0.2 }}
         className="text-center mb-12"
       >
-        <motion.h1
-          initial={{ scale: 0.95 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
-          className="text-4xl md:text-6xl py-2 font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4"
-        >
+        <h1 className="text-4xl md:text-6xl py-2 font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4">
           My DevSpace
-        </motion.h1>
+        </h1>
         <p className="text-gray-400 text-lg font-mono">{terminalCommand}</p>
       </motion.div>
 
@@ -74,36 +67,24 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
           visible: {
             transition: {
               staggerChildren: 0.1,
+              ease: "linear",
             },
           },
         }}
         className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
       >
-        {apps.map((app) => (
+        {apps.map((app, index) => (
           <motion.div
             key={app.id}
-            variants={{
-              hidden: { opacity: 0, scale: 0.8 },
-              visible: {
-                opacity: 1,
-                scale: 1,
-                transition: {
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                },
-              },
-            }}
-            whileHover={{
-              scale: 1.1,
-              y: -8,
-              transition: { type: "tween", duration: 0.15, ease: "easeOut" },
-            }}
-            whileTap={{ scale: 0.95 }}
             onClick={() => onAppOpen(app.id)}
             className="cursor-pointer group"
+            variants={{
+              hidden: { opacity: 0, y: 5 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.6, ease: "easeIn" }}
           >
-            <div className="relative">
+            <div className="relative transition-transform duration-200 ease-linear group-hover:scale-105">
               <div
                 className={`w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br ${app.color} p-4 shadow-xl backdrop-blur-sm border border-white/10 group-hover:shadow-cyan-500/30 transition-all duration-200 ease-in-out`}
               >
@@ -120,9 +101,9 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
 
       {/* Terminal Display */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.5 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, ease: "linear", delay: 0.4 }}
         className="w-full max-w-2xl"
       >
         <div className="bg-black/60 backdrop-blur-md border border-cyan-500/30 rounded-lg p-4 font-mono shadow-md">

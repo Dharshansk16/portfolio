@@ -11,7 +11,7 @@ export default function BootScreen() {
     "Fetching configs...",
     "Mounting dashboard modules...",
     "Applying themes...",
-    "✅ Boot complete. Welcome!",
+    "Boot complete. Welcome!",
   ];
 
   useEffect(() => {

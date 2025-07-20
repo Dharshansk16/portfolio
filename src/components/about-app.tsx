@@ -68,10 +68,9 @@ const techGroups = {
 export default function AboutApp({ onBack }: AboutAppProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "linear" }}
       className="min-h-screen p-8 space-y-12"
     >
       <div className="flex items-center justify-between mb-6">
@@ -94,12 +93,7 @@ export default function AboutApp({ onBack }: AboutAppProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8"
-        >
+        <div className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8">
           <div className="text-center mb-6">
             <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center text-4xl font-bold text-black shadow-lg">
               D
@@ -144,21 +138,13 @@ export default function AboutApp({ onBack }: AboutAppProps) {
               <span className="font-medium">Problem Solving, Teamwork</span>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="grid grid-cols-2 gap-4"
-        >
-          {stats.map((stat, i) => (
-            <motion.div
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {stats.map((stat) => (
+            <div
               key={stat.label}
               className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:border-cyan-500/40"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 + i * 0.1 }}
             >
               <stat.icon className={`w-8 h-8 mx-auto mb-2 ${stat.color}`} />
               <div className={`text-2xl font-bold pb-2 ${stat.color}`}>
@@ -168,71 +154,37 @@ export default function AboutApp({ onBack }: AboutAppProps) {
               <p className="text-sm text-muted-foreground py-2">
                 {stat.description}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={{
-          hidden: { opacity: 0, y: 40 },
-          visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-        }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"
-      >
-        <motion.div
-          className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-6"
-          whileInView={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 30 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
+
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-6">
           <h3 className="text-xl font-semibold text-white mb-4">Skills</h3>
           <div className="space-y-4">
-            {skills.map((skill, i) => (
+            {skills.map((skill) => (
               <div key={skill.name}>
                 <div className="flex justify-between text-sm md:text-lg text-gray-300 mb-1">
                   <span>{skill.name}</span>
                   <span className="text-gray-400">{skill.level}%</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-3 md:h-4">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    transition={{
-                      delay: 0.2,
-                      duration: 1,
-                      ease: [0.25, 0.8, 0.25, 1],
-                    }}
+                  <div
                     className={`h-3 md:h-4 rounded-full ${skill.color}`}
-                    viewport={{ once: true }}
+                    style={{ width: `${skill.level}%` }}
                   />
                 </div>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        {/* Tech Stack Section */}
-        <motion.div
-          className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-6"
-          whileInView={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 30 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
+        <div className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-6">
           <h3 className="text-xl font-semibold text-white mb-6">Tech Stack</h3>
           <div className="space-y-4">
-            {Object.entries(techGroups).map(([group, techs], i) => (
-              <motion.div
-                key={group}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + i * 0.1 }}
-                viewport={{ once: true }}
-              >
+            {Object.entries(techGroups).map(([group, techs]) => (
+              <div key={group}>
                 <h4 className="text-cyan-400 font-semibold mb-2">{group}</h4>
                 <div className="flex flex-wrap gap-3">
                   {techs.map((tech) => (
@@ -244,11 +196,11 @@ export default function AboutApp({ onBack }: AboutAppProps) {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
-        </motion.div>
-      </motion.section>
+        </div>
+      </section>
     </motion.div>
   );
 }
