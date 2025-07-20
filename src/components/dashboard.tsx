@@ -36,23 +36,9 @@ const apps = [
   },
 ];
 
-const typingSpeed = 10;
 const terminalCommand = "> select_application()";
 
 export default function Dashboard({ onAppOpen }: DashboardProps) {
-  const [terminalText, setTerminalText] = useState("");
-  const [typingIndex, setTypingIndex] = useState(0);
-
-  useEffect(() => {
-    if (typingIndex < terminalCommand.length) {
-      const timeout = setTimeout(() => {
-        setTerminalText((prev) => prev + terminalCommand[typingIndex]);
-        setTypingIndex(typingIndex + 1);
-      }, typingSpeed);
-      return () => clearTimeout(timeout);
-    }
-  }, [typingIndex]);
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -72,11 +58,11 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
           initial={{ scale: 0.95 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.3, duration: 0.5, type: "spring" }}
-          className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4"
+          className="text-4xl md:text-6xl py-2 font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4"
         >
-          Dharshan's DevSpace
+          My DevSpace
         </motion.h1>
-        <p className="text-gray-400 text-lg font-mono">{terminalText}</p>
+        <p className="text-gray-400 text-lg font-mono">{terminalCommand}</p>
       </motion.div>
 
       {/* App Grid */}
@@ -111,7 +97,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             whileHover={{
               scale: 1.1,
               y: -8,
-              transition: { type: "spring", stiffness: 200, damping: 10 },
+              transition: { type: "tween", duration: 0.15, ease: "easeOut" },
             }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onAppOpen(app.id)}
@@ -145,17 +131,12 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
             <span className="text-gray-400 text-sm ml-4">
-              dharshan@devspace:~$
+              darsh@devspace:~$
             </span>
           </div>
           <div className="flex items-center">
             <Terminal className="w-4 h-4 text-cyan-400 mr-2" />
-            <span className="text-cyan-400">
-              {terminalText}
-              {typingIndex < terminalCommand.length && (
-                <span className="animate-pulse">_</span>
-              )}
-            </span>
+            <span className="text-cyan-400">{terminalCommand}</span>
           </div>
         </div>
       </motion.div>

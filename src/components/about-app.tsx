@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Code, Coffee, Zap, Heart } from "lucide-react";
+import { ArrowLeft, Brain, Palette, Server, Users, Flame } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface AboutAppProps {
@@ -10,56 +10,60 @@ interface AboutAppProps {
 
 const stats = [
   {
-    label: "Lines of Code",
-    value: "20,000+",
-    icon: Code,
-    color: "text-cyan-400",
+    label: "Problem Solving",
+    value: "400+ Leetode Problems Solved",
+    description:
+      "Strong analytical skills honed through competitive programming and algorithmic thinking.",
+    icon: Brain,
+    color: "text-blue-500",
   },
   {
-    label: "Cups of Coffee",
-    value: "500+",
-    icon: Coffee,
-    color: "text-orange-400",
+    label: "Leadership & Mentorship",
+    value: "CP Team Lead",
+    description:
+      "Led coding club initiatives, mentored juniors, and organized contests and workshops.",
+    icon: Users,
+    color: "text-purple-500",
   },
   {
-    label: "Projects Built",
-    value: "15+",
-    icon: Zap,
-    color: "text-purple-400",
+    label: "Backend Development",
+    value: "Robust API Systems",
+    description:
+      "Built secure, scalable backends using Django, REST, PostgreSQL, Prisma, and auth systems.",
+    icon: Server,
+    color: "text-green-500",
   },
-  { label: "Years Learning", value: "3+", icon: Heart, color: "text-pink-400" },
+  {
+    label: "Developer Journey",
+    value: "3+ Years Learning",
+    description:
+      "Continual growth in full-stack dev, system design, and software craftsmanship.",
+    icon: Flame,
+    color: "text-orange-500",
+  },
 ];
 
 const skills = [
-  { name: "python", level: 90, color: "bg-yellow-500" },
-  { name: "django", level: 80, color: "bg-green-500" },
-  { name: "React", level: 85, color: "bg-blue-500" },
-  { name: "Next.js", level: 80, color: "bg-gray-500" },
-  { name: "TypeScript", level: 75, color: "bg-blue-600" },
-  { name: "TailwindCSS", level: 90, color: "bg-cyan-500" },
-  { name: "Node.js", level: 70, color: "bg-green-500" },
-  { name: "MongoDB", level: 65, color: "bg-green-600" },
-  { name: "PostgreSQL", level: 70, color: "bg-purple-500" },
-  { name: "Git", level: 80, color: "bg-orange-500" },
-  { name: "Docker", level: 60, color: "bg-blue-700" },
+  { name: "Problem Solving", level: 90, color: "bg-yellow-500" },
+  { name: "Frontend", level: 80, color: "bg-green-500" },
+  { name: "Backend", level: 85, color: "bg-blue-500" },
+  { name: "UI/UX", level: 80, color: "bg-gray-500" },
+  { name: "DevOps", level: 75, color: "bg-blue-600" },
 ];
 
-const techStack = [
-  "django",
-  "React",
-  "Next.js",
-  "TypeScript",
-  "JavaScript",
-  "TailwindCSS",
-  "Prisma",
-  "Node.js",
-  "Express",
-  "MongoDB",
-  "PostgreSQL",
-  "Git",
-  "Docker",
-  "AWS",
-];
+const techGroups = {
+  "Core Languages": ["Python", "TypeScript", "C++"],
+  "Frontend Tools": ["React", "Next.js", "TailwindCSS"],
+  "Backend & DB": [
+    "Django",
+    "Node.js",
+    "Express",
+    "PostgreSQL",
+    "MongoDB",
+    "Prisma",
+  ],
+  "DevOps & Utilities": ["Docker", "Git", "GitHub", "Vercel"],
+};
 
 export default function AboutApp({ onBack }: AboutAppProps) {
   return (
@@ -68,10 +72,9 @@ export default function AboutApp({ onBack }: AboutAppProps) {
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -100 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen p-8"
+      className="min-h-screen p-8 space-y-12"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-4">
           <Button
             variant="ghost"
@@ -84,131 +87,168 @@ export default function AboutApp({ onBack }: AboutAppProps) {
           <h1 className="text-3xl font-bold text-cyan-400">About Me</h1>
         </div>
         <div className="flex space-x-2">
-          <div className="w-3 h-3 rounded-full bg-red-500"></div>
-          <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-          <div className="w-3 h-3 rounded-full bg-green-500"></div>
+          <div className="w-3 h-3 rounded-full bg-red-500" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500" />
+          <div className="w-3 h-3 rounded-full bg-green-500" />
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Profile Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-6"
+          className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8"
         >
           <div className="text-center mb-6">
-            <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center text-3xl font-bold text-black">
+            <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center text-4xl font-bold text-black shadow-lg">
               D
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2">Dharshan</h2>
-            <p className="text-cyan-400 font-mono">Full Stack Developer</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-1">
+              Dharshan S Kotian
+            </h2>
+            <p className="text-cyan-400 font-mono text-sm md:text-base">
+              Full Stack Developer
+            </p>
           </div>
 
-          <p className="text-gray-300 text-center mb-6">
-            Passionate fresher developer with a love for creating beautiful,
-            functional web applications. Always eager to learn new technologies
-            and solve complex problems.
+          <p className="text-gray-300 text-center mb-6 text-sm md:text-base leading-relaxed">
+            I'm a passionate full-stack developer who enjoys turning ideas into
+            real-world solutions. I thrive in clean code, collaborative teams,
+            and cutting-edge stacks.
           </p>
 
-          <div className="space-y-3">
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-400">Location:</span>
-              <span className="text-white">India</span>
+          <div className="grid grid-cols-2 gap-4 text-sm md:text-base text-white">
+            <div>
+              <span className="text-gray-400">📍 Location:</span>{" "}
+              <span className="font-medium">India</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-400">Experience:</span>
-              <span className="text-white">Fresher</span>
+            <div>
+              <span className="text-gray-400">🎓 Experience:</span>{" "}
+              <span className="font-medium">Fresher</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-400">Favorite Editor:</span>
-              <span className="text-white">VS Code</span>
+            <div>
+              <span className="text-gray-400">🛠️ Technical Stack:</span>{" "}
+              <span className="font-medium"> React, Next.js, Django</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="text-gray-400">Current Focus:</span>
-              <span className="text-white">React & Next.js</span>
+            <div>
+              <span className="text-gray-400">📚 Learning:</span>{" "}
+              <span className="font-medium">Next.js & System Design</span>
+            </div>
+            <div>
+              <span className="text-gray-400">🎯 Interests:</span>{" "}
+              <span className="font-medium">Real-World Problem Solving</span>
+            </div>
+            <div>
+              <span className="text-gray-400">💡 Strengths:</span>{" "}
+              <span className="font-medium">Problem Solving, Teamwork</span>
             </div>
           </div>
         </motion.div>
 
-        {/* Stats Grid */}
-        <div className="space-y-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 gap-4"
-          >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.4 + index * 0.1 }}
-                className="bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center hover:border-cyan-500/50 transition-all duration-300"
-              >
-                <stat.icon className={`w-8 h-8 mx-auto mb-2 ${stat.color}`} />
-                <div className={`text-2xl font-bold ${stat.color} mb-1`}>
-                  {stat.value}
-                </div>
-                <div className="text-gray-400 text-sm">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Skills */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-6"
-          >
-            <h3 className="text-xl font-semibold text-white mb-4">Skills</h3>
-            <div className="space-y-4">
-              {skills.map((skill, index) => (
-                <div key={skill.name}>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span className="text-gray-300">{skill.name}</span>
-                    <span className="text-gray-400">{skill.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={{ width: `${skill.level}%` }}
-                      transition={{ delay: 0.6 + index * 0.1, duration: 0.8 }}
-                      className={`h-2 rounded-full ${skill.color}`}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Tech Stack */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
-        className="mt-8 bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-6"
-      >
-        <h3 className="text-xl font-semibold text-white mb-4">Tech Stack</h3>
-        <div className="flex flex-wrap gap-3">
-          {techStack.map((tech, index) => (
-            <motion.span
-              key={tech}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-2 gap-4"
+        >
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-4 text-center hover:border-cyan-500/40"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8 + index * 0.05 }}
-              className="px-3 py-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 text-sm rounded-full border border-cyan-500/30 hover:border-cyan-400 transition-colors"
+              transition={{ delay: 0.4 + i * 0.1 }}
             >
-              {tech}
-            </motion.span>
+              <stat.icon className={`w-8 h-8 mx-auto mb-2 ${stat.color}`} />
+              <div className={`text-2xl font-bold pb-2 ${stat.color}`}>
+                {stat.label}
+              </div>
+              <p className="text-gray-400 text-sm">{stat.value}</p>
+              <p className="text-sm text-muted-foreground py-2">
+                {stat.description}
+              </p>
+            </motion.div>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          hidden: { opacity: 0, y: 40 },
+          visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+        }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"
+      >
+        <motion.div
+          className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-6"
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h3 className="text-xl font-semibold text-white mb-4">Skills</h3>
+          <div className="space-y-4">
+            {skills.map((skill, i) => (
+              <div key={skill.name}>
+                <div className="flex justify-between text-sm md:text-lg text-gray-300 mb-1">
+                  <span>{skill.name}</span>
+                  <span className="text-gray-400">{skill.level}%</span>
+                </div>
+                <div className="w-full bg-gray-700 rounded-full h-3 md:h-4">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.level}%` }}
+                    transition={{
+                      delay: 0.2,
+                      duration: 1,
+                      ease: [0.25, 0.8, 0.25, 1],
+                    }}
+                    className={`h-3 md:h-4 rounded-full ${skill.color}`}
+                    viewport={{ once: true }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Tech Stack Section */}
+        <motion.div
+          className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-6"
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 30 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <h3 className="text-xl font-semibold text-white mb-6">Tech Stack</h3>
+          <div className="space-y-4">
+            {Object.entries(techGroups).map(([group, techs], i) => (
+              <motion.div
+                key={group}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 + i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-cyan-400 font-semibold mb-2">{group}</h4>
+                <div className="flex flex-wrap gap-3">
+                  {techs.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-2 bg-cyan-500/10 text-cyan-300 border border-cyan-400/30 rounded-full text-sm hover:border-cyan-300 transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </motion.section>
     </motion.div>
   );
 }

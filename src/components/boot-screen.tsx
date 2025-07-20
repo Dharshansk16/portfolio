@@ -1,32 +1,30 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export default function BootScreen() {
-  const [text, setText] = useState("");
-  const [showCursor, setShowCursor] = useState(true);
-  const fullText = "Welcome to My DevSpace";
+  const [bootMessages, setBootMessages] = useState<string[]>([]);
+  const messages = [
+    "Loading environment variables...",
+    "Connecting to dev server...",
+    "Fetching configs...",
+    "Mounting dashboard modules...",
+    "Applying themes...",
+    "✅ Boot complete. Welcome!",
+  ];
 
   useEffect(() => {
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setText(fullText.slice(0, index + 1));
-        index++;
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < messages.length) {
+        setBootMessages((prev) => [...prev, messages[i]]);
+        i++;
       } else {
-        clearInterval(timer);
+        clearInterval(interval);
       }
-    }, 100);
-
-    const cursorTimer = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 500);
-
-    return () => {
-      clearInterval(timer);
-      clearInterval(cursorTimer);
-    };
+    }, 600);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -34,42 +32,48 @@ export default function BootScreen() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="flex items-center justify-center min-h-screen bg-black"
+      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] px-4"
     >
-      <div className="text-center">
-        <motion.div
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center">
-            <span className="text-2xl font-bold text-black">D</span>
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-md w-full bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-xl text-left font-mono text-sm text-green-400"
+      >
+        <div className="flex items-center mb-6">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center text-black font-bold text-xl shadow-md">
+            D
           </div>
-        </motion.div>
-
-        <div className="font-mono text-2xl text-cyan-400">
-          {text}
-          <span
-            className={`${
-              showCursor ? "opacity-100" : "opacity-0"
-            } transition-opacity`}
-          >
-            _
+          <span className="ml-3 text-cyan-300 tracking-wide text-base">
+            DevSpace Boot Console
           </span>
+        </div>
+
+        <div className="space-y-2 h-48 overflow-hidden">
+          {bootMessages.map((msg, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-green-400"
+            >
+              {msg}
+            </motion.div>
+          ))}
         </div>
 
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: "200px" }}
-          transition={{ delay: 2, duration: 1 }}
-          className="h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mt-8 rounded-full"
+          animate={{ width: "100%" }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
+          className="h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full mt-6"
         />
 
-        <div className="mt-4 text-sm text-gray-400 font-mono">
-          Initializing developer environment...
+        <div className="mt-3 text-xs text-gray-400">
+          system@devspace ~ booting...
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }
