@@ -88,12 +88,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div className="mb-6 space-y-3">
                     <div className="flex items-center space-x-3 text-sm text-gray-300">
                       <Mail className="w-4 h-4 text-cyan-400" />
-                      <span>dharshan@example.com</span>
+                      <span>darshankotian35@gmail.com</span>
                     </div>
-                    <div className="flex items-center space-x-3 text-sm text-gray-300">
+                    {/* <div className="flex items-center space-x-3 text-sm text-gray-300">
                       <Phone className="w-4 h-4 text-cyan-400" />
-                      <span>+91 12345 67890</span>
-                    </div>
+                      <span></span>
+                    </div> */}
                     <div className="flex items-center space-x-3 text-sm text-gray-300">
                       <MapPin className="w-4 h-4 text-cyan-400" />
                       <span>India</span>

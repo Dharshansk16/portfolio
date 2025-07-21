@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  username  String?  @unique
+  avatar    String?
+  password  String
+  role      String   @default("ADMIN")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //relationships
+  profile  Profile?
+  blogs    Blog[]
+  projects Project[]
+  sessions Session[]
+
+  @@map("users")
+}
+
+model Profile {
+  id           String      @id @default(cuid())
+  userId       String      @unique
+  bio          String?
+  skills       String[]
+  techStack    TechStack[]
+  location     String?
+  website      String?
+  githubUrl    String?
+  linkedinUrl  String?
+  instagramUrl String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  //relationships
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("profiles")
+}
+
+model TechStack {
+  id          String            @id @default(cuid())
+  name        String
+  category    TechStackCategory
+  description String?
+  icon        String?
+  profileId   String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  //relationships
+  Profile Profile? @relation(fields: [profileId], references: [id])
+
+  @@map("tech_stacks")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  //relationships
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("sessions")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  image       String?
+  images      String[]
+  githubUrl   String?
+  liveUrl     String?
+  tech        String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+
+  //relationships
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Blog {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  content     String
+  image       String?
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+
+  //relationships
+  user User @relation(fields: [userId], references: [id])
+}
+
+//enums
+
+enum TechStackCategory {
+  LANGUAGES
+  FRONTEND
+  BACKEND
+  DEVOPS
+}

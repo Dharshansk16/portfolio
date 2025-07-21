@@ -42,6 +42,7 @@ const blogPosts = [
 export default function BlogApp({ onBack }: BlogAppProps) {
   const [terminalText, setTerminalText] = useState("");
   const [showPosts, setShowPosts] = useState(false);
+  const [comingSoon, setComingSoon] = useState(false);
   const fullText = "> fetching latest blogs...";
 
   useEffect(() => {
@@ -52,19 +53,18 @@ export default function BlogApp({ onBack }: BlogAppProps) {
         index++;
       } else {
         clearInterval(timer);
-        setTimeout(() => setShowPosts(true), 500);
+        setTimeout(() => setComingSoon(true), 100);
       }
-    }, 50);
+    }, 10);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "linear" }}
       className="min-h-screen p-8"
     >
       {/* Header */}
@@ -103,7 +103,7 @@ export default function BlogApp({ onBack }: BlogAppProps) {
               key={post.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
+              transition={{ delay: index * 0.2, duration: 0.6, ease: "linear" }}
               className="bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300 group cursor-pointer"
             >
               <div className="flex items-start justify-between mb-4">
@@ -141,19 +141,18 @@ export default function BlogApp({ onBack }: BlogAppProps) {
       )}
 
       {/* Coming Soon Message */}
-      {showPosts && (
+      {comingSoon && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+          transition={{ delay: 1, duration: 0.8, ease: "linear" }}
           className="text-center mt-12 p-8 bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl"
         >
           <h3 className="text-xl font-semibold text-cyan-400 mb-2">
-            More Posts Coming Soon!
+            Coming Soon!
           </h3>
           <p className="text-gray-400">
-            Stay tuned for more insights on web development, programming tips,
-            and tech tutorials.
+            Stay tuned for stories from my development journey.
           </p>
         </motion.div>
       )}
