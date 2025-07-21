@@ -16,128 +16,13 @@ import {
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { projects } from "@/constants/project";
+import FloatingParticles from "@/components/particles/floating-particles";
+import AnimatedBackground from "@/components/animations/animated-background";
 
 interface ProjectsAppProps {
   onBack: () => void;
 }
-
-const projects = [
-  {
-    id: 1,
-    title: "E-Commerce Platform",
-    description:
-      "A full-stack e-commerce solution built with Next.js, featuring user authentication, payment integration, and admin dashboard.",
-    longDescription:
-      "This comprehensive e-commerce platform revolutionizes online shopping with its cutting-edge features. Built with Next.js 14 and TypeScript, it offers lightning-fast performance and exceptional user experience. The platform includes advanced features like real-time inventory management, AI-powered product recommendations, multi-currency support, and seamless payment processing through Stripe.",
-    image: "/placeholder.svg?height=400&width=600&text=E-Commerce+Platform",
-    images: [
-      "/placeholder.svg?height=400&width=600&text=Homepage",
-      "/placeholder.svg?height=400&width=600&text=Product+Page",
-      "/placeholder.svg?height=400&width=600&text=Cart+Checkout",
-      "/placeholder.svg?height=400&width=600&text=Admin+Dashboard",
-    ],
-    tech: [
-      "Next.js",
-      "TypeScript",
-      "Prisma",
-      "Stripe",
-      "TailwindCSS",
-      "PostgreSQL",
-    ],
-    github: "https://github.com",
-    live: "https://demo.com",
-    color: "from-blue-500 via-purple-500 to-cyan-500",
-    category: "Full Stack",
-    status: "Completed",
-    year: "2024",
-    duration: "3 months",
-    team: "Solo Project",
-    views: 1234,
-    likes: 89,
-    stars: 4.8,
-  },
-  {
-    id: 2,
-    title: "AI Task Management",
-    description:
-      "An intelligent task management application with AI-powered scheduling, real-time collaboration, and advanced analytics.",
-    longDescription:
-      "Revolutionary task management powered by artificial intelligence. This application uses machine learning algorithms to optimize task scheduling, predict project timelines, and enhance team productivity. Features include smart notifications, automated task prioritization, team collaboration tools, and comprehensive analytics dashboard.",
-    image: "/placeholder.svg?height=400&width=600&text=AI+Task+Manager",
-    images: [
-      "/placeholder.svg?height=400&width=600&text=Dashboard",
-      "/placeholder.svg?height=400&width=600&text=AI+Scheduler",
-      "/placeholder.svg?height=400&width=600&text=Team+Collaboration",
-      "/placeholder.svg?height=400&width=600&text=Analytics",
-    ],
-    tech: ["React", "Node.js", "OpenAI", "Socket.io", "MongoDB", "Python"],
-    github: "https://github.com",
-    live: "https://demo.com",
-    color: "from-green-500 via-emerald-500 to-teal-500",
-    category: "AI/ML",
-    status: "In Progress",
-    year: "2024",
-    duration: "4 months",
-    team: "2 Developers",
-    views: 892,
-    likes: 156,
-    stars: 4.9,
-  },
-  {
-    id: 3,
-    title: "3D Portfolio Experience",
-    description:
-      "An immersive 3D portfolio website built with Three.js, featuring interactive 3D models and stunning visual effects.",
-    longDescription:
-      "Step into the future of web portfolios with this immersive 3D experience. Built using Three.js and React Three Fiber, this portfolio showcases projects in a virtual 3D environment. Users can navigate through different rooms, interact with 3D models, and experience projects in an entirely new dimension.",
-    image: "/placeholder.svg?height=400&width=600&text=3D+Portfolio",
-    images: [
-      "/placeholder.svg?height=400&width=600&text=3D+Scene",
-      "/placeholder.svg?height=400&width=600&text=Interactive+Models",
-      "/placeholder.svg?height=400&width=600&text=Virtual+Gallery",
-      "/placeholder.svg?height=400&width=600&text=Particle+Effects",
-    ],
-    tech: ["Three.js", "React", "WebGL", "GLSL", "Blender", "Framer Motion"],
-    github: "https://github.com",
-    live: "https://demo.com",
-    color: "from-purple-500 via-pink-500 to-rose-500",
-    category: "3D/WebGL",
-    status: "Completed",
-    year: "2024",
-    duration: "2 months",
-    team: "Solo Project",
-    views: 2156,
-    likes: 234,
-    stars: 4.7,
-  },
-  {
-    id: 4,
-    title: "Blockchain DeFi Platform",
-    description:
-      "A decentralized finance platform built on Ethereum, featuring yield farming, staking, and NFT marketplace.",
-    longDescription:
-      "Enter the world of decentralized finance with this comprehensive DeFi platform. Built on Ethereum blockchain using Solidity smart contracts, it offers yield farming opportunities, staking mechanisms, and an integrated NFT marketplace. The platform ensures security through extensive testing and audit processes.",
-    image: "/placeholder.svg?height=400&width=600&text=DeFi+Platform",
-    images: [
-      "/placeholder.svg?height=400&width=600&text=Trading+Interface",
-      "/placeholder.svg?height=400&width=600&text=Staking+Pool",
-      "/placeholder.svg?height=400&width=600&text=NFT+Marketplace",
-      "/placeholder.svg?height=400&width=600&text=Wallet+Connect",
-    ],
-    tech: ["Solidity", "Web3.js", "React", "Hardhat", "IPFS", "MetaMask"],
-    github: "https://github.com",
-    live: "https://demo.com",
-    color: "from-orange-500 via-red-500 to-pink-500",
-    category: "Blockchain",
-    status: "Beta",
-    year: "2024",
-    duration: "5 months",
-    team: "3 Developers",
-    views: 1567,
-    likes: 198,
-    stars: 4.6,
-  },
-];
 
 export default function ProjectsApp({ onBack }: ProjectsAppProps) {
   const [selectedProject, setSelectedProject] = useState<
@@ -146,10 +31,6 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [filter, setFilter] = useState("All");
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const categories = ["All", "Full Stack", "AI/ML", "3D/WebGL", "Blockchain"];
 
   // Auto-play slideshow
   useEffect(() => {
@@ -162,11 +43,6 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
       return () => clearInterval(interval);
     }
   }, [selectedProject, isPlaying]);
-
-  const filteredProjects =
-    filter === "All"
-      ? projects
-      : projects.filter((project) => project.category === filter);
 
   const nextImage = () => {
     if (selectedProject) {
@@ -186,47 +62,22 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -100 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "linear" }}
       className="min-h-screen relative overflow-hidden"
     >
       {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,209,255,0.1),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(147,51,234,0.1),transparent_50%)]" />
-      </div>
-
+      <AnimatedBackground />
       {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-400 rounded-full"
-            animate={{
-              x: [0, Math.random() * 100 - 50],
-              y: [0, Math.random() * 100 - 50],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: Math.random() * 3 + 2,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: Math.random() * 2,
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
-      </div>
+      <FloatingParticles />
 
       <div className="relative z-10 p-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "linear" }}
           className="flex items-center justify-between mb-8"
         >
           <div className="flex items-center space-x-4">
@@ -256,34 +107,12 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
           </div>
         </motion.div>
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-wrap gap-3 mb-8"
-        >
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setFilter(category)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 backdrop-blur-sm border ${
-                filter === category
-                  ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white border-transparent shadow-lg shadow-cyan-500/25"
-                  : "bg-black/30 text-gray-400 border-white/10 hover:border-cyan-500/50 hover:text-cyan-400"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </motion.div>
-
         {/* Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {filteredProjects.map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onHoverStart={() => setHoveredProject(project.id)}
@@ -312,51 +141,18 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-                  {/* Status Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${
-                        project.status === "Completed"
-                          ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                          : project.status === "In Progress"
-                          ? "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30"
-                          : "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                      }`}
-                    >
-                      {project.status}
-                    </span>
-                  </div>
-
-                  {/* Stats */}
-                  <div className="absolute top-4 right-4 flex space-x-2">
-                    <div className="flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
-                      <Eye className="w-3 h-3 text-cyan-400" />
-                      <span className="text-xs text-white">
-                        {project.views}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-1 bg-black/50 backdrop-blur-sm rounded-full px-2 py-1">
-                      <Heart className="w-3 h-3 text-pink-400" />
-                      <span className="text-xs text-white">
-                        {project.likes}
-                      </span>
-                    </div>
-                  </div>
-
                   {/* Hover Overlay */}
                   <motion.div
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: hoveredProject === project.id ? 1 : 0 }}
+                    animate={{
+                      opacity: hoveredProject === project.id ? 1 : 0,
+                    }}
                     className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center"
                   >
                     <div className="text-center">
                       <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{
-                          scale: hoveredProject === project.id ? 1 : 0,
-                        }}
-                        transition={{ delay: 0.1 }}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                         className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center mb-4 mx-auto"
                       >
                         <ExternalLink className="w-8 h-8 text-white" />
@@ -372,12 +168,6 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                     <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
                       {project.title}
                     </h3>
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-sm text-gray-400">
-                        {project.stars}
-                      </span>
-                    </div>
                   </div>
 
                   <p className="text-gray-400 text-sm mb-4 line-clamp-2">
@@ -576,28 +366,6 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                     </div>
                   </div>
 
-                  {/* Project Stats */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Eye className="w-4 h-4 text-cyan-400" />
-                        <span className="text-sm text-gray-400">Views</span>
-                      </div>
-                      <p className="text-2xl font-bold text-white">
-                        {selectedProject.views.toLocaleString()}
-                      </p>
-                    </div>
-                    <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Heart className="w-4 h-4 text-pink-400" />
-                        <span className="text-sm text-gray-400">Likes</span>
-                      </div>
-                      <p className="text-2xl font-bold text-white">
-                        {selectedProject.likes}
-                      </p>
-                    </div>
-                  </div>
-
                   {/* Project Info */}
                   <div className="bg-white/5 rounded-xl p-4 border border-white/10">
                     <div className="grid grid-cols-2 gap-4 text-sm">
@@ -618,15 +386,6 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                         <p className="text-white font-medium">
                           {selectedProject.status}
                         </p>
-                      </div>
-                      <div>
-                        <span className="text-gray-400">Rating:</span>
-                        <div className="flex items-center space-x-1">
-                          <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                          <span className="text-white font-medium">
-                            {selectedProject.stars}
-                          </span>
-                        </div>
                       </div>
                     </div>
                   </div>

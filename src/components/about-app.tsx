@@ -1,69 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Brain, Palette, Server, Users, Flame } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { skills, techGroups, stats } from "@/constants/about";
 
 interface AboutAppProps {
   onBack: () => void;
 }
-
-const stats = [
-  {
-    label: "Problem Solving",
-    value: "400+ Leetode Problems Solved",
-    description:
-      "Strong analytical skills honed through competitive programming and algorithmic thinking.",
-    icon: Brain,
-    color: "text-blue-500",
-  },
-  {
-    label: "Leadership & Mentorship",
-    value: "CP Team Lead",
-    description:
-      "Led coding club initiatives, mentored juniors, and organized contests and workshops.",
-    icon: Users,
-    color: "text-purple-500",
-  },
-  {
-    label: "Backend Development",
-    value: "Robust API Systems",
-    description:
-      "Built secure, scalable backends using Django, REST, PostgreSQL, Prisma, and auth systems.",
-    icon: Server,
-    color: "text-green-500",
-  },
-  {
-    label: "Developer Journey",
-    value: "3+ Years Learning",
-    description:
-      "Continual growth in full-stack dev, system design, and software craftsmanship.",
-    icon: Flame,
-    color: "text-orange-500",
-  },
-];
-
-const skills = [
-  { name: "Problem Solving", level: 90, color: "bg-yellow-500" },
-  { name: "Frontend", level: 80, color: "bg-green-500" },
-  { name: "Backend", level: 85, color: "bg-blue-500" },
-  { name: "UI/UX", level: 80, color: "bg-gray-500" },
-  { name: "DevOps", level: 75, color: "bg-blue-600" },
-];
-
-const techGroups = {
-  "Core Languages": ["Python", "TypeScript", "C++"],
-  "Frontend Tools": ["React", "Next.js", "TailwindCSS"],
-  "Backend & DB": [
-    "Django",
-    "Node.js",
-    "Express",
-    "PostgreSQL",
-    "MongoDB",
-    "Prisma",
-  ],
-  "DevOps & Utilities": ["Docker", "Git", "GitHub", "Vercel"],
-};
 
 export default function AboutApp({ onBack }: AboutAppProps) {
   return (
@@ -93,49 +37,55 @@ export default function AboutApp({ onBack }: AboutAppProps) {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8">
-          <div className="text-center mb-6">
-            <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 flex items-center justify-center text-4xl font-bold text-black shadow-lg">
+        <div className="bg-black/50 border border-white/10 backdrop-blur-md rounded-2xl p-6 md:p-10 shadow-2xl">
+          <div className="flex flex-col items-center text-center space-y-6">
+            <div className="w-28 h-28 rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 flex items-center justify-center text-5xl font-bold text-black shadow-lg">
               D
             </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-1">
-              Dharshan S Kotian
-            </h2>
-            <p className="text-cyan-400 font-mono text-sm md:text-base">
-              Full Stack Developer
+
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white">
+                Dharshan S Kotian
+              </h2>
+              <p className="text-cyan-400 font-mono mt-1 text-sm md:text-base">
+                Full Stack Developer
+              </p>
+            </div>
+
+            <p className="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
+              I'm a dedicated full-stack developer with a strong focus on clean
+              code, practical design, and solving real-world problems. Whether
+              it's building scalable web apps or diving deep into backend
+              systems, I love learning by doing and strive to create things that
+              matter. Currently exploring advanced system design and mastering
+              full-stack frameworks like Next.js and Django.
             </p>
-          </div>
 
-          <p className="text-gray-300 text-center mb-6 text-sm md:text-base leading-relaxed">
-            I'm a passionate full-stack developer who enjoys turning ideas into
-            real-world solutions. I thrive in clean code, collaborative teams,
-            and cutting-edge stacks.
-          </p>
-
-          <div className="grid grid-cols-2 gap-4 text-sm md:text-base text-white">
-            <div>
-              <span className="text-gray-400">📍 Location:</span>{" "}
-              <span className="font-medium">India</span>
-            </div>
-            <div>
-              <span className="text-gray-400">🎓 Experience:</span>{" "}
-              <span className="font-medium">Fresher</span>
-            </div>
-            <div>
-              <span className="text-gray-400">🛠️ Technical Stack:</span>{" "}
-              <span className="font-medium"> React, Next.js, Django</span>
-            </div>
-            <div>
-              <span className="text-gray-400">📚 Learning:</span>{" "}
-              <span className="font-medium">Next.js & System Design</span>
-            </div>
-            <div>
-              <span className="text-gray-400">🎯 Interests:</span>{" "}
-              <span className="font-medium">Real-World Problem Solving</span>
-            </div>
-            <div>
-              <span className="text-gray-400">💡 Strengths:</span>{" "}
-              <span className="font-medium">Problem Solving, Teamwork</span>
+            <div className="flex flex-wrap justify-center gap-4 mt-4">
+              <a
+                href="https://github.com/Dharshansk16"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-cyan-400 hover:text-white transition"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/dharshan-s-kotian-5053aa280/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-500 hover:text-white transition"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://leetcode.com/u/Dharshan_S_Kotian/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-yellow-400 hover:text-black transition"
+              >
+                LeetCode
+              </a>
             </div>
           </div>
         </div>

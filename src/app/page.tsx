@@ -9,7 +9,7 @@ import BlogApp from "@/components/blog-app";
 import AboutApp from "@/components/about-app";
 import ContactModal from "@/components/contact-modal";
 import FloatingDock from "@/components/floating-dock";
-import BackgroundEffects from "@/components/background-effects";
+import BackgroundEffects from "@/components/particles/background-effects";
 
 export type AppType = "dashboard" | "projects" | "blog" | "about" | "resume";
 
