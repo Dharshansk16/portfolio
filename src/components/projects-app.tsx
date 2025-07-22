@@ -10,15 +10,13 @@ import {
   ChevronRight,
   Play,
   Pause,
-  Star,
-  Eye,
-  Heart,
 } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/constants/project";
 import FloatingParticles from "@/components/particles/floating-particles";
 import AnimatedBackground from "@/components/animations/animated-background";
+import Image from "next/image";
 
 interface ProjectsAppProps {
   onBack: () => void;
@@ -133,10 +131,14 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                     }}
                     transition={{ duration: 0.5 }}
                   />
-                  <img
+                  <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
+                    width={500}
+                    height={300}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    style={{ width: "100%", height: "100%" }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
 
                   {/* Overlay */}
@@ -321,16 +323,17 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
-                        className={`flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                        className={`relative flex-shrink-0 w-20 h-16 rounded-lg overflow-hidden border-2 transition-all ${
                           currentImageIndex === index
                             ? "border-cyan-400 shadow-lg shadow-cyan-400/25"
                             : "border-white/20 hover:border-white/40"
                         }`}
                       >
-                        <img
+                        <Image
                           src={image || "/placeholder.svg"}
                           alt={`Thumbnail ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                       </button>
                     ))}

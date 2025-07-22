@@ -26,7 +26,7 @@ export const projects = [
     ],
     github: "https://github.com/Dharshansk16/Study_Buddy",
     live: "https://github.com/Dharshansk16/Study_Buddy",
-    color: "from-indigo-900/80 via-purple-800/60 to-indigo-900/80",
+    color: "from-black via-gray-700 to-white",
     category: "Full Stack",
     status: "Completed",
     year: "2024",

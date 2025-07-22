@@ -25,7 +25,6 @@ export default function FloatingDock({
   showParticles,
 }: FloatingDockProps) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [musicPlaying, setMusicPlaying] = useState(false);
 
   const dockItems = [
     {
