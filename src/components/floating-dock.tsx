@@ -52,12 +52,6 @@ export default function FloatingDock({
       action: onParticlesToggle,
       color: "from-orange-500 to-red-500",
     },
-    {
-      icon: musicPlaying ? Volume2 : VolumeX,
-      label: "Music",
-      action: () => setMusicPlaying(!musicPlaying),
-      color: "from-yellow-500 to-orange-500",
-    },
   ];
 
   return (
