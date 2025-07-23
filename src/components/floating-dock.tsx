@@ -1,14 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  MessageCircle,
-  Download,
-  ArrowUp,
-  Palette,
-  Volume2,
-  VolumeX,
-} from "lucide-react";
+import { MessageCircle, Download, ArrowUp, Palette } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnimatePresence } from "framer-motion";
