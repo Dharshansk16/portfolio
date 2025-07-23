@@ -76,9 +76,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.8, opacity: 0, y: 20 }}
+            initial={{ scale: 0.8, opacity: 0, y: 10 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.8, opacity: 0, y: 20 }}
+            exit={{ scale: 0.8, opacity: 0, y: 10 }}
             onClick={(e) => e.stopPropagation()}
             className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl max-w-md w-full overflow-hidden"
           >
