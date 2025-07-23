@@ -12,9 +12,9 @@ interface AboutAppProps {
 export default function AboutApp({ onBack }: AboutAppProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "linear" }}
+      transition={{ duration: 0.2, ease: "linear" }}
       className="min-h-screen p-8 space-y-12"
     >
       <div className="flex items-center justify-between mb-6">

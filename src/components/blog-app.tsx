@@ -101,9 +101,9 @@ export default function BlogApp({ onBack }: BlogAppProps) {
           {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6, ease: "linear" }}
+              transition={{ delay: index * 0.2, duration: 0.2, ease: "linear" }}
               className="bg-black/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300 group cursor-pointer"
             >
               <div className="flex items-start justify-between mb-4">

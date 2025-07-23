@@ -40,16 +40,16 @@ const terminalCommand = "> select_application()";
 export default function Dashboard({ onAppOpen }: DashboardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "linear" }}
+      transition={{ duration: 0.2, ease: "linear" }}
       className="min-h-screen flex flex-col items-center justify-center p-8"
     >
       {/* Header */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: "linear" }}
+        transition={{ duration: 0.2, ease: "linear" }}
         className="text-center mb-12"
       >
         <h1 className="text-4xl md:text-6xl py-2 font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4">
@@ -82,7 +82,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
               hidden: { opacity: 0, y: 5 },
               visible: { opacity: 1, y: 0 },
             }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
           >
             <div className="relative transition-transform duration-200 ease-linear group-hover:scale-105">
               <div
@@ -103,7 +103,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: "linear", delay: 0.4 }}
+        transition={{ duration: 0.2, ease: "linear", delay: 0.4 }}
         className="w-full max-w-2xl"
       >
         <div className="bg-black/60 backdrop-blur-md border border-cyan-500/30 rounded-lg p-4 font-mono shadow-md">

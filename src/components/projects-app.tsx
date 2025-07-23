@@ -60,9 +60,9 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "linear" }}
+      transition={{ duration: 0.2, ease: "linear" }}
       className="min-h-screen relative overflow-hidden"
     >
       {/* Animated Background */}
@@ -73,9 +73,9 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
       <div className="relative z-10 p-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "linear" }}
+          transition={{ duration: 0.2, ease: "linear" }}
           className="flex items-center justify-between mb-8"
         >
           <div className="flex items-center space-x-4">
