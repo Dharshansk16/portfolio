@@ -38,7 +38,8 @@ export const projects = [
     title: "Next Auction",
     description:
       "Next Auction is a modern web platform built with Next.js, designed to simplify and streamline cricket tournament auctions. From real-time auction updates to team management, settings control, and budget tracking, it provides all the tools needed to run a smooth and transparent auction.The platform was successfully used in the Baarish Cup cricket auction, where it significantly reduced manual errors, saved time, and boosted overall efficiency. With rich insights and a user-friendly dashboard, Next Auction empowers organizers to manage every aspect of the auction process with confidence and clarity",
-    longDescription: "",
+    longDescription:
+      "Next Auction is a powerful and intuitive web-based auction management system built for organizing real-time cricket team auctions. Originally built to conduct the Baarish Cup cricket tournament auction, it successfully streamlined the entire process — from team registration to player bidding.",
     image: "/thumbnails/next-auction.png",
     images: [
       "/projects/next-auction/live-auction.png",
@@ -47,8 +48,8 @@ export const projects = [
       "/projects/next-auction/settings.png",
     ],
     tech: ["React", "Nextjs", "Tailwind CSS", "Shadcn UI", "Typescript"],
-    github: "https://github.com",
-    live: "https://demo.com",
+    github: "https://github.com/Dharshansk16/next-auction",
+    live: "https://next-auctioner.vercel.app",
     color: "from-black via-gray-700 to-white",
     category: "AI/ML",
     status: "In Progress",
@@ -79,32 +80,5 @@ export const projects = [
     year: "2024",
     duration: "1 month",
     team: "Solo Project",
-  },
-  {
-    id: 4,
-    title: "Blockchain DeFi Platform",
-    description:
-      "A decentralized finance platform built on Ethereum, featuring yield farming, staking, and NFT marketplace.",
-    longDescription:
-      "Enter the world of decentralized finance with this comprehensive DeFi platform. Built on Ethereum blockchain using Solidity smart contracts, it offers yield farming opportunities, staking mechanisms, and an integrated NFT marketplace. The platform ensures security through extensive testing and audit processes.",
-    image: "/placeholder.svg?height=400&width=600&text=DeFi+Platform",
-    images: [
-      "/placeholder.svg?height=400&width=600&text=Trading+Interface",
-      "/placeholder.svg?height=400&width=600&text=Staking+Pool",
-      "/placeholder.svg?height=400&width=600&text=NFT+Marketplace",
-      "/placeholder.svg?height=400&width=600&text=Wallet+Connect",
-    ],
-    tech: ["Solidity", "Web3.js", "React", "Hardhat", "IPFS", "MetaMask"],
-    github: "https://github.com",
-    live: "https://demo.com",
-    color: "from-orange-500 via-red-500 to-pink-500",
-    category: "Blockchain",
-    status: "Beta",
-    year: "2024",
-    duration: "5 months",
-    team: "3 Developers",
-    views: 1567,
-    likes: 198,
-    stars: 4.6,
   },
 ];

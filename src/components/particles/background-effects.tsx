@@ -67,7 +67,7 @@ export default function BackgroundEffects({
       );
     };
 
-    const interval = setInterval(animateParticles, 50);
+    const interval = setInterval(animateParticles, 500);
     return () => clearInterval(interval);
   }, [showParticles]);
 

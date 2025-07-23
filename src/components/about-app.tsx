@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { skills, techGroups, stats } from "@/constants/about";
+import { skills, techGroups, stats, aboutMeText } from "@/constants/about";
 
 interface AboutAppProps {
   onBack: () => void;
@@ -53,12 +53,7 @@ export default function AboutApp({ onBack }: AboutAppProps) {
             </div>
 
             <p className="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
-              I'm a dedicated full-stack developer with a strong focus on clean
-              code, practical design, and solving real-world problems. Whether
-              it's building scalable web apps or diving deep into backend
-              systems, I love learning by doing and strive to create things that
-              matter. Currently exploring advanced system design and mastering
-              full-stack frameworks like Next.js and Django.
+              {aboutMeText}
             </p>
 
             <div className="flex flex-wrap justify-center gap-4 mt-4">

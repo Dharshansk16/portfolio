@@ -14,8 +14,8 @@ import {
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/constants/project";
-import FloatingParticles from "@/components/particles/floating-particles";
-import AnimatedBackground from "@/components/animations/animated-background";
+// import FloatingParticles from "@/components/particles/floating-particles";
+// import AnimatedBackground from "@/components/animations/animated-background";
 import Image from "next/image";
 
 interface ProjectsAppProps {
@@ -66,9 +66,9 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
       className="min-h-screen relative overflow-hidden"
     >
       {/* Animated Background */}
-      <AnimatedBackground />
+      {/* <AnimatedBackground /> */}
       {/* Floating Particles */}
-      <FloatingParticles />
+      {/* <FloatingParticles /> */}
 
       <div className="relative z-10 p-8">
         {/* Header */}

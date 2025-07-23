@@ -56,3 +56,6 @@ export const techGroups = {
   ],
   "DevOps & Utilities": ["Docker", "Git", "GitHub", "Vercel"],
 };
+
+export const aboutMeText = `I thrive on solving real problems, exploring new tech, and building projects that excite me.
+Curious by nature, always learning, always building — that’s what keeps me going`;
