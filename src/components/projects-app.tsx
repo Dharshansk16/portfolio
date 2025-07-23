@@ -192,14 +192,6 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                       </span>
                     )}
                   </div>
-
-                  {/* Project Meta */}
-                  <div className="flex items-center justify-between text-xs text-gray-500">
-                    <span>
-                      {project.year} • {project.duration}
-                    </span>
-                    <span>{project.team}</span>
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -366,30 +358,6 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                           {tech}
                         </span>
                       ))}
-                    </div>
-                  </div>
-
-                  {/* Project Info */}
-                  <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <span className="text-gray-400">Duration:</span>
-                        <p className="text-white font-medium">
-                          {selectedProject.duration}
-                        </p>
-                      </div>
-                      <div>
-                        <span className="text-gray-400">Team:</span>
-                        <p className="text-white font-medium">
-                          {selectedProject.team}
-                        </p>
-                      </div>
-                      <div>
-                        <span className="text-gray-400">Status:</span>
-                        <p className="text-white font-medium">
-                          {selectedProject.status}
-                        </p>
-                      </div>
                     </div>
                   </div>
 
