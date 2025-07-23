@@ -49,7 +49,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: "linear", delay: 0.2 }}
+        transition={{ duration: 0.6, ease: "linear" }}
         className="text-center mb-12"
       >
         <h1 className="text-4xl md:text-6xl py-2 font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent mb-4">
@@ -82,7 +82,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
               hidden: { opacity: 0, y: 5 },
               visible: { opacity: 1, y: 0 },
             }}
-            transition={{ duration: 0.6, ease: "easeIn" }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className="relative transition-transform duration-200 ease-linear group-hover:scale-105">
               <div
