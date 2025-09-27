@@ -80,6 +80,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl max-w-md w-full overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
@@ -101,7 +102,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div className="mb-6 space-y-3">
                     <div className="flex items-center space-x-3 text-sm text-gray-300">
                       <Mail className="w-4 h-4 text-cyan-400" />
-                      <span>decodecraft@gmail.com</span>
+                      <span>dcodecraft@gmail.com</span>
                     </div>
                     <div className="flex items-center space-x-3 text-sm text-gray-300">
                       <MapPin className="w-4 h-4 text-cyan-400" />
