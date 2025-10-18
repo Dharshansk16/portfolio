@@ -28,7 +28,7 @@ export default function DevSpaceOS() {
 
   const handleAppOpen = (app: AppType) => {
     if (app === "resume") {
-      window.open("/resume.pdf", "_blank");
+      window.open("/resume_pdf.pdf", "_blank");
       return;
     }
     setCurrentApp(app);
