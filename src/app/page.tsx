@@ -36,15 +36,28 @@ export default function DevSpaceOS() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden relative">
+      {/* Ambient Gradient Orbs - Deep Blue/Cyan Theme */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
+        <div
+          className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-cyan-600/20 rounded-full blur-[120px] animate-pulse"
+          style={{ animationDelay: "1s" }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 bg-sky-600/15 rounded-full blur-[100px] animate-pulse"
+          style={{ animationDelay: "2s" }}
+        />
+      </div>
+
       {/* Background Effects */}
       <BackgroundEffects showParticles={showParticles} />
 
       {/* Cursor Trail Effect */}
       {isBooted && <CursorTrail />}
 
-      {/* Vignette Overlay */}
-      <div className="fixed inset-0 bg-gradient-radial from-transparent via-transparent to-black/60 pointer-events-none z-0" />
+      {/* Refined Vignette Overlay */}
+      <div className="fixed inset-0 bg-gradient-radial from-transparent via-slate-950/30 to-slate-950/80 pointer-events-none z-0" />
 
       <AnimatePresence mode="wait">
         {!isBooted ? (

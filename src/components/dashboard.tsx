@@ -1,6 +1,14 @@
 "use client";
 
-import { Briefcase, FileText, User, Terminal, Sparkles, Code2, Rocket } from "lucide-react";
+import {
+  Briefcase,
+  FileText,
+  User,
+  Terminal,
+  Sparkles,
+  Code2,
+  Rocket,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import type { AppType } from "@/app/page";
 
@@ -13,28 +21,28 @@ const apps = [
     id: "projects" as AppType,
     name: "Projects",
     icon: Briefcase,
-    color: "from-blue-500 to-cyan-500",
+    color: "from-indigo-500 to-blue-600",
     description: "View my work",
   },
   {
     id: "blog" as AppType,
     name: "Blog",
     icon: FileText,
-    color: "from-green-500 to-emerald-500",
+    color: "from-violet-500 to-purple-600",
     description: "Read articles",
   },
   {
     id: "about" as AppType,
     name: "About",
     icon: User,
-    color: "from-purple-500 to-pink-500",
+    color: "from-purple-500 to-fuchsia-600",
     description: "Know me better",
   },
   {
     id: "resume" as AppType,
     name: "Resume",
     icon: FileText,
-    color: "from-orange-500 to-red-500",
+    color: "from-blue-500 to-indigo-600",
     description: "Download CV",
   },
 ];
@@ -49,22 +57,22 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
       className="min-h-screen flex flex-col items-center justify-center p-8 relative"
     >
-      {/* Floating Elements */}
+      {/* Floating Elements - Professional subtle theme */}
       <motion.div
-        className="absolute top-20 left-10 text-cyan-400/20"
-        animate={{ 
+        className="absolute top-20 left-10 text-indigo-400/15"
+        animate={{
           y: [0, -20, 0],
-          rotate: [0, 5, 0]
+          rotate: [0, 5, 0],
         }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       >
         <Code2 size={60} />
       </motion.div>
       <motion.div
-        className="absolute bottom-20 right-10 text-purple-400/20"
-        animate={{ 
+        className="absolute bottom-20 right-10 text-violet-400/15"
+        animate={{
           y: [0, 20, 0],
-          rotate: [0, -5, 0]
+          rotate: [0, -5, 0],
         }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
@@ -80,27 +88,27 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       >
         <motion.div
           className="absolute -top-8 left-1/2 transform -translate-x-1/2"
-          animate={{ 
+          animate={{
             rotate: 360,
-            scale: [1, 1.2, 1]
+            scale: [1, 1.2, 1],
           }}
-          transition={{ 
+          transition={{
             rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+            scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
           }}
         >
-          <Sparkles className="text-yellow-400" size={32} />
+          <Sparkles className="text-indigo-400" size={32} />
         </motion.div>
-        
-        <motion.h1 
-          className="text-5xl md:text-7xl py-2 font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4 relative"
+
+        <motion.h1
+          className="text-5xl md:text-7xl py-2 font-bold bg-gradient-to-r from-indigo-400 via-violet-500 to-purple-500 bg-clip-text text-transparent mb-4 relative"
           animate={{
             backgroundPosition: ["0%", "100%", "0%"],
           }}
           transition={{
             duration: 5,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
           style={{
             backgroundSize: "200% auto",
@@ -108,18 +116,18 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
         >
           My DevSpace
         </motion.h1>
-        
-        <motion.p 
-          className="text-gray-400 text-lg font-mono mb-2"
+
+        <motion.p
+          className="text-slate-400 text-lg font-mono mb-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
           {terminalCommand}
         </motion.p>
-        
+
         <motion.div
-          className="text-cyan-400/60 text-sm font-mono"
+          className="text-indigo-400/60 text-sm font-mono"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -150,157 +158,156 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             className="cursor-pointer group relative"
             variants={{
               hidden: { opacity: 0, y: 50, scale: 0.8 },
-              visible: { 
-                opacity: 1, 
-                y: 0, 
+              visible: {
+                opacity: 1,
+                y: 0,
                 scale: 1,
                 transition: {
                   type: "spring",
                   stiffness: 100,
-                  damping: 10
-                }
+                  damping: 10,
+                },
               },
             }}
-            whileHover={{ 
+            whileHover={{
               scale: 1.08,
               rotateZ: 2,
-              transition: { 
-                type: "spring", 
+              transition: {
+                type: "spring",
                 stiffness: 400,
-                damping: 10 
-              }
+                damping: 10,
+              },
             }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* Glow Effect */}
+            {/* Enhanced Professional Glow Effect */}
             <motion.div
-              className={`absolute -inset-1 bg-gradient-to-r ${app.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500`}
+              className={`absolute -inset-1 bg-gradient-to-r ${app.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`}
               animate={{
-                opacity: [0, 0.3, 0],
+                opacity: [0, 0.35, 0],
               }}
               transition={{
-                duration: 2,
+                duration: 2.5,
                 repeat: Infinity,
                 repeatDelay: 1,
               }}
             />
-            
+
             <div className="relative">
-              {/* App Icon Container */}
+              {/* Professional App Icon Container */}
               <div
-                className={`w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-gradient-to-br ${app.color} p-5 shadow-2xl backdrop-blur-sm border border-white/20 relative overflow-hidden`}
+                className={`w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-gradient-to-br ${app.color} p-5 shadow-[0_8px_32px_0_rgba(99,102,241,0.37)] backdrop-blur-sm border border-white/30 relative overflow-hidden`}
               >
-                {/* Animated Background */}
+                {/* Refined Animated Background */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0"
+                  className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/25 to-white/0"
                   animate={{
                     x: [-200, 200],
                     y: [-200, 200],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 3.5,
                     repeat: Infinity,
                     repeatType: "reverse",
                   }}
                 />
-                
-                <app.icon className="w-full h-full text-white relative z-10 drop-shadow-lg" />
-                
-                {/* Shimmer Effect */}
+
+                <app.icon className="w-full h-full text-white relative z-10 drop-shadow-2xl" />
+
+                {/* Enhanced Shimmer Effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.6 }}
+                  transition={{ duration: 0.7, ease: "easeInOut" }}
                 />
               </div>
-              
-              {/* App Info */}
+
+              {/* App Info with Better Typography */}
               <div className="text-center mt-4">
-                <p className="text-base font-semibold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                <p className="text-base font-semibold text-white mb-1 group-hover:text-indigo-300 transition-colors duration-300">
                   {app.name}
                 </p>
-                <p className="text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
+                <p className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
                   {app.description}
                 </p>
               </div>
-              
-              {/* Hover Indicator */}
-              <motion.div
-                className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full group-hover:w-full transition-all duration-300"
-              />
+
+              {/* Professional Hover Indicator */}
+              <motion.div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-indigo-400 to-violet-500 rounded-full group-hover:w-full transition-all duration-300" />
             </div>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Terminal Display */}
+      {/* Terminal Display - Professional Theme */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
         className="w-full max-w-3xl relative"
       >
-        {/* Terminal Glow */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-purple-500/20 to-pink-500/20 rounded-2xl blur-xl" />
-        
-        <div className="relative bg-black/80 backdrop-blur-xl border border-cyan-500/30 rounded-2xl p-6 font-mono shadow-2xl overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5" style={{
-            backgroundImage: `repeating-linear-gradient(
+        {/* Professional Terminal Glow */}
+        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 rounded-2xl blur-xl" />
+
+        <div className="relative bg-slate-950/90 backdrop-blur-xl border border-indigo-500/30 rounded-2xl p-6 font-mono shadow-2xl overflow-hidden">
+          {/* Professional Background Pattern */}
+          <div
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: `repeating-linear-gradient(
               0deg,
               transparent,
               transparent 2px,
-              rgba(0, 209, 255, 0.03) 2px,
-              rgba(0, 209, 255, 0.03) 4px
-            )`
-          }} />
-          
+              rgba(99, 102, 241, 0.05) 2px,
+              rgba(99, 102, 241, 0.05) 4px
+            )`,
+            }}
+          />
+
           {/* Terminal Header */}
           <div className="flex items-center justify-between mb-4 relative z-10">
             <div className="flex items-center space-x-2">
-              <motion.div 
+              <motion.div
                 className="w-3 h-3 rounded-full bg-red-500 cursor-pointer hover:bg-red-400"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               />
-              <motion.div 
+              <motion.div
                 className="w-3 h-3 rounded-full bg-yellow-500 cursor-pointer hover:bg-yellow-400"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               />
-              <motion.div 
+              <motion.div
                 className="w-3 h-3 rounded-full bg-green-500 cursor-pointer hover:bg-green-400"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               />
             </div>
-            <span className="text-gray-500 text-xs">
-              darsh@devspace:~$
-            </span>
+            <span className="text-gray-500 text-xs">darsh@devspace:~$</span>
           </div>
-          
+
           {/* Terminal Content */}
           <div className="space-y-3 relative z-10">
             <div className="flex items-start space-x-3">
-              <Terminal className="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" />
+              <Terminal className="w-5 h-5 text-indigo-400 mt-1 flex-shrink-0" />
               <div className="flex-1">
-                <motion.span 
-                  className="text-cyan-400 text-sm md:text-base"
+                <motion.span
+                  className="text-indigo-400 text-sm md:text-base"
                   animate={{
                     opacity: [1, 0.7, 1],
                   }}
                   transition={{
                     duration: 2,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                 >
                   {terminalCommand}
                 </motion.span>
               </div>
             </div>
-            
+
             <div className="pl-8 space-y-1 text-xs md:text-sm">
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
@@ -316,7 +323,8 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
                 transition={{ delay: 1 }}
                 className="text-gray-400"
               >
-                <span className="text-green-400">✓</span> {apps.length} applications loaded
+                <span className="text-green-400">✓</span> {apps.length}{" "}
+                applications loaded
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
@@ -324,7 +332,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
                 transition={{ delay: 1.2 }}
                 className="text-gray-400 flex items-center"
               >
-                <span className="text-yellow-400 mr-2">⚡</span> 
+                <span className="text-yellow-400 mr-2">⚡</span>
                 Ready for interaction
                 <motion.span
                   animate={{ opacity: [0, 1, 0] }}
@@ -336,15 +344,15 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
               </motion.div>
             </div>
           </div>
-          
-          {/* Scan Line Effect */}
+
+          {/* Professional Scan Line Effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent pointer-events-none"
+            className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/5 to-transparent pointer-events-none"
             animate={{
               y: ["-100%", "100%"],
             }}
             transition={{
-              duration: 3,
+              duration: 3.5,
               repeat: Infinity,
               ease: "linear",
             }}

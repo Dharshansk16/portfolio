@@ -23,28 +23,28 @@ export default function FloatingDock({
       icon: MessageCircle,
       label: "Contact Me",
       action: onContactOpen,
-      color: "from-blue-500 to-cyan-500",
+      color: "from-indigo-500 to-blue-600",
       emoji: "💬",
     },
     {
       icon: Download,
       label: "Resume",
       action: () => window.open("/resume.pdf", "_blank"),
-      color: "from-green-500 to-emerald-500",
+      color: "from-violet-500 to-purple-600",
       emoji: "📄",
     },
     {
       icon: ArrowUp,
       label: "Scroll Top",
       action: () => window.scrollTo({ top: 0, behavior: "smooth" }),
-      color: "from-purple-500 to-pink-500",
+      color: "from-purple-500 to-fuchsia-600",
       emoji: "🚀",
     },
     {
       icon: showParticles ? Sparkles : X,
       label: showParticles ? "Hide Effects" : "Show Effects",
       action: onParticlesToggle,
-      color: "from-orange-500 to-red-500",
+      color: "from-blue-500 to-indigo-600",
       emoji: showParticles ? "✨" : "🌟",
     },
   ];
@@ -64,35 +64,35 @@ export default function FloatingDock({
               <motion.div
                 key={item.label}
                 initial={{ opacity: 0, x: 50, scale: 0.5, rotate: 10 }}
-                animate={{ 
-                  opacity: 1, 
-                  x: 0, 
-                  scale: 1, 
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  scale: 1,
                   rotate: 0,
                   transition: {
                     type: "spring",
                     stiffness: 300,
                     damping: 20,
                     delay: index * 0.08,
-                  }
+                  },
                 }}
-                exit={{ 
-                  opacity: 0, 
-                  x: 50, 
+                exit={{
+                  opacity: 0,
+                  x: 50,
                   scale: 0.5,
                   transition: {
                     duration: 0.2,
-                  }
+                  },
                 }}
                 className="flex items-center gap-3 group"
               >
-                {/* Label */}
+                {/* Professional Label */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ delay: index * 0.08 + 0.1 }}
-                  className="bg-black/90 backdrop-blur-xl text-white text-sm font-medium px-4 py-2.5 rounded-xl border border-white/20 shadow-xl flex items-center gap-2 whitespace-nowrap"
+                  className="bg-slate-950/90 backdrop-blur-xl text-white text-sm font-medium px-4 py-2.5 rounded-xl border border-indigo-500/30 shadow-xl shadow-indigo-500/10 flex items-center gap-2 whitespace-nowrap"
                 >
                   <span>{item.emoji}</span>
                   <span>{item.label}</span>
@@ -116,7 +116,7 @@ export default function FloatingDock({
                       ease: "easeInOut",
                     }}
                   />
-                  
+
                   <Button
                     size="icon"
                     onClick={item.action}
@@ -129,30 +129,30 @@ export default function FloatingDock({
             ))}
         </AnimatePresence>
 
-        {/* Main Toggle Button */}
-        <motion.div 
+        {/* Professional Main Toggle Button */}
+        <motion.div
           className="relative"
-          whileHover={{ scale: 1.1 }} 
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          {/* Pulsing Glow */}
+          {/* Professional Pulsing Glow */}
           <motion.div
-            className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full blur-xl opacity-50"
+            className="absolute -inset-2 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 rounded-full blur-xl opacity-50"
             animate={{
               scale: [1, 1.3, 1],
               opacity: [0.5, 0.8, 0.5],
             }}
             transition={{
-              duration: 2,
+              duration: 2.5,
               repeat: Infinity,
               ease: "easeInOut",
             }}
           />
-          
+
           <Button
             size="icon"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="relative w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 hover:shadow-2xl transition-all duration-300 border-2 border-white/30"
+            className="relative w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-500 hover:shadow-2xl hover:shadow-indigo-500/50 transition-all duration-300 border-2 border-white/30"
           >
             <motion.div
               animate={{ rotate: isExpanded ? 45 : 0 }}
@@ -165,15 +165,17 @@ export default function FloatingDock({
               )}
             </motion.div>
           </Button>
-          
-          {/* Notification Badge */}
+
+          {/* Professional Notification Badge */}
           {!isExpanded && (
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full border-2 border-black flex items-center justify-center"
+              className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-full border-2 border-slate-950 flex items-center justify-center shadow-lg"
             >
-              <span className="text-xs text-white font-bold">{dockItems.length}</span>
+              <span className="text-xs text-white font-bold">
+                {dockItems.length}
+              </span>
             </motion.div>
           )}
         </motion.div>

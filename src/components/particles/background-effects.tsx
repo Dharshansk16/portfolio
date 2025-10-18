@@ -18,7 +18,8 @@ interface Particle {
   color: string;
 }
 
-const colors = ["#06b6d4", "#8b5cf6", "#ec4899", "#10b981", "#f59e0b"];
+// Professional color palette with indigo/violet theme
+const colors = ["#6366f1", "#8b5cf6", "#a855f7", "#7c3aed", "#6d28d9"];
 
 export default function BackgroundEffects({
   showParticles,
@@ -84,62 +85,62 @@ export default function BackgroundEffects({
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Animated Grid Background */}
+      {/* Refined Animated Grid Background */}
       <motion.div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)
+            linear-gradient(rgba(99, 102, 241, 0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(99, 102, 241, 0.4) 1px, transparent 1px)
           `,
-          backgroundSize: "60px 60px",
+          backgroundSize: "80px 80px",
         }}
         animate={{
-          backgroundPosition: ["0px 0px", "60px 60px"],
+          backgroundPosition: ["0px 0px", "80px 80px"],
         }}
         transition={{
-          duration: 20,
+          duration: 30,
           repeat: Infinity,
           ease: "linear",
         }}
       />
 
-      {/* Gradient Orbs */}
+      {/* Professional Gradient Orbs - Indigo/Violet theme */}
       <motion.div
-        className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
+        className="absolute top-0 left-0 w-[500px] h-[500px] bg-indigo-600/25 rounded-full blur-[100px]"
         animate={{
-          x: [0, 100, 0],
-          y: [0, 50, 0],
-          scale: [1, 1.2, 1],
+          x: [0, 120, 0],
+          y: [0, 60, 0],
+          scale: [1, 1.15, 1],
         }}
         transition={{
-          duration: 20,
+          duration: 22,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
+        className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/25 rounded-full blur-[100px]"
         animate={{
-          x: [0, -100, 0],
-          y: [0, -50, 0],
+          x: [0, -120, 0],
+          y: [0, -60, 0],
+          scale: [1, 1.25, 1],
+        }}
+        transition={{
+          duration: 28,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute top-1/2 left-1/2 w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[90px]"
+        animate={{
+          x: [-120, 120, -120],
+          y: [-60, 60, -60],
           scale: [1, 1.3, 1],
         }}
         transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"
-        animate={{
-          x: [-100, 100, -100],
-          y: [-50, 50, -50],
-          scale: [1, 1.4, 1],
-        }}
-        transition={{
-          duration: 30,
+          duration: 35,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -177,25 +178,25 @@ export default function BackgroundEffects({
           />
         ))}
 
-      {/* Floating Lines */}
+      {/* Elegant Floating Lines */}
       {showParticles && (
         <>
-          {[...Array(5)].map((_, i) => (
+          {[...Array(4)].map((_, i) => (
             <motion.div
               key={`line-${i}`}
-              className="absolute h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"
+              className="absolute h-px bg-gradient-to-r from-transparent via-indigo-500/25 to-transparent"
               style={{
                 width: "100%",
-                top: `${20 + i * 20}%`,
+                top: `${25 + i * 18}%`,
               }}
               animate={{
                 x: ["-100%", "100%"],
-                opacity: [0, 1, 0],
+                opacity: [0, 0.8, 0],
               }}
               transition={{
-                duration: 10 + i * 2,
+                duration: 12 + i * 2,
                 repeat: Infinity,
-                delay: i * 2,
+                delay: i * 2.5,
                 ease: "linear",
               }}
             />
@@ -203,10 +204,10 @@ export default function BackgroundEffects({
         </>
       )}
 
-      {/* Gradient Overlays */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+      {/* Sophisticated Gradient Overlays */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-600/5 via-transparent to-violet-600/5" />
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/8 rounded-full blur-[90px]" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[90px]" />
     </div>
   );
 }
