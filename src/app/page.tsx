@@ -14,16 +14,30 @@ import CursorTrail from "@/components/animations/cursor-trail";
 
 export type AppType = "dashboard" | "projects" | "blog" | "about" | "resume";
 
+// Detect if device is low-end
+const isLowEndDevice = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    navigator.hardwareConcurrency <= 4 ||
+    /Mobile|Android|iPhone/i.test(navigator.userAgent)
+  );
+};
+
 export default function DevSpaceOS() {
   const [isBooted, setIsBooted] = useState(false);
   const [currentApp, setCurrentApp] = useState<AppType>("dashboard");
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [showParticles, setShowParticles] = useState(true);
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
+    setIsLowEnd(isLowEndDevice());
+
+    // Shorter boot time for low-end devices
+    const bootTime = isLowEndDevice() ? 2500 : 4000;
     const timer = setTimeout(() => {
       setIsBooted(true);
-    }, 4000);
+    }, bootTime);
     return () => clearTimeout(timer);
   }, []);
 
@@ -37,24 +51,26 @@ export default function DevSpaceOS() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden relative">
-      {/* Ambient Gradient Orbs - Deep Blue/Cyan Theme */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-        <div
-          className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-cyan-600/20 rounded-full blur-[120px] animate-pulse"
-          style={{ animationDelay: "1s" }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 bg-sky-600/15 rounded-full blur-[100px] animate-pulse"
-          style={{ animationDelay: "2s" }}
-        />
-      </div>
+      {/* Ambient Gradient Orbs - Simplified for low-end devices */}
+      {!isLowEnd && (
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
+          <div
+            className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-cyan-600/20 rounded-full blur-[120px] animate-pulse"
+            style={{ animationDelay: "1s" }}
+          />
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 bg-sky-600/15 rounded-full blur-[100px] animate-pulse"
+            style={{ animationDelay: "2s" }}
+          />
+        </div>
+      )}
 
       {/* Background Effects */}
       <BackgroundEffects showParticles={showParticles} />
 
-      {/* Cursor Trail Effect */}
-      {isBooted && <CursorTrail />}
+      {/* Cursor Trail Effect - Only on high-end devices */}
+      {isBooted && !isLowEnd && <CursorTrail />}
 
       {/* Refined Vignette Overlay */}
       <div className="fixed inset-0 bg-gradient-radial from-transparent via-slate-950/30 to-slate-950/80 pointer-events-none z-0" />

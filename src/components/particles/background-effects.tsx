@@ -21,14 +21,25 @@ interface Particle {
 // Professional color palette with indigo/violet theme
 const colors = ["#6366f1", "#8b5cf6", "#a855f7", "#7c3aed", "#6d28d9"];
 
+// Detect if device is low-end
+const isLowEndDevice = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    navigator.hardwareConcurrency <= 4 ||
+    /Mobile|Android|iPhone/i.test(navigator.userAgent)
+  );
+};
+
 export default function BackgroundEffects({
   showParticles,
 }: BackgroundEffectsProps) {
   const [particles, setParticles] = useState<Particle[]>([]);
   const [mounted, setMounted] = useState(false);
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setIsLowEnd(isLowEndDevice());
   }, []);
 
   useEffect(() => {
@@ -37,9 +48,12 @@ export default function BackgroundEffects({
       return;
     }
 
+    // Reduce particle count on low-end devices
+    const particleCount = isLowEnd ? 15 : 30;
+
     const generateParticles = () => {
       const newParticles: Particle[] = [];
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < particleCount; i++) {
         newParticles.push({
           id: i,
           x: Math.random() * window.innerWidth,
@@ -56,102 +70,113 @@ export default function BackgroundEffects({
 
     generateParticles();
 
+    // Use requestAnimationFrame for smoother performance
+    let animationFrameId: number;
+    let lastUpdate = Date.now();
+    const targetFPS = isLowEnd ? 30 : 60;
+    const frameDelay = 1000 / targetFPS;
+
     const animateParticles = () => {
-      setParticles((prev) =>
-        prev.map((particle) => {
-          let newX = particle.x + particle.speedX;
-          let newY = particle.y + particle.speedY;
+      const now = Date.now();
+      const elapsed = now - lastUpdate;
 
-          if (newX > window.innerWidth) newX = 0;
-          else if (newX < 0) newX = window.innerWidth;
+      if (elapsed > frameDelay) {
+        setParticles((prev) =>
+          prev.map((particle) => {
+            let newX = particle.x + particle.speedX;
+            let newY = particle.y + particle.speedY;
 
-          if (newY > window.innerHeight) newY = 0;
-          else if (newY < 0) newY = window.innerHeight;
+            if (newX > window.innerWidth) newX = 0;
+            else if (newX < 0) newX = window.innerWidth;
 
-          return {
-            ...particle,
-            x: newX,
-            y: newY,
-          };
-        })
-      );
+            if (newY > window.innerHeight) newY = 0;
+            else if (newY < 0) newY = window.innerHeight;
+
+            return {
+              ...particle,
+              x: newX,
+              y: newY,
+            };
+          })
+        );
+        lastUpdate = now;
+      }
+
+      animationFrameId = requestAnimationFrame(animateParticles);
     };
 
-    const interval = setInterval(animateParticles, 50);
-    return () => clearInterval(interval);
-  }, [showParticles, mounted]);
+    animationFrameId = requestAnimationFrame(animateParticles);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [showParticles, mounted, isLowEnd]);
 
   if (!mounted) return null;
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Refined Animated Grid Background */}
-      <motion.div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(99, 102, 241, 0.4) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(99, 102, 241, 0.4) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-        animate={{
-          backgroundPosition: ["0px 0px", "80px 80px"],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
+      {/* Refined Animated Grid Background - Disabled on low-end devices */}
+      {!isLowEnd && (
+        <motion.div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(99, 102, 241, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(99, 102, 241, 0.4) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+          }}
+          animate={{
+            backgroundPosition: ["0px 0px", "80px 80px"],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      )}
 
-      {/* Professional Gradient Orbs - Indigo/Violet theme */}
+      {/* Professional Gradient Orbs - Simplified for low-end devices */}
       <motion.div
         className="absolute top-0 left-0 w-[500px] h-[500px] bg-indigo-600/25 rounded-full blur-[100px]"
-        animate={{
-          x: [0, 120, 0],
-          y: [0, 60, 0],
-          scale: [1, 1.15, 1],
-        }}
+        animate={
+          isLowEnd
+            ? { scale: [1, 1.15, 1] }
+            : {
+                x: [0, 120, 0],
+                y: [0, 60, 0],
+                scale: [1, 1.15, 1],
+              }
+        }
         transition={{
-          duration: 22,
+          duration: isLowEnd ? 15 : 22,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
       <motion.div
         className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/25 rounded-full blur-[100px]"
-        animate={{
-          x: [0, -120, 0],
-          y: [0, -60, 0],
-          scale: [1, 1.25, 1],
-        }}
+        animate={
+          isLowEnd
+            ? { scale: [1, 1.25, 1] }
+            : {
+                x: [0, -120, 0],
+                y: [0, -60, 0],
+                scale: [1, 1.25, 1],
+              }
+        }
         transition={{
-          duration: 28,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[90px]"
-        animate={{
-          x: [-120, 120, -120],
-          y: [-60, 60, -60],
-          scale: [1, 1.3, 1],
-        }}
-        transition={{
-          duration: 35,
+          duration: isLowEnd ? 20 : 28,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
 
-      {/* Animated Particles */}
+      {/* Animated Particles - Optimized rendering */}
       {showParticles &&
         particles.map((particle) => (
-          <motion.div
+          <div
             key={particle.id}
-            className="absolute rounded-full"
+            className="absolute rounded-full will-change-transform"
             style={{
               left: particle.x,
               top: particle.y,
@@ -159,35 +184,23 @@ export default function BackgroundEffects({
               height: particle.size,
               backgroundColor: particle.color,
               opacity: particle.opacity,
-              boxShadow: `0 0 ${particle.size * 3}px ${particle.color}`,
-            }}
-            animate={{
-              scale: [1, 1.8, 1],
-              opacity: [
-                particle.opacity,
-                particle.opacity * 0.4,
-                particle.opacity,
-              ],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: Math.random() * 2,
+              boxShadow: isLowEnd
+                ? "none"
+                : `0 0 ${particle.size * 3}px ${particle.color}`,
             }}
           />
         ))}
 
-      {/* Elegant Floating Lines */}
-      {showParticles && (
+      {/* Elegant Floating Lines - Only on high-end devices */}
+      {showParticles && !isLowEnd && (
         <>
-          {[...Array(4)].map((_, i) => (
+          {[...Array(2)].map((_, i) => (
             <motion.div
               key={`line-${i}`}
               className="absolute h-px bg-gradient-to-r from-transparent via-indigo-500/25 to-transparent"
               style={{
                 width: "100%",
-                top: `${25 + i * 18}%`,
+                top: `${30 + i * 30}%`,
               }}
               animate={{
                 x: ["-100%", "100%"],
@@ -206,8 +219,12 @@ export default function BackgroundEffects({
 
       {/* Sophisticated Gradient Overlays */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-600/5 via-transparent to-violet-600/5" />
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/8 rounded-full blur-[90px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[90px]" />
+      {!isLowEnd && (
+        <>
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/8 rounded-full blur-[90px]" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[90px]" />
+        </>
+      )}
     </div>
   );
 }

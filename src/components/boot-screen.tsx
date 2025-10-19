@@ -4,13 +4,24 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Terminal, Zap, CheckCircle2, Loader2 } from "lucide-react";
 
+// Detect if device is low-end
+const isLowEndDevice = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    navigator.hardwareConcurrency <= 4 ||
+    /Mobile|Android|iPhone/i.test(navigator.userAgent)
+  );
+};
+
 export default function BootScreen() {
   const [bootMessages, setBootMessages] = useState<string[]>([]);
   const [progress, setProgress] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [isLowEnd, setIsLowEnd] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setIsLowEnd(isLowEndDevice());
   }, []);
 
   useEffect(() => {
@@ -80,12 +91,12 @@ export default function BootScreen() {
         />
       </div>
 
-      {/* Professional Floating Particles - Only render on client */}
+      {/* Professional Floating Particles - Only render on client and reduced for low-end */}
       {mounted &&
-        [...Array(15)].map((_, i) => (
+        [...Array(isLowEnd ? 5 : 10)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-indigo-400 rounded-full"
+            className="absolute w-1 h-1 bg-indigo-400 rounded-full will-change-transform"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -124,13 +135,17 @@ export default function BootScreen() {
             >
               <motion.div
                 className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-600 flex items-center justify-center text-white font-bold text-2xl shadow-lg relative"
-                animate={{
-                  boxShadow: [
-                    "0 0 20px rgba(99, 102, 241, 0.5)",
-                    "0 0 40px rgba(139, 92, 246, 0.5)",
-                    "0 0 20px rgba(99, 102, 241, 0.5)",
-                  ],
-                }}
+                animate={
+                  isLowEnd
+                    ? {}
+                    : {
+                        boxShadow: [
+                          "0 0 20px rgba(99, 102, 241, 0.5)",
+                          "0 0 40px rgba(139, 92, 246, 0.5)",
+                          "0 0 20px rgba(99, 102, 241, 0.5)",
+                        ],
+                      }
+                }
                 transition={{
                   duration: 2.5,
                   repeat: Infinity,
@@ -202,18 +217,20 @@ export default function BootScreen() {
                   animate={{ width: `${progress}%` }}
                   transition={{ duration: 0.5 }}
                 >
-                  {/* Enhanced Shimmer Effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                    animate={{
-                      x: ["-100%", "100%"],
-                    }}
-                    transition={{
-                      duration: 1.2,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
-                  />
+                  {/* Enhanced Shimmer Effect - Only on high-end devices */}
+                  {!isLowEnd && (
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                      animate={{
+                        x: ["-100%", "100%"],
+                      }}
+                      transition={{
+                        duration: 1.2,
+                        repeat: Infinity,
+                        ease: "linear",
+                      }}
+                    />
+                  )}
                 </motion.div>
               </div>
             </div>

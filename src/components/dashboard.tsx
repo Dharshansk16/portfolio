@@ -10,11 +10,21 @@ import {
   Rocket,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import type { AppType } from "@/app/page";
 
 interface DashboardProps {
   onAppOpen: (app: AppType) => void;
 }
+
+// Detect if device is low-end
+const isLowEndDevice = () => {
+  if (typeof window === "undefined") return false;
+  return (
+    navigator.hardwareConcurrency <= 4 ||
+    /Mobile|Android|iPhone/i.test(navigator.userAgent)
+  );
+};
 
 const apps = [
   {
@@ -50,6 +60,12 @@ const apps = [
 const terminalCommand = "> select_application()";
 
 export default function Dashboard({ onAppOpen }: DashboardProps) {
+  const [isLowEnd, setIsLowEnd] = useState(false);
+
+  useEffect(() => {
+    setIsLowEnd(isLowEndDevice());
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -57,27 +73,31 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
       className="min-h-screen flex flex-col items-center justify-center p-8 relative"
     >
-      {/* Floating Elements - Professional subtle theme */}
-      <motion.div
-        className="absolute top-20 left-10 text-indigo-400/15"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 5, 0],
-        }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <Code2 size={60} />
-      </motion.div>
-      <motion.div
-        className="absolute bottom-20 right-10 text-violet-400/15"
-        animate={{
-          y: [0, 20, 0],
-          rotate: [0, -5, 0],
-        }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <Rocket size={60} />
-      </motion.div>
+      {/* Floating Elements - Professional subtle theme - Simplified for low-end devices */}
+      {!isLowEnd && (
+        <>
+          <motion.div
+            className="absolute top-20 left-10 text-indigo-400/15"
+            animate={{
+              y: [0, -20, 0],
+              rotate: [0, 5, 0],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Code2 size={60} />
+          </motion.div>
+          <motion.div
+            className="absolute bottom-20 right-10 text-violet-400/15"
+            animate={{
+              y: [0, 20, 0],
+              rotate: [0, -5, 0],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Rocket size={60} />
+          </motion.div>
+        </>
+      )}
 
       {/* Header */}
       <motion.div
@@ -88,31 +108,51 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       >
         <motion.div
           className="absolute -top-8 left-1/2 transform -translate-x-1/2"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-            scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
-          }}
+          animate={
+            isLowEnd
+              ? { rotate: 360 }
+              : {
+                  rotate: 360,
+                  scale: [1, 1.2, 1],
+                }
+          }
+          transition={
+            isLowEnd
+              ? { rotate: { duration: 20, repeat: Infinity, ease: "linear" } }
+              : {
+                  rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+                }
+          }
         >
           <Sparkles className="text-indigo-400" size={32} />
         </motion.div>
 
         <motion.h1
           className="text-5xl md:text-7xl py-2 font-bold bg-gradient-to-r from-indigo-400 via-violet-500 to-purple-500 bg-clip-text text-transparent mb-4 relative"
-          animate={{
-            backgroundPosition: ["0%", "100%", "0%"],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          style={{
-            backgroundSize: "200% auto",
-          }}
+          animate={
+            isLowEnd
+              ? {}
+              : {
+                  backgroundPosition: ["0%", "100%", "0%"],
+                }
+          }
+          transition={
+            isLowEnd
+              ? {}
+              : {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }
+          }
+          style={
+            isLowEnd
+              ? {}
+              : {
+                  backgroundSize: "200% auto",
+                }
+          }
         >
           My DevSpace
         </motion.h1>
@@ -180,37 +220,40 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* Enhanced Professional Glow Effect */}
-            <motion.div
-              className={`absolute -inset-1 bg-gradient-to-r ${app.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`}
-              animate={{
-                opacity: [0, 0.35, 0],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                repeatDelay: 1,
-              }}
-            />
-
+            {/* Enhanced Professional Glow Effect - Simplified for low-end */}
+            {!isLowEnd && (
+              <motion.div
+                className={`absolute -inset-1 bg-gradient-to-r ${app.color} rounded-3xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500`}
+                animate={{
+                  opacity: [0, 0.35, 0],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  repeatDelay: 1,
+                }}
+              />
+            )}{" "}
             <div className="relative">
               {/* Professional App Icon Container */}
               <div
                 className={`w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-gradient-to-br ${app.color} p-5 shadow-[0_8px_32px_0_rgba(99,102,241,0.37)] backdrop-blur-sm border border-white/30 relative overflow-hidden`}
               >
-                {/* Refined Animated Background */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/25 to-white/0"
-                  animate={{
-                    x: [-200, 200],
-                    y: [-200, 200],
-                  }}
-                  transition={{
-                    duration: 3.5,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
-                />
+                {/* Refined Animated Background - Only on high-end devices */}
+                {!isLowEnd && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/25 to-white/0"
+                    animate={{
+                      x: [-200, 200],
+                      y: [-200, 200],
+                    }}
+                    transition={{
+                      duration: 3.5,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                  />
+                )}
 
                 <app.icon className="w-full h-full text-white relative z-10 drop-shadow-2xl" />
 
@@ -345,18 +388,20 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             </div>
           </div>
 
-          {/* Professional Scan Line Effect */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/5 to-transparent pointer-events-none"
-            animate={{
-              y: ["-100%", "100%"],
-            }}
-            transition={{
-              duration: 3.5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          />
+          {/* Professional Scan Line Effect - Only on high-end devices */}
+          {!isLowEnd && (
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/5 to-transparent pointer-events-none"
+              animate={{
+                y: ["-100%", "100%"],
+              }}
+              transition={{
+                duration: 3.5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          )}
         </div>
       </motion.div>
     </motion.div>
