@@ -198,7 +198,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
           <motion.div
             key={app.id}
             onClick={() => onAppOpen(app.id)}
-            className="cursor-pointer group relative"
+            className="cursor-pointer group relative w-full"
             variants={{
               hidden: { opacity: 0, y: 50, scale: 0.8 },
               visible: {
@@ -210,15 +210,6 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
                   stiffness: 100,
                   damping: 10,
                 },
-              },
-            }}
-            whileHover={{
-              scale: 1.08,
-              rotateZ: 2,
-              transition: {
-                type: "spring",
-                stiffness: 400,
-                damping: 10,
               },
             }}
             whileTap={{ scale: 0.95 }}
@@ -236,7 +227,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
                   repeatDelay: 1,
                 }}
               />
-            )}{" "}
+            )}
             <div className="relative">
               {/* Professional App Icon Container */}
               <div

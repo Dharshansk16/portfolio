@@ -11,6 +11,11 @@ import ContactModal from "@/components/contact-modal";
 import FloatingDock from "@/components/floating-dock";
 import BackgroundEffects from "@/components/particles/background-effects";
 import CursorTrail from "@/components/animations/cursor-trail";
+import ContextMenu from "@/components/ui/context-menu";
+import MenuBar from "@/components/ui/menu-bar";
+import EasterEggs from "@/components/effects/easter-eggs";
+import SpotlightSearch from "@/components/ui/spotlight-search";
+import UIHints from "@/components/ui/ui-hints";
 
 export type AppType = "dashboard" | "projects" | "blog" | "about" | "resume";
 
@@ -29,8 +34,11 @@ export default function DevSpaceOS() {
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [showParticles, setShowParticles] = useState(true);
   const [isLowEnd, setIsLowEnd] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // Ensure we're on client side
+    setMounted(true);
     setIsLowEnd(isLowEndDevice());
 
     // Shorter boot time for low-end devices
@@ -48,6 +56,15 @@ export default function DevSpaceOS() {
     }
     setCurrentApp(app);
   };
+
+  // Don't render until mounted on client
+  if (!mounted) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white flex items-center justify-center">
+        <div className="animate-pulse text-indigo-400">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden relative">
@@ -71,6 +88,20 @@ export default function DevSpaceOS() {
 
       {/* Cursor Trail Effect - Only on high-end devices */}
       {isBooted && !isLowEnd && <CursorTrail />}
+
+      {/* Unique UI Enhancements */}
+      {isBooted && (
+        <>
+          <MenuBar />
+          <ContextMenu />
+          <EasterEggs />
+          <SpotlightSearch
+            onNavigate={handleAppOpen}
+            onContactOpen={() => setIsContactOpen(true)}
+          />
+          <UIHints />
+        </>
+      )}
 
       {/* Refined Vignette Overlay */}
       <div className="fixed inset-0 bg-gradient-radial from-transparent via-slate-950/30 to-slate-950/80 pointer-events-none z-0" />

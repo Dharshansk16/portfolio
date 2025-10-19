@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Modern Portfolio - DevSpace OS
 
-## Getting Started
+A stunning, interactive portfolio with unique UI features that make it stand out.
 
-First, run the development server:
+## ✨ Standout Features
+
+### 🎯 Unique Interactions
+
+- **⌘K Spotlight Search** - Quick navigation like macOS Spotlight
+- **Custom Context Menu** - Right-click anywhere for actions
+- **Magnetic Cursor Effect** - UI elements follow your mouse
+- **3D Tilt Cards** - Perspective depth on hover
+- **Dock Magnification** - macOS-style floating dock
+
+### 🎨 Premium UI
+
+- **macOS Menu Bar** - Real-time clock, battery, system info
+- **Easter Eggs System** - Hidden surprises (Konami code, secret commands)
+- **Glassmorphism** - Modern frosted glass effects
+- **Smooth Animations** - Powered by Framer Motion
+
+### ⚡ Performance
+
+- **Low-end Device Detection** - Adapts animations
+- **GPU Acceleration** - Smooth 60fps animations
+- **Lazy Loading** - Optimized bundle size
+- **Reduced Motion Support** - Accessibility-first
+
+## 🎮 Try These!
+
+1. Press `⌘K` or `Ctrl+K` for Spotlight Search
+2. Right-click anywhere for context menu
+3. Type Konami Code: ↑↑↓↓←→←→BA
+4. Press `Ctrl + `` for secret terminal
+5. Hover over dashboard icons for magnetic effect
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📚 Documentation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `NEW_FEATURES.md` - Quick guide to all new features
+- `UI_ENHANCEMENTS.md` - Detailed documentation
 
-## Learn More
+## 🛠️ Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Runtime**: React 19
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📱 Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🎨 Modern UI/UX with attention to detail
+- ⚡ Blazing fast performance
+- 📱 Fully responsive (mobile-first)
+- ♿ Accessible keyboard navigation
+- 🌙 Dark mode optimized
+- 🎭 Easter eggs and hidden features
+- 🔍 Spotlight-style search
+- 🎯 Interactive animations
 
-## Deploy on Vercel
+## 🎯 What Makes It Stand Out?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Professional Polish** - macOS-inspired design language
+2. **Playful Interactions** - Magnetic effects, 3D tilts
+3. **Hidden Depths** - Easter eggs reward exploration
+4. **Power User Features** - Keyboard shortcuts everywhere
+5. **Modern Stack** - Latest React, Next.js, TypeScript
+6. **Performance** - Optimized for all devices
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Project Structure
+
+```
+src/
+├── app/              # Next.js app router
+├── components/
+│   ├── effects/      # Magnetic cursor, tilt, easter eggs
+│   ├── ui/           # Context menu, menu bar, search
+│   ├── animations/   # Cursor trail, backgrounds
+│   └── particles/    # Visual effects
+├── constants/        # Data and content
+├── hooks/            # Custom React hooks
+└── lib/              # Utilities
+```
+
+## 🎨 Customization
+
+All features are modular and customizable. Check the documentation for details.
+
+---
+
+**Built with ❤️ and attention to detail**

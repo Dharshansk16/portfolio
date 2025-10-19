@@ -132,7 +132,7 @@ export default function FloatingDock({
 
                 {/* Action Button */}
                 <motion.div
-                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="relative"
                 >
