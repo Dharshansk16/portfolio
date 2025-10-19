@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Zap, Terminal } from "lucide-react";
 
@@ -281,6 +281,30 @@ export default function EasterEggs() {
   const [konamiProgress, setKonamiProgress] = useState<string[]>([]);
   const [typedCommand, setTypedCommand] = useState("");
   const [commandMode, setCommandMode] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  const triggerEasterEgg = useCallback((msg: string) => {
+    setMessage(msg);
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 3000);
+  }, []);
+
+  const checkCommand = useCallback((cmd: string) => {
+    const trimmedCmd = cmd.trim().toLowerCase();
+    const commandResult = getCommandResult(trimmedCmd);
+
+    if (commandResult) {
+      triggerEasterEgg(commandResult.message);
+      // Execute the action if it exists
+      if (commandResult.action) {
+        commandResult.action();
+      }
+    } else {
+      triggerEasterEgg(
+        `Command Error: '${cmd}' not recognized. Type 'help' for available commands`
+      );
+    }
+  }, [triggerEasterEgg]);
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -309,19 +333,11 @@ export default function EasterEggs() {
         return;
       }
 
-      if (commandMode) {
-        if (e.key === "Escape") {
-          setCommandMode(false);
-          setTypedCommand("");
-        } else if (e.key === "Enter") {
-          checkCommand(typedCommand);
-          setTypedCommand("");
-          setCommandMode(false);
-        } else if (e.key === "Backspace") {
-          setTypedCommand((prev) => prev.slice(0, -1));
-        } else if (e.key.length === 1) {
-          setTypedCommand((prev) => prev + e.key);
-        }
+      // Don't handle individual key inputs when in command mode
+      // The input field handles this now
+      if (commandMode && e.key === "Escape") {
+        setCommandMode(false);
+        setTypedCommand("");
       }
 
       // Secret key combinations
@@ -330,34 +346,11 @@ export default function EasterEggs() {
       }
     };
 
-    const checkCommand = (cmd: string) => {
-      const trimmedCmd = cmd.trim().toLowerCase();
-      const commandResult = getCommandResult(trimmedCmd);
-
-      if (commandResult) {
-        triggerEasterEgg(commandResult.message);
-        // Execute the action if it exists
-        if (commandResult.action) {
-          commandResult.action();
-        }
-      } else {
-        triggerEasterEgg(
-          `Command Error: '${cmd}' not recognized. Type 'help' for available commands`
-        );
-      }
-    };
-
-    const triggerEasterEgg = (msg: string) => {
-      setMessage(msg);
-      setShowMessage(true);
-      setTimeout(() => setShowMessage(false), 3000);
-    };
-
     window.addEventListener("keydown", handleKeyPress);
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [konamiProgress, commandMode, typedCommand]);
+  }, [konamiProgress, commandMode, typedCommand, triggerEasterEgg, checkCommand]);
 
   return (
     <>
@@ -437,15 +430,43 @@ export default function EasterEggs() {
             className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-md px-4"
           >
             <div className="bg-slate-950/95 backdrop-blur-xl border border-indigo-500/30 rounded-xl shadow-2xl p-4">
-              <div className="flex items-center space-x-2 mb-2">
-                <Terminal className="w-4 h-4 text-indigo-400" />
-                <span className="text-xs text-indigo-300 font-semibold">
-                  Secret Command Terminal
-                </span>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-2">
+                  <Terminal className="w-4 h-4 text-indigo-400" />
+                  <span className="text-xs text-indigo-300 font-semibold">
+                    Secret Command Terminal
+                  </span>
+                </div>
+                <button
+                  onClick={() => {
+                    setCommandMode(false);
+                    setTypedCommand("");
+                  }}
+                  className="text-slate-500 hover:text-white text-xs px-2 py-1 rounded hover:bg-slate-800 transition-colors"
+                >
+                  ESC
+                </button>
               </div>
               <div className="flex items-center space-x-2 font-mono">
                 <span className="text-green-400">$</span>
-                <span className="text-white">{typedCommand}</span>
+                <input
+                  type="text"
+                  value={typedCommand}
+                  onChange={(e) => setTypedCommand(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      checkCommand(typedCommand);
+                      setTypedCommand("");
+                      setCommandMode(false);
+                    } else if (e.key === "Escape") {
+                      setCommandMode(false);
+                      setTypedCommand("");
+                    }
+                  }}
+                  autoFocus
+                  placeholder="Type command..."
+                  className="flex-1 bg-transparent text-white outline-none placeholder:text-slate-600"
+                />
                 <motion.span
                   animate={{ opacity: [1, 0] }}
                   transition={{ duration: 0.8, repeat: Infinity }}
@@ -455,13 +476,150 @@ export default function EasterEggs() {
                 </motion.span>
               </div>
               <p className="text-xs text-slate-500 mt-2">
-                Try: matrix, hack, rainbow, confetti, quote, help • Press ESC to
-                close
+                Try: matrix, hack, rainbow, confetti, quote, help
               </p>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mobile Command Menu */}
+      <AnimatePresence>
+        {showMobileMenu && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] flex items-end sm:items-center justify-center p-4"
+            onClick={() => setShowMobileMenu(false)}
+          >
+            <motion.div
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-slate-900/95 backdrop-blur-xl border border-indigo-500/30 rounded-2xl shadow-2xl w-full max-w-md max-h-[80vh] overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 px-5 py-4 rounded-t-2xl">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                      <Terminal className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-base">Secret Commands</h3>
+                      <p className="text-slate-400 text-xs">Tap to activate</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => setShowMobileMenu(false)}
+                    className="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors flex items-center justify-center"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
+
+              {/* Command Grid */}
+              <div className="p-4 space-y-2">
+                {Object.entries({
+                  matrix: { icon: "🟢", label: "Matrix Rain", desc: "Classic Matrix effect" },
+                  hack: { icon: "💻", label: "Hacking Mode", desc: "Elevated privileges" },
+                  rainbow: { icon: "🌈", label: "Rainbow Mode", desc: "Colorful gradient" },
+                  confetti: { icon: "🎉", label: "Confetti", desc: "Celebration time!" },
+                  developer: { icon: "🏆", label: "Developer", desc: "Advanced features" },
+                  quote: { icon: "💭", label: "Random Quote", desc: "Coding wisdom" },
+                  time: { icon: "⏰", label: "Current Time", desc: "Show time" },
+                  date: { icon: "📅", label: "Today's Date", desc: "Show date" },
+                  theme: { icon: "🎨", label: "Toggle Theme", desc: "Switch colors" },
+                }).map(([cmd, info]) => (
+                  <motion.button
+                    key={cmd}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      const commandResult = getCommandResult(cmd);
+                      if (commandResult) {
+                        triggerEasterEgg(commandResult.message);
+                        if (commandResult.action) {
+                          commandResult.action();
+                        }
+                      }
+                      setShowMobileMenu(false);
+                    }}
+                    className="w-full bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 hover:border-indigo-500/50 rounded-xl p-3 transition-all group"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="text-2xl">{info.icon}</span>
+                      <div className="flex-1 text-left">
+                        <p className="text-white font-semibold text-sm group-hover:text-indigo-300 transition-colors">
+                          {info.label}
+                        </p>
+                        <p className="text-slate-400 text-xs">{info.desc}</p>
+                      </div>
+                      <span className="text-slate-600 text-xs font-mono opacity-0 group-hover:opacity-100 transition-opacity">
+                        {cmd}
+                      </span>
+                    </div>
+                  </motion.button>
+                ))}
+
+                {/* Terminal Input Option */}
+                <motion.button
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setShowMobileMenu(false);
+                    setCommandMode(true);
+                  }}
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl p-3 transition-all mt-4"
+                >
+                  <div className="flex items-center justify-center space-x-2">
+                    <Terminal className="w-4 h-4 text-white" />
+                    <span className="text-white font-semibold text-sm">
+                      Open Terminal Mode
+                    </span>
+                  </div>
+                </motion.button>
+
+                {/* Info */}
+                <div className="mt-4 p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-lg">
+                  <p className="text-xs text-indigo-300">
+                    <strong>💡 Tip:</strong> Desktop users can press Ctrl+` to open terminal directly!
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Floating Action Button */}
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 2, type: "spring", stiffness: 200 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => setShowMobileMenu(true)}
+        className="fixed bottom-24 right-4 z-[100] w-14 h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg shadow-indigo-500/50 flex items-center justify-center lg:hidden group"
+      >
+        <Terminal className="w-6 h-6 text-white" />
+        
+        {/* Pulse effect */}
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.5, 0, 0.5],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute inset-0 rounded-full bg-indigo-500"
+        />
+      </motion.button>
 
       {/* Hint Indicator */}
       <motion.div

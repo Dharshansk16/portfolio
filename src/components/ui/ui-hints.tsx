@@ -291,7 +291,7 @@ export default function UIHints() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 50 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[60] lg:hidden max-w-[90vw]"
+              className="fixed bottom-40 left-1/2 -translate-x-1/2 z-[60] lg:hidden max-w-[90vw]"
             >
               <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-[2px] rounded-xl shadow-2xl">
                 <div className="bg-slate-950/95 backdrop-blur-xl rounded-xl px-4 py-3">
@@ -300,10 +300,10 @@ export default function UIHints() {
                       <Sparkles className="w-6 h-6 text-indigo-300 flex-shrink-0" />
                       <div>
                         <p className="text-white font-semibold text-sm">
-                          Tap the keyboard icon above for shortcuts!
+                          Tap the terminal icon (bottom-right) for secret commands!
                         </p>
                         <p className="text-indigo-300 text-xs">
-                          Hidden features await...
+                          Matrix, hacks, and more hidden features...
                         </p>
                       </div>
                     </div>
