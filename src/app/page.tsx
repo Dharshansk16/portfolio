@@ -1,12 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BootScreen from "@/components/boot-screen";
 import Dashboard from "@/components/dashboard";
-import ProjectsApp from "@/components/projects-app";
-import BlogApp from "@/components/blog-app";
-import AboutApp from "@/components/about-app";
 import ContactModal from "@/components/contact-modal";
 import FloatingDock from "@/components/floating-dock";
 import BackgroundEffects from "@/components/particles/background-effects";
@@ -16,6 +13,11 @@ import MenuBar from "@/components/ui/menu-bar";
 import EasterEggs from "@/components/effects/easter-eggs";
 import SpotlightSearch from "@/components/ui/spotlight-search";
 import UIHints from "@/components/ui/ui-hints";
+
+// Lazy load heavy app components to reduce initial bundle
+const ProjectsApp = lazy(() => import("@/components/projects-app"));
+const BlogApp = lazy(() => import("@/components/blog-app"));
+const AboutApp = lazy(() => import("@/components/about-app"));
 
 export type AppType = "dashboard" | "projects" | "blog" | "about" | "resume";
 
@@ -126,19 +128,46 @@ export default function DevSpaceOS() {
                 <Dashboard key="dashboard" onAppOpen={handleAppOpen} />
               )}
               {currentApp === "projects" && (
-                <ProjectsApp
-                  key="projects"
-                  onBack={() => setCurrentApp("dashboard")}
-                />
+                <Suspense
+                  fallback={
+                    <div className="min-h-screen flex items-center justify-center">
+                      <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  }
+                >
+                  <ProjectsApp
+                    key="projects"
+                    onBack={() => setCurrentApp("dashboard")}
+                  />
+                </Suspense>
               )}
               {currentApp === "blog" && (
-                <BlogApp key="blog" onBack={() => setCurrentApp("dashboard")} />
+                <Suspense
+                  fallback={
+                    <div className="min-h-screen flex items-center justify-center">
+                      <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  }
+                >
+                  <BlogApp
+                    key="blog"
+                    onBack={() => setCurrentApp("dashboard")}
+                  />
+                </Suspense>
               )}
               {currentApp === "about" && (
-                <AboutApp
-                  key="about"
-                  onBack={() => setCurrentApp("dashboard")}
-                />
+                <Suspense
+                  fallback={
+                    <div className="min-h-screen flex items-center justify-center">
+                      <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+                    </div>
+                  }
+                >
+                  <AboutApp
+                    key="about"
+                    onBack={() => setCurrentApp("dashboard")}
+                  />
+                </Suspense>
               )}
             </AnimatePresence>
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,7 +10,7 @@ interface AboutAppProps {
   onBack: () => void;
 }
 
-export default function AboutApp({ onBack }: AboutAppProps) {
+function AboutApp({ onBack }: AboutAppProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -161,3 +162,5 @@ export default function AboutApp({ onBack }: AboutAppProps) {
     </motion.div>
   );
 }
+
+export default memo(AboutApp);

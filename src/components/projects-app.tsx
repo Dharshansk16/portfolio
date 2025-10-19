@@ -11,7 +11,7 @@ import {
   Play,
   Pause,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/constants/project";
 // import FloatingParticles from "@/components/particles/floating-particles";
@@ -22,7 +22,7 @@ interface ProjectsAppProps {
   onBack: () => void;
 }
 
-export default function ProjectsApp({ onBack }: ProjectsAppProps) {
+function ProjectsApp({ onBack }: ProjectsAppProps) {
   const [selectedProject, setSelectedProject] = useState<
     (typeof projects)[0] | null
   >(null);
@@ -42,21 +42,30 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
     }
   }, [selectedProject, isPlaying]);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (selectedProject) {
       setCurrentImageIndex((prev) =>
         prev === selectedProject.images.length - 1 ? 0 : prev + 1
       );
     }
-  };
+  }, [selectedProject]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     if (selectedProject) {
       setCurrentImageIndex((prev) =>
         prev === 0 ? selectedProject.images.length - 1 : prev - 1
       );
     }
-  };
+  }, [selectedProject]);
+
+  const handleProjectClick = useCallback((project: (typeof projects)[0]) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setSelectedProject(null);
+  }, []);
 
   return (
     <motion.div
@@ -116,10 +125,7 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
               transition={{ delay: index * 0.1 }}
               onHoverStart={() => setHoveredProject(project.id)}
               onHoverEnd={() => setHoveredProject(null)}
-              onClick={() => {
-                setSelectedProject(project);
-                setCurrentImageIndex(0);
-              }}
+              onClick={() => handleProjectClick(project)}
               className="group cursor-pointer touch-manipulation"
             >
               <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-500">
@@ -137,10 +143,11 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                     alt={project.title}
                     width={500}
                     height={300}
+                    priority={index < 2}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     style={{ width: "100%", height: "100%" }}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading="lazy"
+                    loading={index < 2 ? "eager" : "lazy"}
                     placeholder="blur"
                     blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB8H/9k="
                   />
@@ -213,7 +220,7 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
-            onClick={() => setSelectedProject(null)}
+            onClick={handleCloseModal}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
@@ -244,7 +251,7 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => setSelectedProject(null)}
+                  onClick={handleCloseModal}
                   className="text-gray-400 hover:text-white flex-shrink-0 touch-manipulation"
                 >
                   <X className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -318,23 +325,23 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
 
                   {/* Thumbnail Strip */}
                   <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-cyan-500/50">
-                    {selectedProject.images.map((image, index) => (
+                    {selectedProject.images.map((image, idx) => (
                       <button
-                        key={index}
-                        onClick={() => setCurrentImageIndex(index)}
+                        key={idx}
+                        onClick={() => setCurrentImageIndex(idx)}
                         className={`relative flex-shrink-0 w-16 h-12 sm:w-20 sm:h-16 rounded-md sm:rounded-lg overflow-hidden border-2 transition-all touch-manipulation ${
-                          currentImageIndex === index
+                          currentImageIndex === idx
                             ? "border-cyan-400 shadow-lg shadow-cyan-400/25"
                             : "border-white/20 hover:border-white/40"
                         }`}
                       >
                         <Image
                           src={image || "/placeholder.svg"}
-                          alt={`Thumbnail ${index + 1}`}
+                          alt={`Thumbnail ${idx + 1}`}
                           fill
                           className="object-cover"
                           sizes="80px"
-                          loading="lazy"
+                          loading={idx === 0 ? "eager" : "lazy"}
                         />
                       </button>
                     ))}
@@ -400,3 +407,5 @@ export default function ProjectsApp({ onBack }: ProjectsAppProps) {
     </motion.div>
   );
 }
+
+export default memo(ProjectsApp);

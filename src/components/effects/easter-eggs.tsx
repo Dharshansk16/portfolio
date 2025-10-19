@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Zap, Terminal } from "lucide-react";
 
@@ -86,47 +86,66 @@ function startMatrixRain() {
   if (matrixInterval) return;
 
   const canvas = document.createElement("canvas");
-  canvas.style.position = "fixed";
-  canvas.style.top = "0";
-  canvas.style.left = "0";
-  canvas.style.width = "100vw";
-  canvas.style.height = "100vh";
-  canvas.style.pointerEvents = "none";
-  canvas.style.zIndex = "9999";
+  canvas.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+  `;
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   document.body.appendChild(canvas);
 
-  const ctx = canvas.getContext("2d")!;
+  const ctx = canvas.getContext("2d", { alpha: true })!;
   const chars =
     "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
   const fontSize = 14;
-  const columns = canvas.width / fontSize;
-  const drops: number[] = Array(Math.floor(columns)).fill(1);
+  const columns = Math.floor(canvas.width / fontSize);
+  const drops: number[] = new Array(columns).fill(1);
 
-  matrixInterval = setInterval(() => {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#0F0";
-    ctx.font = `${fontSize}px monospace`;
+  let animationFrame: number;
+  let lastTime = 0;
+  const fps = 20; // Reduced from implicit 20 (50ms interval)
+  const interval = 1000 / fps;
 
-    drops.forEach((y, i) => {
-      const text = chars[Math.floor(Math.random() * chars.length)];
-      ctx.fillText(text, i * fontSize, y * fontSize);
-      if (y * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
+  const animate = (currentTime: number) => {
+    const deltaTime = currentTime - lastTime;
+
+    if (deltaTime >= interval) {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
       }
-      drops[i]++;
-    });
-  }, 50);
 
-  setTimeout(() => {
-    if (matrixInterval) {
-      clearInterval(matrixInterval);
-      matrixInterval = null;
+      lastTime = currentTime - (deltaTime % interval);
+    }
+
+    animationFrame = requestAnimationFrame(animate);
+  };
+
+  animationFrame = requestAnimationFrame(animate);
+
+  const timeoutId = setTimeout(() => {
+    cancelAnimationFrame(animationFrame);
+    matrixInterval = null;
+    if (document.body.contains(canvas)) {
       document.body.removeChild(canvas);
     }
   }, 5000);
+
+  matrixInterval = timeoutId as unknown as NodeJS.Timeout;
 }
 
 function startHackingEffect() {
@@ -212,30 +231,35 @@ function triggerConfetti() {
     "#ff00ff",
     "#00ffff",
   ];
-  const confettiCount = 100;
+  const confettiCount = 50; // Reduced from 100 for better performance
+  const fragment = document.createDocumentFragment();
+  const confettiElements: HTMLDivElement[] = [];
 
   for (let i = 0; i < confettiCount; i++) {
     const confetti = document.createElement("div");
-    confetti.style.position = "fixed";
-    confetti.style.top = "-10px";
-    confetti.style.left = Math.random() * window.innerWidth + "px";
-    confetti.style.width = "10px";
-    confetti.style.height = "10px";
-    confetti.style.backgroundColor =
-      colors[Math.floor(Math.random() * colors.length)];
-    confetti.style.zIndex = "9999";
-    confetti.style.pointerEvents = "none";
-    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
-    document.body.appendChild(confetti);
+    confetti.style.cssText = `
+      position: fixed;
+      top: -10px;
+      left: ${Math.random() * window.innerWidth}px;
+      width: 10px;
+      height: 10px;
+      background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+      z-index: 9999;
+      pointer-events: none;
+      transform: rotate(${Math.random() * 360}deg);
+      will-change: transform, opacity;
+    `;
+    fragment.appendChild(confetti);
+    confettiElements.push(confetti);
 
     const animation = confetti.animate(
       [
-        { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+        { transform: `translate(0, 0) rotate(0deg)`, opacity: "1" },
         {
           transform: `translate(${(Math.random() - 0.5) * 200}px, ${
             window.innerHeight
           }px) rotate(${Math.random() * 720}deg)`,
-          opacity: 0,
+          opacity: "0",
         },
       ],
       {
@@ -245,9 +269,13 @@ function triggerConfetti() {
     );
 
     animation.onfinish = () => {
-      document.body.removeChild(confetti);
+      if (confetti.parentNode) {
+        confetti.parentNode.removeChild(confetti);
+      }
     };
   }
+
+  document.body.appendChild(fragment);
 }
 
 // Update the time and date commands dynamically
@@ -278,10 +306,63 @@ function getCommandResult(cmd: string): CommandResult {
 export default function EasterEggs() {
   const [showMessage, setShowMessage] = useState(false);
   const [message, setMessage] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [konamiProgress, setKonamiProgress] = useState<string[]>([]);
   const [typedCommand, setTypedCommand] = useState("");
   const [commandMode, setCommandMode] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+  // Memoize command entries to prevent recreation on every render
+  const commandEntries = useMemo(
+    () => ({
+      matrix: {
+        icon: "🟢",
+        label: "Matrix Rain",
+        desc: "Classic Matrix effect",
+      },
+      hack: {
+        icon: "💻",
+        label: "Hacking Mode",
+        desc: "Elevated privileges",
+      },
+      rainbow: {
+        icon: "🌈",
+        label: "Rainbow Mode",
+        desc: "Colorful gradient",
+      },
+      confetti: {
+        icon: "🎉",
+        label: "Confetti",
+        desc: "Celebration time!",
+      },
+      developer: {
+        icon: "🏆",
+        label: "Developer",
+        desc: "Advanced features",
+      },
+      quote: {
+        icon: "💭",
+        label: "Random Quote",
+        desc: "Coding wisdom",
+      },
+      time: {
+        icon: "⏰",
+        label: "Current Time",
+        desc: "Show time",
+      },
+      date: {
+        icon: "📅",
+        label: "Today's Date",
+        desc: "Show date",
+      },
+      theme: {
+        icon: "🎨",
+        label: "Toggle Theme",
+        desc: "Switch colors",
+      },
+    }),
+    []
+  );
 
   const triggerEasterEgg = useCallback((msg: string) => {
     setMessage(msg);
@@ -353,13 +434,7 @@ export default function EasterEggs() {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [
-    konamiProgress,
-    commandMode,
-    typedCommand,
-    triggerEasterEgg,
-    checkCommand,
-  ]);
+  }, [commandMode, triggerEasterEgg]);
 
   return (
     <>
@@ -535,53 +610,7 @@ export default function EasterEggs() {
 
               {/* Command Grid */}
               <div className="p-4 space-y-2">
-                {Object.entries({
-                  matrix: {
-                    icon: "🟢",
-                    label: "Matrix Rain",
-                    desc: "Classic Matrix effect",
-                  },
-                  hack: {
-                    icon: "💻",
-                    label: "Hacking Mode",
-                    desc: "Elevated privileges",
-                  },
-                  rainbow: {
-                    icon: "🌈",
-                    label: "Rainbow Mode",
-                    desc: "Colorful gradient",
-                  },
-                  confetti: {
-                    icon: "🎉",
-                    label: "Confetti",
-                    desc: "Celebration time!",
-                  },
-                  developer: {
-                    icon: "🏆",
-                    label: "Developer",
-                    desc: "Advanced features",
-                  },
-                  quote: {
-                    icon: "💭",
-                    label: "Random Quote",
-                    desc: "Coding wisdom",
-                  },
-                  time: {
-                    icon: "⏰",
-                    label: "Current Time",
-                    desc: "Show time",
-                  },
-                  date: {
-                    icon: "📅",
-                    label: "Today's Date",
-                    desc: "Show date",
-                  },
-                  theme: {
-                    icon: "🎨",
-                    label: "Toggle Theme",
-                    desc: "Switch colors",
-                  },
-                }).map(([cmd, info]) => (
+                {Object.entries(commandEntries).map(([cmd, info]) => (
                   <motion.button
                     key={cmd}
                     whileTap={{ scale: 0.95 }}

@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,41 +29,45 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSubmitting(true);
 
-    try {
-      await emailjs.sendForm(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        formRef.current!,
-        PUBLIC_KEY
-      );
+      try {
+        await emailjs.sendForm(
+          SERVICE_ID,
+          TEMPLATE_ID,
+          formRef.current!,
+          PUBLIC_KEY
+        );
 
-      setIsSubmitting(false);
-      setIsSubmitted(true);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
 
-      setTimeout(() => {
-        setIsSubmitted(false);
-        onClose();
-        setFormData({ name: "", email: "", message: "" });
-      }, 2000);
-    } catch (error) {
-      console.error("Email send failed:", error);
-      setIsSubmitting(false);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+        setTimeout(() => {
+          setIsSubmitted(false);
+          onClose();
+          setFormData({ name: "", email: "", message: "" });
+        }, 2000);
+      } catch (error) {
+        console.error("Email send failed:", error);
+        setIsSubmitting(false);
+        alert("Something went wrong. Please try again.");
+      }
+    },
+    [onClose]
+  );
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    },
+    []
+  );
 
   return (
     <AnimatePresence>
@@ -200,3 +204,5 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     </AnimatePresence>
   );
 }
+
+export default memo(ContactModal);

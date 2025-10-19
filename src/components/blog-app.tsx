@@ -1,5 +1,6 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Clock, ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -39,9 +40,8 @@ const blogPosts = [
   },
 ];
 
-export default function BlogApp({ onBack }: BlogAppProps) {
+function BlogApp({ onBack }: BlogAppProps) {
   const [terminalText, setTerminalText] = useState("");
-  const [showPosts, setShowPosts] = useState(false);
   const [comingSoon, setComingSoon] = useState(false);
   const fullText = "> fetching latest blogs...";
 
@@ -95,8 +95,8 @@ export default function BlogApp({ onBack }: BlogAppProps) {
         </div>
       </div>
 
-      {/* Blog Posts */}
-      {showPosts && (
+      {/* Blog Posts - Hidden for now */}
+      {false && (
         <div className="space-y-6">
           {blogPosts.map((post, index) => (
             <motion.article
@@ -159,3 +159,5 @@ export default function BlogApp({ onBack }: BlogAppProps) {
     </motion.div>
   );
 }
+
+export default memo(BlogApp);
