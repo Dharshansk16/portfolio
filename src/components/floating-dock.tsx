@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, Download, ArrowUp, Sparkles, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 
 interface FloatingDockProps {
@@ -17,6 +17,34 @@ export default function FloatingDock({
   showParticles,
 }: FloatingDockProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const dockRef = useRef<HTMLDivElement>(null);
+
+  // Close dock when clicking outside on mobile
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (dockRef.current && !dockRef.current.contains(event.target as Node)) {
+        setIsExpanded(false);
+      }
+    };
+
+    if (isExpanded) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isExpanded]);
+
+  const handleItemClick = (action: () => void) => {
+    action();
+    // Close dock after action on mobile devices
+    if (/Mobile|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      setIsExpanded(false);
+    }
+  };
 
   const dockItems = [
     {
@@ -51,10 +79,14 @@ export default function FloatingDock({
 
   return (
     <motion.div
+      ref={dockRef}
       className="fixed bottom-8 right-8 z-50"
       onHoverStart={() => setIsExpanded(true)}
       onHoverEnd={() => setIsExpanded(false)}
-      onTouchStart={() => setIsExpanded(!isExpanded)}
+      onTouchStart={(e) => {
+        e.stopPropagation();
+        setIsExpanded(!isExpanded);
+      }}
     >
       <div className="flex flex-col-reverse items-end gap-3">
         {/* Dock Items */}
@@ -119,7 +151,7 @@ export default function FloatingDock({
 
                   <Button
                     size="icon"
-                    onClick={item.action}
+                    onClick={() => handleItemClick(item.action)}
                     className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} hover:shadow-2xl transition-all duration-300 border border-white/20`}
                   >
                     <item.icon className="w-6 h-6 text-white" />
