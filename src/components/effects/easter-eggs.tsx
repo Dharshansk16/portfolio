@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Award, Zap, Terminal } from "lucide-react";
+import { Sparkles, Zap, Terminal } from "lucide-react";
 
 const KONAMI_CODE = [
   "ArrowUp",
@@ -37,15 +37,15 @@ function getRandomQuote() {
 
 const SECRET_COMMANDS: { [key: string]: CommandResult } = {
   matrix: {
-    message: "Wake up, Neo...",
+    message: "Matrix Effect: Animation started successfully",
     action: () => startMatrixRain(),
   },
   hack: {
-    message: "Access Granted. Welcome, Hacker!",
+    message: "Security Access: Elevated privileges granted",
     action: () => startHackingEffect(),
   },
   developer: {
-    message: "You're hired! 🎉",
+    message: "Developer Mode: Advanced features enabled",
   },
   time: {
     message: `Current time: ${new Date().toLocaleTimeString()}`,
@@ -59,22 +59,22 @@ const SECRET_COMMANDS: { [key: string]: CommandResult } = {
     })}`,
   },
   rainbow: {
-    message: "🌈 Rainbow Mode Activated!",
+    message: "Visual Effects: Rainbow gradient mode activated",
     action: () => activateRainbowMode(),
   },
   clear: {
-    message: "Terminal cleared",
+    message: "Terminal: Display cleared successfully",
   },
   help: {
     message:
-      "Available commands: matrix, hack, developer, time, date, rainbow, theme, confetti, quote, clear, help",
+      "System Help: Available commands - matrix, hack, developer, time, date, rainbow, theme, confetti, quote, clear, help",
   },
   theme: {
-    message: "Theme toggled! ✨",
+    message: "Appearance: Theme preferences updated",
     action: () => toggleTheme(),
   },
   confetti: {
-    message: "🎉 Celebration time!",
+    message: "Celebration Mode: Confetti effect triggered",
     action: () => triggerConfetti(),
   },
 };
@@ -295,7 +295,7 @@ export default function EasterEggs() {
           newProgress.length === KONAMI_CODE.length &&
           newProgress.every((key, i) => key === KONAMI_CODE[i])
         ) {
-          triggerEasterEgg("🎮 Konami Code Activated! You're a legend!");
+          triggerEasterEgg("Achievement Unlocked: Konami Code master detected");
           return [];
         }
 
@@ -326,7 +326,7 @@ export default function EasterEggs() {
 
       // Secret key combinations
       if (e.ctrlKey && e.shiftKey && e.key === "D") {
-        triggerEasterEgg("🎨 Developer Mode Activated!");
+        triggerEasterEgg("Developer Mode: Advanced debugging features enabled");
       }
     };
 
@@ -342,7 +342,7 @@ export default function EasterEggs() {
         }
       } else {
         triggerEasterEgg(
-          `Command not found: ${cmd}. Type 'help' for available commands.`
+          `Command Error: '${cmd}' not recognized. Type 'help' for available commands`
         );
       }
     };
@@ -361,36 +361,67 @@ export default function EasterEggs() {
 
   return (
     <>
-      {/* Easter Egg Message */}
+      {/* OS-Style System Notification */}
       <AnimatePresence>
         {showMessage && (
           <motion.div
-            initial={{ opacity: 0, y: -100, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -100, scale: 0.8 }}
-            className="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100]"
+            initial={{ opacity: 0, x: 400 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 400 }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+            className="fixed top-20 right-6 z-[100] w-96 max-w-[calc(100vw-3rem)]"
           >
-            <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-[2px] rounded-2xl shadow-2xl">
-              <div className="bg-slate-950 rounded-2xl px-8 py-4 flex items-center space-x-4">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                >
-                  <Sparkles className="w-8 h-8 text-yellow-400" />
-                </motion.div>
-                <div>
-                  <p className="text-white font-bold text-lg">{message}</p>
-                  <p className="text-indigo-300 text-sm">
-                    You found a secret! 🎉
-                  </p>
+            {/* macOS-style notification */}
+            <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl shadow-2xl overflow-hidden">
+              {/* Notification header */}
+              <div className="bg-gradient-to-r from-slate-800/90 to-slate-900/90 px-4 py-2 border-b border-white/10">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                      <Sparkles className="w-3 h-3 text-white" />
+                    </div>
+                    <span className="text-white/90 font-semibold text-sm">
+                      System
+                    </span>
+                  </div>
+                  <span className="text-white/50 text-xs font-medium">now</span>
                 </div>
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 0.5, repeat: Infinity }}
-                >
-                  <Award className="w-8 h-8 text-yellow-400" />
-                </motion.div>
               </div>
+
+              {/* Notification body */}
+              <div className="bg-slate-900/95 px-4 py-4">
+                <div className="flex items-start space-x-3">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                    className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg"
+                  >
+                    <Terminal className="w-5 h-5 text-white" />
+                  </motion.div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-semibold text-base leading-snug mb-1">
+                      {message.split(":")[0] || message.split(".")[0]}
+                    </p>
+                    <p className="text-slate-300 text-sm leading-relaxed">
+                      {message.includes(":")
+                        ? message.split(":").slice(1).join(":").trim()
+                        : message.includes(".")
+                        ? message.split(".").slice(1).join(".").trim() ||
+                          "Feature activated successfully"
+                        : "Feature activated successfully"}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Subtle progress indicator */}
+              <motion.div
+                initial={{ width: "100%" }}
+                animate={{ width: "0%" }}
+                transition={{ duration: 3, ease: "linear" }}
+                className="h-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+              />
             </div>
           </motion.div>
         )}
