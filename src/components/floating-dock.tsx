@@ -80,7 +80,7 @@ export default function FloatingDock({
   return (
     <motion.div
       ref={dockRef}
-      className="fixed bottom-8 right-8 z-50"
+      className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50"
       onHoverStart={() => setIsExpanded(true)}
       onHoverEnd={() => setIsExpanded(false)}
       onTouchStart={(e) => {
@@ -88,7 +88,7 @@ export default function FloatingDock({
         setIsExpanded(!isExpanded);
       }}
     >
-      <div className="flex flex-col-reverse items-end gap-3">
+      <div className="flex flex-col-reverse items-end gap-2 sm:gap-3">
         {/* Dock Items */}
         <AnimatePresence>
           {isExpanded &&
@@ -116,7 +116,7 @@ export default function FloatingDock({
                     duration: 0.2,
                   },
                 }}
-                className="flex items-center gap-3 group"
+                className="flex items-center gap-2 sm:gap-3 group"
               >
                 {/* Professional Label */}
                 <motion.div
@@ -124,10 +124,10 @@ export default function FloatingDock({
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ delay: index * 0.08 + 0.1 }}
-                  className="bg-slate-950/90 backdrop-blur-xl text-white text-sm font-medium px-4 py-2.5 rounded-xl border border-indigo-500/30 shadow-xl shadow-indigo-500/10 flex items-center gap-2 whitespace-nowrap"
+                  className="bg-slate-950/90 backdrop-blur-xl text-white text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl border border-indigo-500/30 shadow-xl shadow-indigo-500/10 flex items-center gap-2 whitespace-nowrap"
                 >
-                  <span>{item.emoji}</span>
-                  <span>{item.label}</span>
+                  <span className="text-sm sm:text-base">{item.emoji}</span>
+                  <span className="hidden sm:inline">{item.label}</span>
                 </motion.div>
 
                 {/* Action Button */}
@@ -152,9 +152,9 @@ export default function FloatingDock({
                   <Button
                     size="icon"
                     onClick={() => handleItemClick(item.action)}
-                    className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} hover:shadow-2xl transition-all duration-300 border border-white/20`}
+                    className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${item.color} hover:shadow-2xl transition-all duration-300 border border-white/20 touch-manipulation`}
                   >
-                    <item.icon className="w-6 h-6 text-white" />
+                    <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </Button>
                 </motion.div>
               </motion.div>
@@ -184,16 +184,16 @@ export default function FloatingDock({
           <Button
             size="icon"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="relative w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-500 hover:shadow-2xl hover:shadow-indigo-500/50 transition-all duration-300 border-2 border-white/30"
+            className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 via-violet-500 to-purple-500 hover:shadow-2xl hover:shadow-indigo-500/50 transition-all duration-300 border-2 border-white/30 touch-manipulation"
           >
             <motion.div
               animate={{ rotate: isExpanded ? 45 : 0 }}
               transition={{ type: "spring", stiffness: 200 }}
             >
               {isExpanded ? (
-                <X className="w-7 h-7 text-white" />
+                <X className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               ) : (
-                <Sparkles className="w-7 h-7 text-white" />
+                <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               )}
             </motion.div>
           </Button>

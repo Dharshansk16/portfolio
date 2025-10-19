@@ -71,7 +71,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="min-h-screen flex flex-col items-center justify-center p-8 relative"
+      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 relative safe-area"
     >
       {/* Floating Elements - Professional subtle theme - Simplified for low-end devices */}
       {!isLowEnd && (
@@ -104,10 +104,10 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-center mb-16 relative"
+        className="text-center mb-12 sm:mb-14 md:mb-16 relative px-4"
       >
         <motion.div
-          className="absolute -top-8 left-1/2 transform -translate-x-1/2"
+          className="absolute -top-6 sm:-top-8 left-1/2 transform -translate-x-1/2"
           animate={
             isLowEnd
               ? { rotate: 360 }
@@ -125,11 +125,14 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
                 }
           }
         >
-          <Sparkles className="text-indigo-400" size={32} />
+          <Sparkles
+            className="text-indigo-400 w-7 h-7 sm:w-8 sm:h-8"
+            size={32}
+          />
         </motion.div>
 
         <motion.h1
-          className="text-5xl md:text-7xl py-2 font-bold bg-gradient-to-r from-indigo-400 via-violet-500 to-purple-500 bg-clip-text text-transparent mb-4 relative"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl py-2 font-bold bg-gradient-to-r from-indigo-400 via-violet-500 to-purple-500 bg-clip-text text-transparent mb-3 sm:mb-4 relative"
           animate={
             isLowEnd
               ? {}
@@ -158,7 +161,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
         </motion.h1>
 
         <motion.p
-          className="text-slate-400 text-lg font-mono mb-2"
+          className="text-slate-400 text-base sm:text-lg font-mono mb-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -167,7 +170,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
         </motion.p>
 
         <motion.div
-          className="text-indigo-400/60 text-sm font-mono"
+          className="text-indigo-400/60 text-xs sm:text-sm font-mono"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -189,7 +192,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             },
           },
         }}
-        className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20 relative z-10"
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-16 sm:mb-20 relative z-10 max-w-4xl mx-auto px-4"
       >
         {apps.map((app) => (
           <motion.div
@@ -237,7 +240,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             <div className="relative">
               {/* Professional App Icon Container */}
               <div
-                className={`w-28 h-28 md:w-32 md:h-32 rounded-3xl bg-gradient-to-br ${app.color} p-5 shadow-[0_8px_32px_0_rgba(99,102,241,0.37)] backdrop-blur-sm border border-white/30 relative overflow-hidden`}
+                className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${app.color} p-4 sm:p-5 shadow-[0_8px_32px_0_rgba(99,102,241,0.37)] backdrop-blur-sm border border-white/30 relative overflow-hidden touch-manipulation`}
               >
                 {/* Refined Animated Background - Only on high-end devices */}
                 {!isLowEnd && (
@@ -267,8 +270,8 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
               </div>
 
               {/* App Info with Better Typography */}
-              <div className="text-center mt-4">
-                <p className="text-base font-semibold text-white mb-1 group-hover:text-indigo-300 transition-colors duration-300">
+              <div className="text-center mt-3 sm:mt-4">
+                <p className="text-sm sm:text-base font-semibold text-white mb-0.5 sm:mb-1 group-hover:text-indigo-300 transition-colors duration-300">
                   {app.name}
                 </p>
                 <p className="text-xs text-slate-400 group-hover:text-slate-300 transition-colors duration-300">
@@ -277,7 +280,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
               </div>
 
               {/* Professional Hover Indicator */}
-              <motion.div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-indigo-400 to-violet-500 rounded-full group-hover:w-full transition-all duration-300" />
+              <motion.div className="absolute -bottom-1 sm:-bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 sm:h-1 bg-gradient-to-r from-indigo-400 to-violet-500 rounded-full group-hover:w-full transition-all duration-300" />
             </div>
           </motion.div>
         ))}
@@ -288,12 +291,12 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="w-full max-w-3xl relative"
+        className="w-full max-w-3xl relative px-4"
       >
         {/* Professional Terminal Glow */}
-        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 rounded-2xl blur-xl" />
+        <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 rounded-xl sm:rounded-2xl blur-xl" />
 
-        <div className="relative bg-slate-950/90 backdrop-blur-xl border border-indigo-500/30 rounded-2xl p-6 font-mono shadow-2xl overflow-hidden">
+        <div className="relative bg-slate-950/90 backdrop-blur-xl border border-indigo-500/30 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 font-mono shadow-2xl overflow-hidden">
           {/* Professional Background Pattern */}
           <div
             className="absolute inset-0 opacity-5"
@@ -309,7 +312,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
           />
 
           {/* Terminal Header */}
-          <div className="flex items-center justify-between mb-4 relative z-10">
+          <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
             <div className="flex items-center space-x-2">
               <motion.div
                 className="w-3 h-3 rounded-full bg-red-500 cursor-pointer hover:bg-red-400"
@@ -331,12 +334,12 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
           </div>
 
           {/* Terminal Content */}
-          <div className="space-y-3 relative z-10">
-            <div className="flex items-start space-x-3">
-              <Terminal className="w-5 h-5 text-indigo-400 mt-1 flex-shrink-0" />
-              <div className="flex-1">
+          <div className="space-y-2 sm:space-y-3 relative z-10">
+            <div className="flex items-start space-x-2 sm:space-x-3">
+              <Terminal className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 mt-1 flex-shrink-0" />
+              <div className="flex-1 min-w-0">
                 <motion.span
-                  className="text-indigo-400 text-sm md:text-base"
+                  className="text-indigo-400 text-xs sm:text-sm md:text-base break-all"
                   animate={{
                     opacity: [1, 0.7, 1],
                   }}
@@ -351,7 +354,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
               </div>
             </div>
 
-            <div className="pl-8 space-y-1 text-xs md:text-sm">
+            <div className="pl-6 sm:pl-8 space-y-1 text-xs md:text-sm">
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}

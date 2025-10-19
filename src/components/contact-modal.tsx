@@ -79,33 +79,33 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl max-w-md w-full overflow-hidden"
+            className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl max-w-md w-full overflow-hidden touch-manipulation"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
+            <div className="flex items-center justify-between p-5 sm:p-6 border-b border-white/10">
+              <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 Get In Touch
               </h2>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={onClose}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white touch-manipulation"
               >
                 <X className="w-5 h-5" />
               </Button>
             </div>
 
-            <div className="p-6">
+            <div className="p-5 sm:p-6">
               {!isSubmitted ? (
                 <>
-                  <div className="mb-6 space-y-3">
+                  <div className="mb-5 sm:mb-6 space-y-2 sm:space-y-3">
                     <div className="flex items-center space-x-3 text-sm text-gray-300">
-                      <Mail className="w-4 h-4 text-cyan-400" />
-                      <span>dcodecraft@gmail.com</span>
+                      <Mail className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+                      <span className="break-all">dcodecraft@gmail.com</span>
                     </div>
                     <div className="flex items-center space-x-3 text-sm text-gray-300">
-                      <MapPin className="w-4 h-4 text-cyan-400" />
+                      <MapPin className="w-4 h-4 text-cyan-400 flex-shrink-0" />
                       <span>India</span>
                     </div>
                   </div>
@@ -122,7 +122,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400"
+                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400 h-11 sm:h-10 touch-manipulation"
                       />
                     </div>
                     <div>
@@ -133,7 +133,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400"
+                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400 h-11 sm:h-10 touch-manipulation"
                       />
                     </div>
                     <div>
@@ -144,13 +144,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         onChange={handleChange}
                         required
                         rows={4}
-                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400 resize-none"
+                        className="bg-white/5 border-white/20 text-white placeholder:text-gray-400 focus:border-cyan-400 resize-none touch-manipulation"
                       />
                     </div>
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white font-medium"
+                      className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white font-medium h-11 sm:h-10 touch-manipulation"
                     >
                       {isSubmitting ? (
                         <motion.div
@@ -181,20 +181,16 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                    className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center"
+                    className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 flex items-center justify-center text-2xl"
                   >
-                    <motion.div
-                      initial={{ pathLength: 0 }}
-                      animate={{ pathLength: 1 }}
-                      transition={{ delay: 0.5, duration: 0.5 }}
-                    >
-                      ✓
-                    </motion.div>
+                    ✓
                   </motion.div>
                   <h3 className="text-xl font-semibold text-white mb-2">
                     Message Sent!
                   </h3>
-                  <p className="text-gray-400">Thanks for the feedback!</p>
+                  <p className="text-gray-400 text-sm">
+                    Thanks for the feedback!
+                  </p>
                 </motion.div>
               )}
             </div>
