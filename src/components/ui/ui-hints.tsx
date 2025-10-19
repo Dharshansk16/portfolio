@@ -300,7 +300,8 @@ export default function UIHints() {
                       <Sparkles className="w-6 h-6 text-indigo-300 flex-shrink-0" />
                       <div>
                         <p className="text-white font-semibold text-sm">
-                          Tap the terminal icon (bottom-right) for secret commands!
+                          Tap the terminal icon (bottom-right) for secret
+                          commands!
                         </p>
                         <p className="text-indigo-300 text-xs">
                           Matrix, hacks, and more hidden features...

@@ -289,22 +289,25 @@ export default function EasterEggs() {
     setTimeout(() => setShowMessage(false), 3000);
   }, []);
 
-  const checkCommand = useCallback((cmd: string) => {
-    const trimmedCmd = cmd.trim().toLowerCase();
-    const commandResult = getCommandResult(trimmedCmd);
+  const checkCommand = useCallback(
+    (cmd: string) => {
+      const trimmedCmd = cmd.trim().toLowerCase();
+      const commandResult = getCommandResult(trimmedCmd);
 
-    if (commandResult) {
-      triggerEasterEgg(commandResult.message);
-      // Execute the action if it exists
-      if (commandResult.action) {
-        commandResult.action();
+      if (commandResult) {
+        triggerEasterEgg(commandResult.message);
+        // Execute the action if it exists
+        if (commandResult.action) {
+          commandResult.action();
+        }
+      } else {
+        triggerEasterEgg(
+          `Command Error: '${cmd}' not recognized. Type 'help' for available commands`
+        );
       }
-    } else {
-      triggerEasterEgg(
-        `Command Error: '${cmd}' not recognized. Type 'help' for available commands`
-      );
-    }
-  }, [triggerEasterEgg]);
+    },
+    [triggerEasterEgg]
+  );
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
@@ -350,7 +353,13 @@ export default function EasterEggs() {
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
     };
-  }, [konamiProgress, commandMode, typedCommand, triggerEasterEgg, checkCommand]);
+  }, [
+    konamiProgress,
+    commandMode,
+    typedCommand,
+    triggerEasterEgg,
+    checkCommand,
+  ]);
 
   return (
     <>
@@ -509,7 +518,9 @@ export default function EasterEggs() {
                       <Terminal className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-white font-bold text-base">Secret Commands</h3>
+                      <h3 className="text-white font-bold text-base">
+                        Secret Commands
+                      </h3>
                       <p className="text-slate-400 text-xs">Tap to activate</p>
                     </div>
                   </div>
@@ -525,15 +536,51 @@ export default function EasterEggs() {
               {/* Command Grid */}
               <div className="p-4 space-y-2">
                 {Object.entries({
-                  matrix: { icon: "🟢", label: "Matrix Rain", desc: "Classic Matrix effect" },
-                  hack: { icon: "💻", label: "Hacking Mode", desc: "Elevated privileges" },
-                  rainbow: { icon: "🌈", label: "Rainbow Mode", desc: "Colorful gradient" },
-                  confetti: { icon: "🎉", label: "Confetti", desc: "Celebration time!" },
-                  developer: { icon: "🏆", label: "Developer", desc: "Advanced features" },
-                  quote: { icon: "💭", label: "Random Quote", desc: "Coding wisdom" },
-                  time: { icon: "⏰", label: "Current Time", desc: "Show time" },
-                  date: { icon: "📅", label: "Today's Date", desc: "Show date" },
-                  theme: { icon: "🎨", label: "Toggle Theme", desc: "Switch colors" },
+                  matrix: {
+                    icon: "🟢",
+                    label: "Matrix Rain",
+                    desc: "Classic Matrix effect",
+                  },
+                  hack: {
+                    icon: "💻",
+                    label: "Hacking Mode",
+                    desc: "Elevated privileges",
+                  },
+                  rainbow: {
+                    icon: "🌈",
+                    label: "Rainbow Mode",
+                    desc: "Colorful gradient",
+                  },
+                  confetti: {
+                    icon: "🎉",
+                    label: "Confetti",
+                    desc: "Celebration time!",
+                  },
+                  developer: {
+                    icon: "🏆",
+                    label: "Developer",
+                    desc: "Advanced features",
+                  },
+                  quote: {
+                    icon: "💭",
+                    label: "Random Quote",
+                    desc: "Coding wisdom",
+                  },
+                  time: {
+                    icon: "⏰",
+                    label: "Current Time",
+                    desc: "Show time",
+                  },
+                  date: {
+                    icon: "📅",
+                    label: "Today's Date",
+                    desc: "Show date",
+                  },
+                  theme: {
+                    icon: "🎨",
+                    label: "Toggle Theme",
+                    desc: "Switch colors",
+                  },
                 }).map(([cmd, info]) => (
                   <motion.button
                     key={cmd}
@@ -585,7 +632,8 @@ export default function EasterEggs() {
                 {/* Info */}
                 <div className="mt-4 p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-lg">
                   <p className="text-xs text-indigo-300">
-                    <strong>💡 Tip:</strong> Desktop users can press Ctrl+` to open terminal directly!
+                    <strong>💡 Tip:</strong> Desktop users can press Ctrl+` to
+                    open terminal directly!
                   </p>
                 </div>
               </div>
@@ -605,7 +653,7 @@ export default function EasterEggs() {
         className="fixed bottom-24 right-4 z-[100] w-14 h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg shadow-indigo-500/50 flex items-center justify-center lg:hidden group"
       >
         <Terminal className="w-6 h-6 text-white" />
-        
+
         {/* Pulse effect */}
         <motion.div
           animate={{
