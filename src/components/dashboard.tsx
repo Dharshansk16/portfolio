@@ -71,7 +71,7 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 relative safe-area"
+      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area"
     >
       {/* Floating Elements - Professional subtle theme - Simplified for low-end devices */}
       {!isLowEnd && (

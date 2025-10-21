@@ -2,8 +2,8 @@
 
 import { memo } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { User } from "lucide-react";
+import OSWindow from "@/components/ui/os-window";
 import { skills, techGroups, stats, aboutMeText } from "@/constants/about";
 
 interface AboutAppProps {
@@ -12,154 +12,209 @@ interface AboutAppProps {
 
 function AboutApp({ onBack }: AboutAppProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, ease: "linear" }}
-      className="min-h-screen p-4 sm:p-6 md:p-8 space-y-8 sm:space-y-10 md:space-y-12"
-    >
-      <div className="flex items-center justify-between mb-4 sm:mb-6">
-        <div className="flex items-center space-x-3 sm:space-x-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onBack}
-            className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10 touch-manipulation"
-          >
-            <ArrowLeft className="w-5 h-5" />
-          </Button>
-          <h1 className="text-2xl sm:text-3xl font-bold text-cyan-400">
-            About Me
-          </h1>
-        </div>
-        <div className="flex space-x-2">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-        <div className="bg-black/50 border border-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-5 sm:p-8 md:p-10 shadow-2xl">
-          <div className="flex flex-col items-center text-center space-y-4 sm:space-y-6">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-cyan-400 to-purple-500 flex items-center justify-center text-4xl sm:text-5xl font-bold text-black shadow-lg">
-              D
-            </div>
-
-            <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-                Dharshan S Kotian
-              </h2>
-              <p className="text-cyan-400 font-mono mt-1 text-sm md:text-base">
-                Full Stack Developer
-              </p>
-            </div>
-
-            <p className="text-gray-300 leading-relaxed max-w-2xl text-sm md:text-base">
-              {aboutMeText}
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-3 sm:mt-4">
-              <a
-                href="https://github.com/Dharshansk16"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-cyan-400 hover:text-white transition touch-manipulation"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/dharshan-s-kotian-5053aa280/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-purple-500 hover:text-white transition touch-manipulation"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://leetcode.com/u/Dharshan_S_Kotian/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white text-black px-4 py-2 rounded-full text-sm font-medium hover:bg-yellow-400 hover:text-black transition touch-manipulation"
-              >
-                LeetCode
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 text-center hover:border-cyan-500/40 transition-colors"
+    <div className="min-h-screen relative pt-12 pb-24 sm:pb-28 px-2 sm:px-4 md:px-6">
+      <OSWindow
+        title="About Me"
+        subtitle="~/portfolio/about"
+        icon={<User className="w-5 h-5" />}
+        onClose={onBack}
+        accentColor="purple"
+        className="max-w-[1600px] mx-auto h-[calc(100vh-8rem)]"
+      >
+        <div className="h-[calc(100vh-12rem)] overflow-y-auto scrollbar-thin p-3 sm:p-4 md:p-6">
+          {/* Two Column Layout - Better space utilization */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+            {/* Left Column - Profile (1/3 width) */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+              className="lg:col-span-1"
             >
-              <stat.icon
-                className={`w-7 h-7 sm:w-8 sm:h-8 mx-auto mb-2 ${stat.color}`}
-              />
-              <div
-                className={`text-xl sm:text-2xl font-bold pb-2 ${stat.color}`}
-              >
-                {stat.label}
-              </div>
-              <p className="text-gray-400 text-xs sm:text-sm">{stat.value}</p>
-              <p className="text-xs sm:text-sm text-muted-foreground py-2">
-                {stat.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+              <div className="bg-gradient-to-br from-slate-900/70 to-slate-800/50 border border-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 shadow-xl hover:shadow-purple-500/20 transition-shadow sticky top-0">
+                <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-cyan-400 via-purple-400 to-fuchsia-500 flex items-center justify-center text-3xl sm:text-4xl font-bold text-white shadow-2xl shadow-purple-500/50 ring-4 ring-purple-500/20"
+                  >
+                    D
+                  </motion.div>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mt-6 sm:mt-8">
-        <div className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-5 sm:p-6">
-          <h3 className="text-lg sm:text-xl font-semibold text-white mb-4">
-            Skills
-          </h3>
-          <div className="space-y-3 sm:space-y-4">
-            {skills.map((skill) => (
-              <div key={skill.name}>
-                <div className="flex justify-between text-sm md:text-base text-gray-300 mb-1">
-                  <span>{skill.name}</span>
-                  <span className="text-gray-400">{skill.level}%</span>
-                </div>
-                <div className="w-full bg-gray-700 rounded-full h-3 md:h-4">
-                  <div
-                    className={`h-3 md:h-4 rounded-full ${skill.color} transition-all duration-1000`}
-                    style={{ width: `${skill.level}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-fuchsia-400 bg-clip-text text-transparent">
+                      Dharshan S Kotian
+                    </h2>
+                    <p className="text-purple-400 font-mono mt-1 text-xs sm:text-sm font-semibold">
+                      &lt;Full Stack Developer /&gt;
+                    </p>
+                  </div>
 
-        <div className="bg-black/50 border border-white/10 backdrop-blur-sm rounded-xl p-5 sm:p-6">
-          <h3 className="text-lg sm:text-xl font-semibold text-white mb-6">
-            Tech Stack
-          </h3>
-          <div className="space-y-4">
-            {Object.entries(techGroups).map(([group, techs]) => (
-              <div key={group}>
-                <h4 className="text-cyan-400 font-semibold mb-2 text-sm sm:text-base">
-                  {group}
-                </h4>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
-                  {techs.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1.5 sm:px-3 sm:py-2 bg-cyan-500/10 text-cyan-300 border border-cyan-400/30 rounded-full text-xs sm:text-sm hover:border-cyan-300 transition-colors touch-manipulation"
+                  <p className="text-gray-300 leading-relaxed text-xs sm:text-sm">
+                    {aboutMeText}
+                  </p>
+
+                  {/* Social Links - Compact */}
+                  <div className="flex flex-col w-full gap-2 mt-3">
+                    <motion.a
+                      whileHover={{ scale: 1.02, x: 2 }}
+                      whileTap={{ scale: 0.98 }}
+                      href="https://github.com/Dharshansk16"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-gradient-to-r from-gray-700 to-gray-800 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-gray-600 hover:to-gray-700 transition shadow-md hover:shadow-gray-500/20 touch-manipulation border border-white/10"
                     >
-                      {tech}
-                    </span>
-                  ))}
+                      GitHub
+                    </motion.a>
+                    <motion.a
+                      whileHover={{ scale: 1.02, x: 2 }}
+                      whileTap={{ scale: 0.98 }}
+                      href="https://www.linkedin.com/in/dharshan-s-kotian-5053aa280/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-blue-500 hover:to-blue-600 transition shadow-md hover:shadow-blue-500/20 touch-manipulation border border-white/10"
+                    >
+                      LinkedIn
+                    </motion.a>
+                    <motion.a
+                      whileHover={{ scale: 1.02, x: 2 }}
+                      whileTap={{ scale: 0.98 }}
+                      href="https://leetcode.com/u/Dharshan_S_Kotian/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-orange-400 hover:to-amber-400 transition shadow-md hover:shadow-orange-500/20 touch-manipulation border border-white/10"
+                    >
+                      LeetCode
+                    </motion.a>
+                  </div>
                 </div>
               </div>
-            ))}
+            </motion.div>
+
+            {/* Right Column - Stats, Skills, Tech (2/3 width) */}
+            <div className="lg:col-span-2 space-y-4 sm:space-y-5">
+              {/* Stats Grid - Compact */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * (index + 1) }}
+                    className="bg-gradient-to-br from-slate-900/70 to-slate-800/50 border border-white/10 backdrop-blur-sm rounded-lg p-3 text-center hover:border-purple-500/40 transition-all group hover:shadow-lg hover:shadow-purple-500/10"
+                  >
+                    <stat.icon
+                      className={`w-6 h-6 sm:w-7 sm:h-7 mx-auto mb-2 ${stat.color} group-hover:scale-110 transition-transform`}
+                    />
+                    <div
+                      className={`text-base sm:text-lg font-bold mb-0.5 ${stat.color}`}
+                    >
+                      {stat.label}
+                    </div>
+                    <p className="text-gray-400 text-[10px] sm:text-xs font-medium">
+                      {stat.value}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Skills and Tech Stack - Side by side */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                {/* Skills Progress Bars - Compact */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-gradient-to-br from-slate-900/70 to-slate-800/50 border border-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 hover:shadow-lg hover:shadow-cyan-500/10 transition-shadow"
+                >
+                  <h3 className="text-sm sm:text-base font-semibold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-4 flex items-center">
+                    <span className="w-1.5 h-6 bg-gradient-to-b from-cyan-400 to-blue-400 rounded-full mr-2"></span>
+                    Skills Proficiency
+                  </h3>
+                  <div className="space-y-3">
+                    {skills.map((skill, index) => (
+                      <motion.div
+                        key={skill.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + index * 0.05 }}
+                      >
+                        <div className="flex justify-between text-xs sm:text-sm text-gray-300 mb-1.5">
+                          <span className="font-medium">{skill.name}</span>
+                          <span className="text-cyan-400 font-semibold">
+                            {skill.level}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-slate-800/50 rounded-full h-2 overflow-hidden border border-white/5">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${skill.level}%` }}
+                            transition={{
+                              delay: 0.5 + index * 0.05,
+                              duration: 0.8,
+                              ease: "easeOut",
+                            }}
+                            className={`h-2 rounded-full ${skill.color} shadow-md`}
+                          />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+
+                {/* Tech Stack Tags - Compact */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-gradient-to-br from-slate-900/70 to-slate-800/50 border border-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 hover:shadow-lg hover:shadow-purple-500/10 transition-shadow"
+                >
+                  <h3 className="text-sm sm:text-base font-semibold bg-gradient-to-r from-purple-400 to-fuchsia-400 bg-clip-text text-transparent mb-4 flex items-center">
+                    <span className="w-1.5 h-6 bg-gradient-to-b from-purple-400 to-fuchsia-400 rounded-full mr-2"></span>
+                    Tech Stack
+                  </h3>
+                  <div className="space-y-3 sm:space-y-4">
+                    {Object.entries(techGroups).map(
+                      ([group, techs], groupIndex) => (
+                        <motion.div
+                          key={group}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 + groupIndex * 0.1 }}
+                        >
+                          <h4 className="text-purple-400 font-semibold mb-2 text-xs sm:text-sm flex items-center">
+                            <span className="w-1 h-1 bg-purple-400 rounded-full mr-1.5"></span>
+                            {group}
+                          </h4>
+                          <div className="flex flex-wrap gap-1.5">
+                            {techs.map((tech, techIndex) => (
+                              <motion.span
+                                key={tech}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{
+                                  delay:
+                                    0.5 + groupIndex * 0.1 + techIndex * 0.02,
+                                }}
+                                whileHover={{ scale: 1.05, y: -1 }}
+                                className="px-2 py-1 bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 text-purple-300 border border-purple-400/30 rounded-md text-[10px] sm:text-xs hover:border-purple-300 hover:from-purple-500/30 hover:to-fuchsia-500/30 transition-all touch-manipulation shadow-sm hover:shadow-purple-500/20 font-medium"
+                              >
+                                {tech}
+                              </motion.span>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )
+                    )}
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    </motion.div>
+      </OSWindow>
+    </div>
   );
 }
 

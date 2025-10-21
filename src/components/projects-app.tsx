@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowLeft,
+  Briefcase,
   Github,
   ExternalLink,
   X,
@@ -14,8 +14,7 @@ import {
 import { useState, useEffect, useCallback, memo } from "react";
 import { Button } from "@/components/ui/button";
 import { projects } from "@/constants/project";
-// import FloatingParticles from "@/components/particles/floating-particles";
-// import AnimatedBackground from "@/components/animations/animated-background";
+import OSWindow from "@/components/ui/os-window";
 import Image from "next/image";
 
 interface ProjectsAppProps {
@@ -68,149 +67,112 @@ function ProjectsApp({ onBack }: ProjectsAppProps) {
   }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.2, ease: "linear" }}
-      className="min-h-screen relative overflow-hidden"
-    >
-      {/* Animated Background */}
-      {/* <AnimatedBackground /> */}
-      {/* Floating Particles */}
-      {/* <FloatingParticles /> */}
+    <div className="min-h-screen relative pt-12 pb-24 sm:pb-28 px-2 sm:px-4 md:px-6">
+      <OSWindow
+        title="Projects"
+        subtitle="~/portfolio/projects"
+        icon={<Briefcase className="w-5 h-5" />}
+        onClose={onBack}
+        accentColor="cyan"
+        className="max-w-[1600px] mx-auto h-[calc(100vh-8rem)]"
+      >
+        <div className="h-[calc(100vh-12rem)] overflow-y-auto scrollbar-thin p-3 sm:p-4 md:p-6">
+          {/* Projects Grid - Optimized spacing */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                onHoverStart={() => setHoveredProject(project.id)}
+                onHoverEnd={() => setHoveredProject(null)}
+                onClick={() => handleProjectClick(project)}
+                className="group cursor-pointer touch-manipulation"
+              >
+                <div className="relative overflow-hidden rounded-lg sm:rounded-xl bg-black/50 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/20 h-full flex flex-col">
+                  {/* Project Image - Reduced height */}
+                  <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden flex-shrink-0">
+                    <motion.div
+                      className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}
+                      animate={{
+                        scale: hoveredProject === project.id ? 1.1 : 1,
+                      }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      width={500}
+                      height={300}
+                      priority={index < 3}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      style={{ width: "100%", height: "100%" }}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      loading={index < 3 ? "eager" : "lazy"}
+                      placeholder="blur"
+                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB8H/9k="
+                    />
 
-      <div className="relative z-10 p-4 sm:p-6 md:p-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2, ease: "linear" }}
-          className="flex items-center justify-between mb-6 sm:mb-8"
-        >
-          <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onBack}
-              className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-400/10 backdrop-blur-sm border border-cyan-500/20 flex-shrink-0"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </Button>
-            <div className="min-w-0 flex-1">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent truncate">
-                <span className="block sm:hidden">Projects</span>
-                <span className="hidden sm:block">Featured Projects</span>
-              </h1>
-              <p className="text-gray-400 mt-1 sm:mt-2 text-xs sm:text-sm truncate">
-                Innovative solutions crafted with passion
-              </p>
-            </div>
-          </div>
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-          {/* Terminal Window Controls */}
-          <div className="flex space-x-2 flex-shrink-0">
-            <div className="w-3 h-3 rounded-full bg-red-500 shadow-lg shadow-red-500/50"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
-          </div>
-        </motion.div>
+                    {/* Hover Overlay */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{
+                        opacity: hoveredProject === project.id ? 1 : 0,
+                      }}
+                      className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center"
+                    >
+                      <div className="text-center">
+                        <motion.div
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center mb-2 mx-auto"
+                        >
+                          <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        </motion.div>
+                        <p className="text-white font-medium text-xs sm:text-sm">
+                          View Details
+                        </p>
+                      </div>
+                    </motion.div>
+                  </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              onHoverStart={() => setHoveredProject(project.id)}
-              onHoverEnd={() => setHoveredProject(null)}
-              onClick={() => handleProjectClick(project)}
-              className="group cursor-pointer touch-manipulation"
-            >
-              <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-black/50 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-500">
-                {/* Project Image */}
-                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                  <motion.div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}
-                    animate={{
-                      scale: hoveredProject === project.id ? 1.1 : 1,
-                    }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <Image
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    width={500}
-                    height={300}
-                    priority={index < 2}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    style={{ width: "100%", height: "100%" }}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading={index < 2 ? "eager" : "lazy"}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB8H/9k="
-                  />
-
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  {/* Hover Overlay */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: hoveredProject === project.id ? 1 : 0,
-                    }}
-                    className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center"
-                  >
-                    <div className="text-center">
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center mb-3 sm:mb-4 mx-auto"
-                      >
-                        <ExternalLink className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
-                      </motion.div>
-                      <p className="text-white font-medium text-sm sm:text-base">
-                        View Details
-                      </p>
-                    </div>
-                  </motion.div>
-                </div>
-
-                {/* Project Info */}
-                <div className="p-4 sm:p-5 md:p-6">
-                  <div className="flex items-center justify-between mb-2 sm:mb-3">
-                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-cyan-400 transition-colors truncate">
+                  {/* Project Info - Optimized padding */}
+                  <div className="p-3 sm:p-4 flex-1 flex flex-col">
+                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors truncate mb-1.5">
                       {project.title}
                     </h3>
-                  </div>
 
-                  <p className="text-gray-400 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
+                    <p className="text-gray-400 text-xs sm:text-sm mb-3 line-clamp-2 flex-1">
+                      {project.description}
+                    </p>
 
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
-                    {project.tech.slice(0, 4).map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 text-xs rounded-full border border-cyan-500/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.tech.length > 4 && (
-                      <span className="px-2 py-1 bg-gray-500/20 text-gray-400 text-xs rounded-full">
-                        +{project.tech.length - 4}
-                      </span>
-                    )}
+                    {/* Tech Stack - Compact */}
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tech.slice(0, 3).map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-0.5 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 text-[10px] sm:text-xs rounded-md border border-cyan-500/30 font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                      {project.tech.length > 3 && (
+                        <span className="px-2 py-0.5 bg-gray-500/20 text-gray-400 text-[10px] sm:text-xs rounded-md font-medium">
+                          +{project.tech.length - 3}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
-      </div>
+      </OSWindow>
 
       {/* Project Detail Modal */}
       <AnimatePresence>
@@ -404,7 +366,7 @@ function ProjectsApp({ onBack }: ProjectsAppProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 

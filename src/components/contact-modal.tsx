@@ -87,17 +87,27 @@ function ContactModal({ isOpen, onClose }: ContactModalProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-5 sm:p-6 border-b border-white/10">
-              <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                Get In Touch
-              </h2>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={onClose}
-                className="text-gray-400 hover:text-white touch-manipulation"
-              >
-                <X className="w-5 h-5" />
-              </Button>
+              <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
+                <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent truncate">
+                  Get In Touch
+                </h2>
+              </div>
+              {/* Terminal Window Controls */}
+              <div className="flex items-center space-x-3 sm:space-x-4 flex-shrink-0">
+                <div className="hidden sm:flex space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500 shadow-lg shadow-red-500/50"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={onClose}
+                  className="text-gray-400 hover:text-white hover:bg-white/10 touch-manipulation"
+                >
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
             </div>
 
             <div className="p-5 sm:p-6">
