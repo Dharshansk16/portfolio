@@ -19,6 +19,16 @@ const ProjectsApp = lazy(() => import("@/components/projects-app"));
 const BlogApp = lazy(() => import("@/components/blog-app"));
 const AboutApp = lazy(() => import("@/components/about-app"));
 
+// Optimized loading component
+const AppLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="flex flex-col items-center gap-3">
+      <div className="w-10 h-10 border-3 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+      <p className="text-sm text-gray-400">Loading...</p>
+    </div>
+  </div>
+);
+
 export type AppType = "dashboard" | "projects" | "blog" | "about" | "resume";
 
 // Detect if device is low-end
@@ -130,13 +140,7 @@ export default function DevSpaceOS() {
                 <Dashboard key="dashboard" onAppOpen={handleAppOpen} />
               )}
               {currentApp === "projects" && (
-                <Suspense
-                  fallback={
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  }
-                >
+                <Suspense fallback={<AppLoader />}>
                   <ProjectsApp
                     key="projects"
                     onBack={() => setCurrentApp("dashboard")}
@@ -144,13 +148,7 @@ export default function DevSpaceOS() {
                 </Suspense>
               )}
               {currentApp === "blog" && (
-                <Suspense
-                  fallback={
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  }
-                >
+                <Suspense fallback={<AppLoader />}>
                   <BlogApp
                     key="blog"
                     onBack={() => setCurrentApp("dashboard")}
@@ -158,13 +156,7 @@ export default function DevSpaceOS() {
                 </Suspense>
               )}
               {currentApp === "about" && (
-                <Suspense
-                  fallback={
-                    <div className="min-h-screen flex items-center justify-center">
-                      <div className="w-12 h-12 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
-                    </div>
-                  }
-                >
+                <Suspense fallback={<AppLoader />}>
                   <AboutApp
                     key="about"
                     onBack={() => setCurrentApp("dashboard")}

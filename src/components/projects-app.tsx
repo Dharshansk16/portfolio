@@ -21,6 +21,12 @@ interface ProjectsAppProps {
   onBack: () => void;
 }
 
+// Detect mobile for simplified animations
+const isMobileDevice = () => {
+  if (typeof window === "undefined") return false;
+  return /Mobile|Android|iPhone/i.test(navigator.userAgent);
+};
+
 function ProjectsApp({ onBack }: ProjectsAppProps) {
   const [selectedProject, setSelectedProject] = useState<
     (typeof projects)[0] | null
@@ -28,6 +34,11 @@ function ProjectsApp({ onBack }: ProjectsAppProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+  }, []);
 
   // Auto-play slideshow
   useEffect(() => {
@@ -82,23 +93,29 @@ function ProjectsApp({ onBack }: ProjectsAppProps) {
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                onHoverStart={() => setHoveredProject(project.id)}
-                onHoverEnd={() => setHoveredProject(null)}
+                transition={{
+                  delay: isMobile ? index * 0.02 : index * 0.05,
+                  duration: isMobile ? 0.2 : 0.3,
+                }}
+                onHoverStart={() => !isMobile && setHoveredProject(project.id)}
+                onHoverEnd={() => !isMobile && setHoveredProject(null)}
                 onClick={() => handleProjectClick(project)}
                 className="group cursor-pointer touch-manipulation"
+                style={{ willChange: "transform, opacity" }}
               >
                 <div className="relative overflow-hidden rounded-lg sm:rounded-xl bg-black/50 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/20 h-full flex flex-col">
                   {/* Project Image - Reduced height */}
                   <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden flex-shrink-0">
-                    <motion.div
-                      className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20`}
-                      animate={{
-                        scale: hoveredProject === project.id ? 1.1 : 1,
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 transition-transform duration-500`}
+                      style={{
+                        transform:
+                          hoveredProject === project.id && !isMobile
+                            ? "scale(1.1)"
+                            : "scale(1)",
                       }}
-                      transition={{ duration: 0.5 }}
                     />
                     <Image
                       src={project.image || "/placeholder.svg"}
@@ -117,27 +134,26 @@ function ProjectsApp({ onBack }: ProjectsAppProps) {
                     {/* Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-                    {/* Hover Overlay */}
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity: hoveredProject === project.id ? 1 : 0,
-                      }}
-                      className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center"
-                    >
-                      <div className="text-center">
-                        <motion.div
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center mb-2 mx-auto"
-                        >
-                          <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                        </motion.div>
-                        <p className="text-white font-medium text-xs sm:text-sm">
-                          View Details
-                        </p>
+                    {/* Hover Overlay - Only on desktop */}
+                    {!isMobile && (
+                      <div
+                        className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300"
+                        style={{
+                          opacity: hoveredProject === project.id ? 1 : 0,
+                          pointerEvents:
+                            hoveredProject === project.id ? "auto" : "none",
+                        }}
+                      >
+                        <div className="text-center">
+                          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center mb-2 mx-auto">
+                            <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                          </div>
+                          <p className="text-white font-medium text-xs sm:text-sm">
+                            View Details
+                          </p>
+                        </div>
                       </div>
-                    </motion.div>
+                    )}
                   </div>
 
                   {/* Project Info - Optimized padding */}
@@ -181,15 +197,18 @@ function ProjectsApp({ onBack }: ProjectsAppProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: isMobile ? 0.15 : 0.2 }}
             className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
             onClick={handleCloseModal}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0, y: 50 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: isMobile ? 20 : 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: isMobile ? 20 : 50 }}
+              transition={{ duration: isMobile ? 0.2 : 0.3, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
               className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl sm:rounded-3xl max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto my-auto"
+              style={{ willChange: "transform, opacity" }}
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between p-4 sm:p-6 border-b border-white/10 sticky top-0 bg-black/90 backdrop-blur-xl z-10">

@@ -10,6 +10,12 @@ interface BlogAppProps {
   onBack: () => void;
 }
 
+// Detect mobile for simplified animations
+const isMobileDevice = () => {
+  if (typeof window === "undefined") return false;
+  return /Mobile|Android|iPhone/i.test(navigator.userAgent);
+};
+
 const blogPosts = [
   {
     id: 1,
@@ -43,9 +49,15 @@ const blogPosts = [
 function BlogApp({ onBack }: BlogAppProps) {
   const [terminalText, setTerminalText] = useState("");
   const [comingSoon, setComingSoon] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const fullText = "> fetching latest blogs...";
 
   useEffect(() => {
+    setIsMobile(isMobileDevice());
+  }, []);
+
+  useEffect(() => {
+    const speed = isMobile ? 20 : 10; // Faster on mobile
     let index = 0;
     const timer = setInterval(() => {
       if (index < fullText.length) {
@@ -55,10 +67,10 @@ function BlogApp({ onBack }: BlogAppProps) {
         clearInterval(timer);
         setTimeout(() => setComingSoon(true), 100);
       }
-    }, 10);
+    }, speed);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="min-h-screen relative pt-12 pb-24 sm:pb-28 px-2 sm:px-4 md:px-6">
@@ -137,9 +149,12 @@ function BlogApp({ onBack }: BlogAppProps) {
           {/* Coming Soon Message - Compact */}
           {comingSoon && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.4 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                delay: isMobile ? 0.1 : 0.2,
+                duration: isMobile ? 0.2 : 0.3,
+              }}
               className="text-center mt-6 sm:mt-8 p-6 sm:p-10 bg-gradient-to-br from-purple-500/10 to-fuchsia-500/10 backdrop-blur-sm border border-purple-500/30 rounded-xl shadow-lg shadow-purple-500/10"
             >
               <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-fuchsia-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg shadow-purple-500/50">

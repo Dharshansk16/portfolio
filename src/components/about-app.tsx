@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { User } from "lucide-react";
 import OSWindow from "@/components/ui/os-window";
@@ -10,7 +10,19 @@ interface AboutAppProps {
   onBack: () => void;
 }
 
+// Detect mobile for simplified animations
+const isMobileDevice = () => {
+  if (typeof window === "undefined") return false;
+  return /Mobile|Android|iPhone/i.test(navigator.userAgent);
+};
+
 function AboutApp({ onBack }: AboutAppProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(isMobileDevice());
+  }, []);
+
   return (
     <div className="min-h-screen relative pt-12 pb-24 sm:pb-28 px-2 sm:px-4 md:px-6">
       <OSWindow
@@ -26,17 +38,23 @@ function AboutApp({ onBack }: AboutAppProps) {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
             {/* Left Column - Profile (1/3 width) */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
+              transition={{
+                delay: isMobile ? 0 : 0.05,
+                duration: isMobile ? 0.2 : 0.3,
+              }}
               className="lg:col-span-1"
             >
               <div className="bg-gradient-to-br from-slate-900/70 to-slate-800/50 border border-white/10 backdrop-blur-md rounded-xl p-4 sm:p-5 shadow-xl hover:shadow-purple-500/20 transition-shadow sticky top-0">
                 <div className="flex flex-col items-center text-center space-y-3 sm:space-y-4">
                   <motion.div
-                    initial={{ scale: 0 }}
+                    initial={{ scale: isMobile ? 1 : 0 }}
                     animate={{ scale: 1 }}
-                    transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                    transition={{
+                      delay: isMobile ? 0 : 0.1,
+                      duration: isMobile ? 0.15 : 0.3,
+                    }}
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-cyan-400 via-purple-400 to-fuchsia-500 flex items-center justify-center text-3xl sm:text-4xl font-bold text-white shadow-2xl shadow-purple-500/50 ring-4 ring-purple-500/20"
                   >
                     D
@@ -57,36 +75,30 @@ function AboutApp({ onBack }: AboutAppProps) {
 
                   {/* Social Links - Compact */}
                   <div className="flex flex-col w-full gap-2 mt-3">
-                    <motion.a
-                      whileHover={{ scale: 1.02, x: 2 }}
-                      whileTap={{ scale: 0.98 }}
+                    <a
                       href="https://github.com/Dharshansk16"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full bg-gradient-to-r from-gray-700 to-gray-800 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-gray-600 hover:to-gray-700 transition shadow-md hover:shadow-gray-500/20 touch-manipulation border border-white/10"
+                      className="w-full bg-gradient-to-r from-gray-700 to-gray-800 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-gray-600 hover:to-gray-700 transition shadow-md hover:shadow-gray-500/20 touch-manipulation border border-white/10 active:scale-98"
                     >
                       GitHub
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.02, x: 2 }}
-                      whileTap={{ scale: 0.98 }}
+                    </a>
+                    <a
                       href="https://www.linkedin.com/in/dharshan-s-kotian-5053aa280/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-blue-500 hover:to-blue-600 transition shadow-md hover:shadow-blue-500/20 touch-manipulation border border-white/10"
+                      className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-blue-500 hover:to-blue-600 transition shadow-md hover:shadow-blue-500/20 touch-manipulation border border-white/10 active:scale-98"
                     >
                       LinkedIn
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.02, x: 2 }}
-                      whileTap={{ scale: 0.98 }}
+                    </a>
+                    <a
                       href="https://leetcode.com/u/Dharshan_S_Kotian/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-orange-400 hover:to-amber-400 transition shadow-md hover:shadow-orange-500/20 touch-manipulation border border-white/10"
+                      className="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white px-3 py-2 rounded-lg text-xs font-medium hover:from-orange-400 hover:to-amber-400 transition shadow-md hover:shadow-orange-500/20 touch-manipulation border border-white/10 active:scale-98"
                     >
                       LeetCode
-                    </motion.a>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -99,9 +111,12 @@ function AboutApp({ onBack }: AboutAppProps) {
                 {stats.map((stat, index) => (
                   <motion.div
                     key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * (index + 1) }}
+                    transition={{
+                      delay: isMobile ? index * 0.03 : 0.05 * (index + 1),
+                      duration: isMobile ? 0.2 : 0.3,
+                    }}
                     className="bg-gradient-to-br from-slate-900/70 to-slate-800/50 border border-white/10 backdrop-blur-sm rounded-lg p-3 text-center hover:border-purple-500/40 transition-all group hover:shadow-lg hover:shadow-purple-500/10"
                   >
                     <stat.icon
