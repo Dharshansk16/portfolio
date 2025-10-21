@@ -43,8 +43,8 @@ export default function DevSpaceOS() {
     setMounted(true);
     setIsLowEnd(isLowEndDevice());
 
-    // Shorter boot time for low-end devices
-    const bootTime = isLowEndDevice() ? 2500 : 4000;
+    // Shorter boot time - optimized for faster loading
+    const bootTime = isLowEndDevice() ? 2000 : 2800;
     const timer = setTimeout(() => {
       setIsBooted(true);
     }, bootTime);
@@ -70,25 +70,18 @@ export default function DevSpaceOS() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden relative">
-      {/* Ambient Gradient Orbs - Simplified for low-end devices */}
-      {!isLowEnd && (
+      {/* Simplified Ambient Gradient Orbs - Only on high-end devices and reduced complexity */}
+      {!isLowEnd && isBooted && (
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-          <div
-            className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-cyan-600/20 rounded-full blur-[120px] animate-pulse"
-            style={{ animationDelay: "1s" }}
-          />
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 bg-sky-600/15 rounded-full blur-[100px] animate-pulse"
-            style={{ animationDelay: "2s" }}
-          />
+          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-600/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-cyan-600/10 rounded-full blur-[100px]" />
         </div>
       )}
 
-      {/* Background Effects */}
-      <BackgroundEffects showParticles={showParticles} />
+      {/* Background Effects - Only show after boot to prevent lag */}
+      {isBooted && <BackgroundEffects showParticles={showParticles} />}
 
-      {/* Cursor Trail Effect - Only on high-end devices */}
+      {/* Cursor Trail Effect - Only on high-end devices and after boot */}
       {isBooted && !isLowEnd && <CursorTrail />}
 
       {/* Unique UI Enhancements */}
@@ -114,12 +107,12 @@ export default function DevSpaceOS() {
         ) : (
           <motion.div
             key="main"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{
-              duration: 0.8,
-              ease: [0.6, -0.05, 0.01, 0.99],
+              duration: 0.5,
+              ease: "easeOut",
             }}
             className="relative z-10"
           >

@@ -48,8 +48,8 @@ export default function BackgroundEffects({
       return;
     }
 
-    // Reduce particle count on low-end devices
-    const particleCount = isLowEnd ? 15 : 30;
+    // Significantly reduce particle count for better performance
+    const particleCount = isLowEnd ? 8 : 15;
 
     const generateParticles = () => {
       const newParticles: Particle[] = [];
@@ -58,10 +58,10 @@ export default function BackgroundEffects({
           id: i,
           x: Math.random() * window.innerWidth,
           y: Math.random() * window.innerHeight,
-          size: Math.random() * 4 + 1,
-          speedX: (Math.random() - 0.5) * 0.8,
-          speedY: (Math.random() - 0.5) * 0.8,
-          opacity: Math.random() * 0.6 + 0.2,
+          size: Math.random() * 3 + 1,
+          speedX: (Math.random() - 0.5) * 0.5,
+          speedY: (Math.random() - 0.5) * 0.5,
+          opacity: Math.random() * 0.4 + 0.1,
           color: colors[Math.floor(Math.random() * colors.length)],
         });
       }
@@ -73,7 +73,7 @@ export default function BackgroundEffects({
     // Use requestAnimationFrame for smoother performance
     let animationFrameId: number;
     let lastUpdate = Date.now();
-    const targetFPS = isLowEnd ? 30 : 60;
+    const targetFPS = isLowEnd ? 24 : 30; // Reduced FPS for better performance
     const frameDelay = 1000 / targetFPS;
 
     const animateParticles = () => {
@@ -113,65 +113,29 @@ export default function BackgroundEffects({
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Refined Animated Grid Background - Disabled on low-end devices */}
-      {!isLowEnd && (
-        <motion.div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(99, 102, 241, 0.4) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(99, 102, 241, 0.4) 1px, transparent 1px)
-            `,
-            backgroundSize: "80px 80px",
-          }}
-          animate={{
-            backgroundPosition: ["0px 0px", "80px 80px"],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      )}
+      {/* Removed animated grid to reduce lag */}
 
-      {/* Professional Gradient Orbs - Simplified for low-end devices */}
+      {/* Simplified Gradient Orbs - Reduced animation complexity */}
       <motion.div
-        className="absolute top-0 left-0 w-[500px] h-[500px] bg-indigo-600/25 rounded-full blur-[100px]"
-        animate={
-          isLowEnd
-            ? { scale: [1, 1.15, 1] }
-            : {
-                x: [0, 120, 0],
-                y: [0, 60, 0],
-                scale: [1, 1.15, 1],
-              }
-        }
+        className="absolute top-0 left-0 w-[400px] h-[400px] bg-indigo-600/20 rounded-full blur-[80px]"
+        animate={{ scale: [1, 1.1, 1] }}
         transition={{
-          duration: isLowEnd ? 15 : 22,
+          duration: 20,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
       <motion.div
-        className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-violet-600/25 rounded-full blur-[100px]"
-        animate={
-          isLowEnd
-            ? { scale: [1, 1.25, 1] }
-            : {
-                x: [0, -120, 0],
-                y: [0, -60, 0],
-                scale: [1, 1.25, 1],
-              }
-        }
+        className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-violet-600/20 rounded-full blur-[80px]"
+        animate={{ scale: [1, 1.15, 1] }}
         transition={{
-          duration: isLowEnd ? 20 : 28,
+          duration: 25,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       />
 
-      {/* Animated Particles - Optimized rendering */}
+      {/* Optimized Particles - Reduced box-shadow for better performance */}
       {showParticles &&
         particles.map((particle) => (
           <div
@@ -184,47 +148,15 @@ export default function BackgroundEffects({
               height: particle.size,
               backgroundColor: particle.color,
               opacity: particle.opacity,
-              boxShadow: isLowEnd
-                ? "none"
-                : `0 0 ${particle.size * 3}px ${particle.color}`,
+              boxShadow: "none", // Removed glow for better performance
             }}
           />
         ))}
 
-      {/* Elegant Floating Lines - Only on high-end devices */}
-      {showParticles && !isLowEnd && (
-        <>
-          {[...Array(2)].map((_, i) => (
-            <motion.div
-              key={`line-${i}`}
-              className="absolute h-px bg-gradient-to-r from-transparent via-indigo-500/25 to-transparent"
-              style={{
-                width: "100%",
-                top: `${30 + i * 30}%`,
-              }}
-              animate={{
-                x: ["-100%", "100%"],
-                opacity: [0, 0.8, 0],
-              }}
-              transition={{
-                duration: 12 + i * 2,
-                repeat: Infinity,
-                delay: i * 2.5,
-                ease: "linear",
-              }}
-            />
-          ))}
-        </>
-      )}
+      {/* Removed floating lines to reduce animations */}
 
-      {/* Sophisticated Gradient Overlays */}
+      {/* Simplified Gradient Overlays */}
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-600/5 via-transparent to-violet-600/5" />
-      {!isLowEnd && (
-        <>
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/8 rounded-full blur-[90px]" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-[90px]" />
-        </>
-      )}
     </div>
   );
 }
