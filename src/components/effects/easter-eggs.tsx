@@ -436,16 +436,25 @@ export default function EasterEggs() {
     };
   }, [commandMode, triggerEasterEgg]);
 
+  // Detect mobile for simplified animations
+  const isMobile =
+    typeof window !== "undefined" &&
+    /Mobile|Android|iPhone/i.test(navigator.userAgent);
+
   return (
     <>
       {/* OS-Style System Notification */}
       <AnimatePresence>
         {showMessage && (
           <motion.div
-            initial={{ opacity: 0, x: 400 }}
+            initial={{ opacity: 0, x: isMobile ? 20 : 400 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 400 }}
-            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+            exit={{ opacity: 0, x: isMobile ? 20 : 400 }}
+            transition={
+              isMobile
+                ? { duration: 0.2 }
+                : { type: "spring", damping: 20, stiffness: 300 }
+            }
             className="fixed top-20 right-6 z-[100] w-96 max-w-[calc(100vw-3rem)]"
           >
             {/* macOS-style notification */}
@@ -469,9 +478,13 @@ export default function EasterEggs() {
               <div className="bg-slate-900/95 px-4 py-4">
                 <div className="flex items-start space-x-3">
                   <motion.div
-                    initial={{ scale: 0 }}
+                    initial={{ scale: isMobile ? 1 : 0 }}
                     animate={{ scale: 1 }}
-                    transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                    transition={
+                      isMobile
+                        ? { duration: 0.1 }
+                        : { delay: 0.1, type: "spring", stiffness: 200 }
+                    }
                     className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0 shadow-lg"
                   >
                     <Terminal className="w-5 h-5 text-white" />
@@ -508,9 +521,10 @@ export default function EasterEggs() {
       <AnimatePresence>
         {commandMode && (
           <motion.div
-            initial={{ opacity: 0, y: 100 }}
+            initial={{ opacity: 0, y: isMobile ? 20 : 100 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 100 }}
+            exit={{ opacity: 0, y: isMobile ? 20 : 100 }}
+            transition={{ duration: isMobile ? 0.2 : 0.3 }}
             className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-md px-4"
           >
             <div className="bg-slate-950/95 backdrop-blur-xl border border-indigo-500/30 rounded-xl shadow-2xl p-4">
@@ -675,27 +689,36 @@ export default function EasterEggs() {
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ delay: 2, type: "spring", stiffness: 200 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        transition={
+          isMobile
+            ? { duration: 0.3, delay: 1 }
+            : { delay: 2, type: "spring", stiffness: 200 }
+        }
+        whileHover={isMobile ? {} : { scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => setShowMobileMenu(true)}
-        className="fixed bottom-6 left-4 z-[100] w-14 h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg shadow-indigo-500/50 flex items-center justify-center lg:hidden group"
+        className="fixed bottom-6 left-4 z-[100] w-14 h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg flex items-center justify-center lg:hidden group touch-manipulation"
+        style={{
+          boxShadow: isMobile ? "0 4px 6px rgba(0, 0, 0, 0.3)" : undefined,
+        }}
       >
         <Terminal className="w-6 h-6 text-white" />
 
-        {/* Pulse effect */}
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.5, 0, 0.5],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0 rounded-full bg-indigo-500"
-        />
+        {/* Pulse effect - Disabled on mobile */}
+        {!isMobile && (
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              opacity: [0.5, 0, 0.5],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute inset-0 rounded-full bg-indigo-500"
+          />
+        )}
       </motion.button>
 
       {/* Hint Indicator */}

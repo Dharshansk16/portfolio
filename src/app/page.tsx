@@ -69,12 +69,21 @@ export default function DevSpaceOS() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden relative">
+    <div
+      className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950 text-white overflow-hidden relative"
+      style={{ willChange: "auto" }}
+    >
       {/* Simplified Ambient Gradient Orbs - Only on high-end devices and reduced complexity */}
       {!isLowEnd && isBooted && (
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-600/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-cyan-600/10 rounded-full blur-[100px]" />
+          <div
+            className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-blue-600/10 rounded-full"
+            style={{ filter: "blur(100px)" }}
+          />
+          <div
+            className="absolute bottom-0 -right-1/4 w-1/2 h-1/2 bg-cyan-600/10 rounded-full"
+            style={{ filter: "blur(100px)" }}
+          />
         </div>
       )}
 
@@ -111,7 +120,7 @@ export default function DevSpaceOS() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{
-              duration: 0.5,
+              duration: isLowEnd ? 0.2 : 0.5,
               ease: "easeOut",
             }}
             className="relative z-10"

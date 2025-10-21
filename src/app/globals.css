@@ -406,4 +406,30 @@ html {
     min-height: 44px;
     min-width: 44px;
   }
+
+  /* Disable expensive effects on mobile */
+  .glass {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  /* Remove box shadows on mobile for better performance */
+  .glow,
+  .glow-violet,
+  .glow-blue {
+    box-shadow: none;
+  }
+
+  /* Disable animations that cause jank on mobile */
+  .mobile-no-animate {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Simplify gradients on mobile */
+  .animate-gradient {
+    animation: none;
+    background-size: 100% 100%;
+  }
 }

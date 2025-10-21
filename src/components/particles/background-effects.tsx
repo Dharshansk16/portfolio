@@ -116,31 +116,46 @@ export default function BackgroundEffects({
       {/* Removed animated grid to reduce lag */}
 
       {/* Simplified Gradient Orbs - Reduced animation complexity */}
-      <motion.div
-        className="absolute top-0 left-0 w-[400px] h-[400px] bg-indigo-600/20 rounded-full blur-[80px]"
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-violet-600/20 rounded-full blur-[80px]"
-        animate={{ scale: [1, 1.15, 1] }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
+      {isLowEnd ? (
+        <>
+          <div
+            className="absolute top-0 left-0 w-[300px] h-[300px] bg-indigo-600/15 rounded-full"
+            style={{ filter: "blur(60px)" }}
+          />
+          <div
+            className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-violet-600/15 rounded-full"
+            style={{ filter: "blur(60px)" }}
+          />
+        </>
+      ) : (
+        <>
+          <motion.div
+            className="absolute top-0 left-0 w-[400px] h-[400px] bg-indigo-600/20 rounded-full blur-[80px]"
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-violet-600/20 rounded-full blur-[80px]"
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </>
+      )}
 
       {/* Optimized Particles - Reduced box-shadow for better performance */}
       {showParticles &&
         particles.map((particle) => (
           <div
             key={particle.id}
-            className="absolute rounded-full will-change-transform"
+            className="absolute rounded-full"
             style={{
               left: particle.x,
               top: particle.y,
@@ -148,7 +163,8 @@ export default function BackgroundEffects({
               height: particle.size,
               backgroundColor: particle.color,
               opacity: particle.opacity,
-              boxShadow: "none", // Removed glow for better performance
+              transform: "translateZ(0)", // Force GPU acceleration
+              willChange: "transform",
             }}
           />
         ))}

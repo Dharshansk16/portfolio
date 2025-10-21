@@ -120,6 +120,7 @@ export default function FloatingDock({
                     },
                   }}
                   className="flex items-center gap-2 sm:gap-3 group"
+                  style={{ willChange: "transform, opacity" }}
                 >
                   {/* Professional Label */}
                   <motion.div
@@ -127,6 +128,7 @@ export default function FloatingDock({
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ delay: index * 0.08 + 0.1 }}
+                    style={{ willChange: "transform, opacity" }}
                     className="bg-slate-950/90 backdrop-blur-xl text-white text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl border border-indigo-500/30 shadow-xl shadow-indigo-500/10 flex items-center gap-2 whitespace-nowrap"
                   >
                     <span className="text-sm sm:text-base">{item.emoji}</span>
@@ -139,18 +141,12 @@ export default function FloatingDock({
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     className="relative"
+                    style={{ willChange: "transform" }}
                   >
-                    {/* Glow Effect */}
-                    <motion.div
-                      className={`absolute -inset-2 bg-gradient-to-r ${item.color} rounded-full blur-lg opacity-0 group-hover:opacity-60 transition-opacity`}
-                      animate={{
-                        scale: [1, 1.2, 1],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
+                    {/* Glow Effect - Simplified animation */}
+                    <div
+                      className={`absolute -inset-2 bg-gradient-to-r ${item.color} rounded-full opacity-0 group-hover:opacity-60 transition-opacity`}
+                      style={{ filter: "blur(12px)" }}
                     />
 
                     <Button
@@ -170,13 +166,14 @@ export default function FloatingDock({
             className="relative"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
+            style={{ willChange: "transform" }}
           >
-            {/* Professional Pulsing Glow */}
+            {/* Professional Pulsing Glow - Simplified */}
             <motion.div
-              className="absolute -inset-2 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 rounded-full blur-xl opacity-50"
+              className="absolute -inset-2 bg-gradient-to-r from-indigo-500 via-violet-500 to-purple-500 rounded-full opacity-50"
+              style={{ filter: "blur(20px)" }}
               animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.5, 0.8, 0.5],
+                opacity: [0.4, 0.6, 0.4],
               }}
               transition={{
                 duration: 2.5,

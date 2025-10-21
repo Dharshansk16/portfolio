@@ -212,16 +212,21 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
                 },
               },
             }}
-            whileHover={{
-              scale: 1.05,
-              y: -8,
-              transition: {
-                type: "spring",
-                stiffness: 400,
-                damping: 15,
-              },
-            }}
+            whileHover={
+              isLowEnd
+                ? {}
+                : {
+                    scale: 1.05,
+                    y: -8,
+                    transition: {
+                      type: "spring",
+                      stiffness: 400,
+                      damping: 15,
+                    },
+                  }
+            }
             whileTap={{ scale: 0.95 }}
+            style={{ willChange: "transform" }}
           >
             {/* Enhanced Professional Glow Effect - Simplified for low-end */}
             {!isLowEnd && (
@@ -241,10 +246,20 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
             <div className="relative">
               {/* Professional App Icon Container */}
               <motion.div
-                className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${app.color} p-4 sm:p-5 shadow-[0_8px_32px_0_rgba(99,102,241,0.37)] backdrop-blur-sm border border-white/30 relative overflow-hidden touch-manipulation transition-shadow duration-300`}
-                whileHover={{
-                  boxShadow: "0 20px 60px 0 rgba(99, 102, 241, 0.6)",
+                className={`w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${app.color} p-4 sm:p-5 backdrop-blur-sm border border-white/30 relative overflow-hidden touch-manipulation transition-shadow duration-300`}
+                style={{
+                  boxShadow: isLowEnd
+                    ? "0 4px 12px 0 rgba(99, 102, 241, 0.3)"
+                    : "0 8px 32px 0 rgba(99, 102, 241, 0.37)",
+                  willChange: "transform",
                 }}
+                whileHover={
+                  isLowEnd
+                    ? {}
+                    : {
+                        boxShadow: "0 20px 60px 0 rgba(99, 102, 241, 0.6)",
+                      }
+                }
               >
                 {/* Refined Animated Background - Only on high-end devices */}
                 {!isLowEnd && (
@@ -264,21 +279,27 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
 
                 <motion.div
                   className="w-full h-full relative z-10"
-                  whileHover={{
-                    rotate: [0, -5, 5, -5, 0],
-                    transition: { duration: 0.5 },
-                  }}
+                  whileHover={
+                    isLowEnd
+                      ? {}
+                      : {
+                          rotate: [0, -5, 5, -5, 0],
+                          transition: { duration: 0.5 },
+                        }
+                  }
                 >
                   <app.icon className="w-full h-full text-white drop-shadow-2xl" />
                 </motion.div>
 
-                {/* Enhanced Shimmer Effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.7, ease: "easeInOut" }}
-                />
+                {/* Enhanced Shimmer Effect - Disabled on mobile */}
+                {!isLowEnd && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                  />
+                )}
               </motion.div>
 
               {/* App Info with Better Typography */}
