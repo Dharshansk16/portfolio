@@ -71,7 +71,7 @@ export default function OSWindow({
                 <div className="w-3 h-0.5 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded-full"></div>
                 <div className="w-3 h-0.5 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded-full"></div>
               </div>
-              
+
               {/* Desktop: Traditional macOS dots */}
               <div className="hidden md:flex items-center space-x-2">
                 <motion.button
