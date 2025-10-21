@@ -574,16 +574,16 @@ export default function EasterEggs() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] flex items-end sm:items-center justify-center p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] flex items-center justify-center p-4"
             onClick={() => setShowMobileMenu(false)}
           >
             <motion.div
-              initial={{ y: 100, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 100, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-slate-900/95 backdrop-blur-xl border border-indigo-500/30 rounded-2xl shadow-2xl w-full max-w-md max-h-[80vh] overflow-y-auto"
+              className="bg-slate-900/95 backdrop-blur-xl border border-indigo-500/30 rounded-2xl shadow-2xl w-full max-w-md max-h-[70vh] overflow-y-auto"
             >
               {/* Header */}
               <div className="sticky top-0 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 px-5 py-4 rounded-t-2xl">
@@ -679,7 +679,7 @@ export default function EasterEggs() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setShowMobileMenu(true)}
-        className="fixed bottom-24 right-4 z-[100] w-14 h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg shadow-indigo-500/50 flex items-center justify-center lg:hidden group"
+        className="fixed bottom-6 left-4 z-[100] w-14 h-14 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 shadow-lg shadow-indigo-500/50 flex items-center justify-center lg:hidden group"
       >
         <Terminal className="w-6 h-6 text-white" />
 

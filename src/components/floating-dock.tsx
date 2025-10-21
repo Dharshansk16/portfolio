@@ -47,14 +47,6 @@ export default function FloatingDock({
     };
   }, [isExpanded]);
 
-  const handleItemClick = (action: () => void) => {
-    action();
-    // Close dock after action on mobile devices
-    if (isMobile) {
-      setIsExpanded(false);
-    }
-  };
-
   const dockItems = [
     {
       icon: MessageCircle,
@@ -86,41 +78,18 @@ export default function FloatingDock({
     },
   ];
 
+  // Don't render floating dock on mobile devices
+  if (isMobile) {
+    return null;
+  }
+
   return (
     <>
-      {/* Mobile Overlay - Dims background when dock is expanded */}
-      <AnimatePresence>
-        {isExpanded && isMobile && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40"
-            onClick={() => setIsExpanded(false)}
-          />
-        )}
-      </AnimatePresence>
-
       <motion.div
         ref={dockRef}
-        className={`fixed z-50 ${
-          isExpanded && isMobile
-            ? "bottom-20 right-4"
-            : "bottom-6 right-4 sm:bottom-8 sm:right-8"
-        }`}
-        onHoverStart={() => !isMobile && setIsExpanded(true)}
-        onHoverEnd={() => !isMobile && setIsExpanded(false)}
-        onTouchStart={(e) => {
-          if (isMobile) {
-            e.stopPropagation();
-            setIsExpanded(!isExpanded);
-          }
-        }}
-        animate={{
-          y: isExpanded && isMobile ? -10 : 0,
-        }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50"
+        onHoverStart={() => setIsExpanded(true)}
+        onHoverEnd={() => setIsExpanded(false)}
       >
         <div className="flex flex-col-reverse items-end gap-2 sm:gap-3 pb-safe">
           {/* Dock Items */}
@@ -186,7 +155,7 @@ export default function FloatingDock({
 
                     <Button
                       size="icon"
-                      onClick={() => handleItemClick(item.action)}
+                      onClick={item.action}
                       className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br ${item.color} hover:shadow-2xl transition-all duration-300 border border-white/20 touch-manipulation`}
                     >
                       <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />

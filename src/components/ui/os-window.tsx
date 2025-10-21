@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Minus, Square, X } from "lucide-react";
+import { Minus, Square, X, ChevronLeft } from "lucide-react";
 import { ReactNode, useState } from "react";
 
 interface OSWindowProps {
@@ -63,14 +63,19 @@ export default function OSWindow({
       {/* Window Title Bar - macOS Style */}
       <div className="bg-gradient-to-r from-slate-900/90 to-slate-800/90 border-b border-white/10 px-3 md:px-4 py-2.5 md:py-3 flex items-center justify-between backdrop-blur-xl group">
         {/* Left: Window Controls */}
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           {showControls && (
             <>
-              {/* Mobile: Simple horizontal lines indicator */}
-              <div className="md:hidden flex flex-col gap-0.5 opacity-50">
-                <div className="w-3 h-0.5 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded-full"></div>
-                <div className="w-3 h-0.5 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded-full"></div>
-              </div>
+              {/* Mobile: Back button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onClose}
+                className="md:hidden flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 hover:border-indigo-400/50 text-indigo-400 hover:text-indigo-300 transition-all touch-manipulation"
+                aria-label="Go back"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </motion.button>
 
               {/* Desktop: Traditional macOS dots */}
               <div className="hidden md:flex items-center space-x-2">
@@ -107,26 +112,26 @@ export default function OSWindow({
         </div>
 
         {/* Center: Window Title */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center space-x-2.5">
+        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center space-x-1.5 sm:space-x-2.5 max-w-[50%] sm:max-w-[60%]">
           {icon && (
             <motion.div
               animate={{ rotate: [0, -5, 5, -5, 0] }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="flex-shrink-0"
+              className="flex-shrink-0 hidden sm:block"
             >
               {icon}
             </motion.div>
           )}
-          <div className="text-center">
+          <div className="text-center min-w-0 flex-1">
             <h3
-              className={`text-sm font-semibold bg-gradient-to-r ${
+              className={`text-xs sm:text-sm font-semibold bg-gradient-to-r ${
                 gradientMap[accentColor] || gradientMap.cyan
-              } bg-clip-text text-transparent drop-shadow-sm`}
+              } bg-clip-text text-transparent drop-shadow-sm truncate`}
             >
               {title}
             </h3>
             {subtitle && (
-              <p className="text-[10px] text-gray-500 font-mono mt-0.5">
+              <p className="text-[9px] sm:text-[10px] text-gray-500 font-mono mt-0.5 truncate">
                 {subtitle}
               </p>
             )}

@@ -298,12 +298,12 @@ export default function Dashboard({ onAppOpen }: DashboardProps) {
         ))}
       </motion.div>
 
-      {/* Terminal Display - Professional Theme */}
+      {/* Terminal Display - Professional Theme - Hidden on mobile to prevent overlap */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="w-full max-w-3xl relative px-4"
+        className="w-full max-w-3xl relative px-4 hidden sm:block"
       >
         {/* Professional Terminal Glow */}
         <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500/20 via-violet-500/20 to-purple-500/20 rounded-xl sm:rounded-2xl blur-xl" />
