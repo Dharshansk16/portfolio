@@ -61,38 +61,47 @@ export default function OSWindow({
       }}
     >
       {/* Window Title Bar - macOS Style */}
-      <div className="bg-gradient-to-r from-slate-900/90 to-slate-800/90 border-b border-white/10 px-4 py-3 flex items-center justify-between backdrop-blur-xl group">
+      <div className="bg-gradient-to-r from-slate-900/90 to-slate-800/90 border-b border-white/10 px-3 md:px-4 py-2.5 md:py-3 flex items-center justify-between backdrop-blur-xl group">
         {/* Left: Window Controls */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center">
           {showControls && (
             <>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={onClose}
-                className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/50 group-hover:shadow-xl group-hover:shadow-red-500/60 relative transition-all touch-manipulation"
-                aria-label="Close window"
-              >
-                <X className="w-2 h-2 text-red-900 absolute inset-0 m-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={onMinimize}
-                className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 shadow-lg shadow-yellow-500/50 group-hover:shadow-xl group-hover:shadow-yellow-500/60 relative transition-all touch-manipulation"
-                aria-label="Minimize window"
-              >
-                <Minus className="w-2 h-2 text-yellow-900 absolute inset-0 m-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={handleMaximize}
-                className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 shadow-lg shadow-green-500/50 group-hover:shadow-xl group-hover:shadow-green-500/60 relative transition-all touch-manipulation"
-                aria-label="Maximize window"
-              >
-                <Square className="w-2 h-2 text-green-900 absolute inset-0 m-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-              </motion.button>
+              {/* Mobile: Simple horizontal lines indicator */}
+              <div className="md:hidden flex flex-col gap-0.5 opacity-50">
+                <div className="w-3 h-0.5 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded-full"></div>
+                <div className="w-3 h-0.5 bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 rounded-full"></div>
+              </div>
+              
+              {/* Desktop: Traditional macOS dots */}
+              <div className="hidden md:flex items-center space-x-2">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={onClose}
+                  className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/50 group-hover:shadow-xl group-hover:shadow-red-500/60 relative transition-all touch-manipulation"
+                  aria-label="Close window"
+                >
+                  <X className="w-2 h-2 text-red-900 absolute inset-0 m-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={onMinimize}
+                  className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 shadow-lg shadow-yellow-500/50 group-hover:shadow-xl group-hover:shadow-yellow-500/60 relative transition-all touch-manipulation"
+                  aria-label="Minimize window"
+                >
+                  <Minus className="w-2 h-2 text-yellow-900 absolute inset-0 m-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.button>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={handleMaximize}
+                  className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 shadow-lg shadow-green-500/50 group-hover:shadow-xl group-hover:shadow-green-500/60 relative transition-all touch-manipulation"
+                  aria-label="Maximize window"
+                >
+                  <Square className="w-2 h-2 text-green-900 absolute inset-0 m-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.button>
+              </div>
             </>
           )}
         </div>
