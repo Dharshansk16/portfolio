@@ -432,4 +432,22 @@ html {
     animation: none;
     background-size: 100% 100%;
   }
+
+  /* Optimize modal performance on mobile */
+  .fixed {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Reduce backdrop blur on mobile for better performance */
+  [style*="backdrop-filter"] {
+    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+
+  /* Optimize transforms on mobile */
+  [style*="transform"] {
+    will-change: transform;
+    transform: translateZ(0);
+  }
 }

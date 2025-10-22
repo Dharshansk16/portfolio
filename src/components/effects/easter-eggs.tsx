@@ -521,13 +521,23 @@ export default function EasterEggs() {
       <AnimatePresence>
         {commandMode && (
           <motion.div
-            initial={{ opacity: 0, y: isMobile ? 20 : 100 }}
+            initial={{ opacity: 0, y: isMobile ? 15 : 100 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: isMobile ? 20 : 100 }}
-            transition={{ duration: isMobile ? 0.2 : 0.3 }}
+            exit={{ opacity: 0, y: isMobile ? 15 : 100 }}
+            transition={{ duration: isMobile ? 0.15 : 0.25, ease: "easeOut" }}
             className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-md px-4"
+            style={{ willChange: "transform, opacity" }}
           >
-            <div className="bg-slate-950/95 backdrop-blur-xl border border-indigo-500/30 rounded-xl shadow-2xl p-4">
+            <div
+              className="border border-indigo-500/30 rounded-xl shadow-2xl p-4"
+              style={{
+                backgroundColor: isMobile
+                  ? "rgba(2, 6, 23, 0.98)"
+                  : "rgba(2, 6, 23, 0.95)",
+                backdropFilter: isMobile ? "blur(8px)" : "blur(24px)",
+                WebkitBackdropFilter: isMobile ? "blur(8px)" : "blur(24px)",
+              }}
+            >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
                   <Terminal className="w-4 h-4 text-indigo-400" />
@@ -565,13 +575,15 @@ export default function EasterEggs() {
                   placeholder="Type command..."
                   className="flex-1 bg-transparent text-white outline-none placeholder:text-slate-600"
                 />
-                <motion.span
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
-                  className="text-indigo-400"
-                >
-                  █
-                </motion.span>
+                {!isMobile && (
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.8, repeat: Infinity }}
+                    className="text-indigo-400"
+                  >
+                    █
+                  </motion.span>
+                )}
               </div>
               <p className="text-xs text-slate-500 mt-2">
                 Try: matrix, hack, rainbow, confetti, quote, help
@@ -588,19 +600,38 @@ export default function EasterEggs() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] flex items-center justify-center p-4"
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-[150] flex items-center justify-center p-4"
+            style={{
+              backgroundColor: "rgba(0, 0, 0, 0.7)",
+              backdropFilter: isMobile ? "blur(4px)" : "blur(8px)",
+              WebkitBackdropFilter: isMobile ? "blur(4px)" : "blur(8px)",
+            }}
             onClick={() => setShowMobileMenu(false)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-slate-900/95 backdrop-blur-xl border border-indigo-500/30 rounded-2xl shadow-2xl w-full max-w-md max-h-[70vh] overflow-y-auto"
+              className="border border-indigo-500/30 rounded-2xl shadow-2xl w-full max-w-md max-h-[70vh] overflow-y-auto"
+              style={{
+                backgroundColor: "rgba(15, 23, 42, 0.98)",
+                backdropFilter: isMobile ? "blur(8px)" : "blur(16px)",
+                WebkitBackdropFilter: isMobile ? "blur(8px)" : "blur(16px)",
+                willChange: "transform, opacity",
+              }}
             >
               {/* Header */}
-              <div className="sticky top-0 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 px-5 py-4 rounded-t-2xl">
+              <div
+                className="sticky top-0 border-b border-slate-800 px-5 py-4 rounded-t-2xl"
+                style={{
+                  backgroundColor: "rgba(15, 23, 42, 0.98)",
+                  backdropFilter: isMobile ? "blur(8px)" : "blur(16px)",
+                  WebkitBackdropFilter: isMobile ? "blur(8px)" : "blur(16px)",
+                }}
+              >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
@@ -625,9 +656,8 @@ export default function EasterEggs() {
               {/* Command Grid */}
               <div className="p-4 space-y-2">
                 {Object.entries(commandEntries).map(([cmd, info]) => (
-                  <motion.button
+                  <button
                     key={cmd}
-                    whileTap={{ scale: 0.95 }}
                     onClick={() => {
                       const commandResult = getCommandResult(cmd);
                       if (commandResult) {
@@ -638,7 +668,8 @@ export default function EasterEggs() {
                       }
                       setShowMobileMenu(false);
                     }}
-                    className="w-full bg-slate-800/50 hover:bg-slate-700/50 border border-slate-700 hover:border-indigo-500/50 rounded-xl p-3 transition-all group"
+                    className="w-full bg-slate-800/50 active:bg-slate-700/70 border border-slate-700 active:border-indigo-500/50 rounded-xl p-3 transition-colors group touch-manipulation active:scale-[0.98]"
+                    style={{ willChange: "transform" }}
                   >
                     <div className="flex items-center space-x-3">
                       <span className="text-2xl">{info.icon}</span>
@@ -652,17 +683,17 @@ export default function EasterEggs() {
                         {cmd}
                       </span>
                     </div>
-                  </motion.button>
+                  </button>
                 ))}
 
                 {/* Terminal Input Option */}
-                <motion.button
-                  whileTap={{ scale: 0.95 }}
+                <button
                   onClick={() => {
                     setShowMobileMenu(false);
                     setCommandMode(true);
                   }}
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 rounded-xl p-3 transition-all mt-4"
+                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 active:from-indigo-500 active:to-purple-500 rounded-xl p-3 transition-colors mt-4 touch-manipulation active:scale-[0.98]"
+                  style={{ willChange: "transform" }}
                 >
                   <div className="flex items-center justify-center space-x-2">
                     <Terminal className="w-4 h-4 text-white" />
@@ -670,7 +701,7 @@ export default function EasterEggs() {
                       Open Terminal Mode
                     </span>
                   </div>
-                </motion.button>
+                </button>
 
                 {/* Info */}
                 <div className="mt-4 p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-lg">
