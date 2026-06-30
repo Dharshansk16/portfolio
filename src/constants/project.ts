@@ -6,13 +6,8 @@ export const projects = [
 "An AI assistant platform where users can create and train custom personas using their own data. Built with Next.js, LangChain, Azure AI Search, PostgreSQL, and Neo4j.",
  longDescription:
 "Built an AI assistant platform where users can create and train custom personas using their own data. Designed a hybrid RAG architecture combining knowledge graph (Neo4j) and vector database to enhance accuracy. Reduced hallucination rate by improving retrieval accuracy via hybrid RAG (vector + graph-based retrieval).",
- image:"/thumbnails/study-buddy.png",
- images: [
-"/projects/study-buddy/home.png",
-"/projects/study-buddy/dashboard.png",
-"/projects/study-buddy/preview.png",
-"/projects/study-buddy/chat_interface.png",
- ],
+ image: "",
+ images: [],
  tech: [
 "Next.js",
 "LangChain",
@@ -37,13 +32,8 @@ export const projects = [
 "A scalable evaluation interface built to handle 3000+ participants and 600+ submissions, reducing evaluation time by 60%+.",
  longDescription:
 "Built a scalable evaluation interface handling 3000+ participants and 600+ submissions, reducing evaluation time by 60%+ via unified workflows. Implemented score normalisation logic to mitigate bias between strict and lenient judges, ensuring fair and consistent evaluation.",
- image:"/thumbnails/next-auction.png",
- images: [
-"/projects/next-auction/live-auction.png",
-"/projects/next-auction/manage-team.png",
-"/projects/next-auction/all-players.png",
-"/projects/next-auction/settings.png",
- ],
+ image: "",
+ images: [],
  tech: ["Next.js","TypeScript","TailwindCSS","Drizzle","PostgreSQL"],
  github:"https://github.com/Dharshansk16",
  live:"https://github.com/Dharshansk16",

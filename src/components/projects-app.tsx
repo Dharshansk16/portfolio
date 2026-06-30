@@ -154,14 +154,23 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   className="w-full md:w-1/2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-2xl cursor-pointer"
   onClick={() => handleProjectClick(project)}
   >
-  <Image
-  src={project.image ||"/placeholder.svg"}
-  alt={project.title}
-  fill
-  priority={index < 2}
-  className="object-cover transition-transform duration-1000 group-hover:scale-105"
-  sizes="(max-width: 768px) 100vw, 50vw"
-  />
+  {project.image ? (
+    <Image
+    src={project.image}
+    alt={project.title}
+    fill
+    priority={index < 2}
+    className="object-cover transition-transform duration-1000 group-hover:scale-105"
+    sizes="(max-width: 768px) 100vw, 50vw"
+    />
+  ) : (
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900 transition-transform duration-1000 group-hover:scale-105">
+      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white dark:bg-zinc-950 flex items-center justify-center shadow-lg mb-4">
+        <span className="text-3xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-200">{project.title.charAt(0)}</span>
+      </div>
+      <span className="text-zinc-500 dark:text-zinc-400 font-medium px-4 text-center">Images coming soon</span>
+    </div>
+  )}
   <div className="absolute inset-0 bg-black/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
   </div>
   </motion.div>
@@ -243,84 +252,96 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
 
  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 p-5 sm:p-8">
  {/* Image Gallery */}
- <div className="space-y-4">
- <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden bg-zinc-100 dark:bg-black border border-zinc-200 dark:border-zinc-800 group">
- <AnimatePresence mode="wait">
- <motion.img
- key={currentImageIndex}
- src={selectedProject.images[currentImageIndex]}
- alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
- initial={{ opacity: 0, scale: 1.05}}
- animate={{ opacity: 1, scale: 1}}
- exit={{ opacity: 0}}
- transition={{ duration: 0.4}}
- className="w-full h-full object-cover"
- loading="lazy"
- />
- </AnimatePresence>
+ {selectedProject.images && selectedProject.images.length > 0 ? (
+  <div className="space-y-4">
+  <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden bg-zinc-100 dark:bg-black border border-zinc-200 dark:border-zinc-800 group">
+  <AnimatePresence mode="wait">
+  <motion.img
+  key={currentImageIndex}
+  src={selectedProject.images[currentImageIndex]}
+  alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+  initial={{ opacity: 0, scale: 1.05}}
+  animate={{ opacity: 1, scale: 1}}
+  exit={{ opacity: 0}}
+  transition={{ duration: 0.4}}
+  className="w-full h-full object-cover"
+  loading="lazy"
+  />
+  </AnimatePresence>
 
- {/* Gallery Controls (Hover reveal on desktop) */}
- <div className="absolute inset-0 flex items-center justify-between p-4 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
- <Button
- variant="ghost"
- size="icon"
- onClick={prevImage}
- className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
- >
- <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
- </Button>
- <Button
- variant="ghost"
- size="icon"
- onClick={nextImage}
- className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
- >
- <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
- </Button>
- </div>
+  {/* Gallery Controls (Hover reveal on desktop) */}
+  <div className="absolute inset-0 flex items-center justify-between p-4 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+  <Button
+  variant="ghost"
+  size="icon"
+  onClick={prevImage}
+  className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
+  >
+  <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+  </Button>
+  <Button
+  variant="ghost"
+  size="icon"
+  onClick={nextImage}
+  className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
+  >
+  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+  </Button>
+  </div>
 
- {/* Controls Bottom Row */}
- <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
- <Button
- variant="ghost"
- size="icon"
- onClick={() => setIsPlaying(!isPlaying)}
- className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 rounded-full"
- >
- {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
- </Button>
- <div className="bg-white/80 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1.5 shadow-lg">
- <span className="text-zinc-900 dark:text-white text-xs font-semibold">
- {currentImageIndex + 1} / {selectedProject.images.length}
- </span>
- </div>
- </div>
- </div>
+  {/* Controls Bottom Row */}
+  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+  <Button
+  variant="ghost"
+  size="icon"
+  onClick={() => setIsPlaying(!isPlaying)}
+  className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 rounded-full"
+  >
+  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+  </Button>
+  <div className="bg-white/80 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1.5 shadow-lg">
+  <span className="text-zinc-900 dark:text-white text-xs font-semibold">
+  {currentImageIndex + 1} / {selectedProject.images.length}
+  </span>
+  </div>
+  </div>
+  </div>
 
- {/* Thumbnail Strip */}
- <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-none py-1">
- {selectedProject.images.map((image, idx) => (
- <button
- key={idx}
- onClick={() => setCurrentImageIndex(idx)}
- className={`relative flex-shrink-0 w-20 h-16 sm:w-24 sm:h-16 rounded-xl overflow-hidden transition-all touch-manipulation ${
- currentImageIndex === idx
- ?"ring-2 ring-zinc-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-900"
- :"opacity-60 hover:opacity-100"
+  {/* Thumbnail Strip */}
+  <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-none py-1">
+  {selectedProject.images.map((image, idx) => (
+  <button
+  key={idx}
+  onClick={() => setCurrentImageIndex(idx)}
+  className={`relative flex-shrink-0 w-20 h-16 sm:w-24 sm:h-16 rounded-xl overflow-hidden transition-all touch-manipulation ${
+  currentImageIndex === idx
+  ?"ring-2 ring-zinc-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-900"
+  :"opacity-60 hover:opacity-100"
 }`}
- >
- <Image
- src={image ||"/placeholder.svg"}
- alt={`Thumbnail ${idx + 1}`}
- fill
- className="object-cover"
- sizes="96px"
- loading={idx === 0 ?"eager" :"lazy"}
- />
- </button>
- ))}
- </div>
- </div>
+  >
+  <Image
+  src={image ||"/placeholder.svg"}
+  alt={`Thumbnail ${idx + 1}`}
+  fill
+  className="object-cover"
+  sizes="96px"
+  loading={idx === 0 ?"eager" :"lazy"}
+  />
+  </button>
+  ))}
+  </div>
+  </div>
+  ) : (
+  <div className="flex flex-col items-center justify-center h-64 sm:h-80 md:h-96 rounded-2xl bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900 border border-zinc-200 dark:border-zinc-800 group relative">
+    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white dark:bg-zinc-950 flex items-center justify-center shadow-lg mb-6 z-10">
+      <span className="text-3xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-200">{selectedProject.title.charAt(0)}</span>
+    </div>
+    <p className="text-zinc-500 dark:text-zinc-400 font-medium text-lg z-10">Project screenshots coming soon</p>
+    {/* Decorative background elements */}
+    <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-zinc-300 dark:bg-zinc-700 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob"></div>
+    <div className="absolute top-1/3 right-1/4 w-32 h-32 bg-zinc-400 dark:bg-zinc-600 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob animation-delay-2000"></div>
+  </div>
+  )}
 
  {/* Project Details */}
  <div className="space-y-6 sm:space-y-8 flex flex-col justify-center">
