@@ -1,392 +1,352 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence} from"framer-motion";
 import {
-  Briefcase,
-  Github,
-  ExternalLink,
-  X,
-  ChevronLeft,
-  ChevronRight,
-  Play,
-  Pause,
-} from "lucide-react";
-import { useState, useEffect, useCallback, memo } from "react";
-import { Button } from "@/components/ui/button";
-import { projects } from "@/constants/project";
-import OSWindow from "@/components/ui/os-window";
-import Image from "next/image";
+ Briefcase,
+ ExternalLink,
+ X,
+ ChevronLeft,
+ ChevronRight,
+ Play,
+ Pause,
+} from"lucide-react";
+import { useState, useEffect, useCallback, memo} from"react";
+import { Button} from"@/components/ui/button";
+import { projects} from"@/constants/project";
+import Image from"next/image";
+import { FaGithub} from"react-icons/fa";
 
 interface ProjectsAppProps {
-  onBack: () => void;
+ onBack: () => void;
 }
 
 // Detect mobile for simplified animations
 const isMobileDevice = () => {
-  if (typeof window === "undefined") return false;
-  return /Mobile|Android|iPhone/i.test(navigator.userAgent);
+ if (typeof window ==="undefined") return false;
+ return /Mobile|Android|iPhone/i.test(navigator.userAgent);
 };
 
-function ProjectsApp({ onBack }: ProjectsAppProps) {
-  const [selectedProject, setSelectedProject] = useState<
-    (typeof projects)[0] | null
-  >(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+function ProjectsApp({ onBack}: ProjectsAppProps) {
+ const [selectedProject, setSelectedProject] = useState<
+ (typeof projects)[0] | null
+ >(null);
+ const [currentImageIndex, setCurrentImageIndex] = useState(0);
+ const [isPlaying, setIsPlaying] = useState(false);
+ const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+ const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-  }, []);
+ useEffect(() => {
+ setIsMobile(isMobileDevice());
+}, []);
 
-  // Auto-play slideshow
-  useEffect(() => {
-    if (selectedProject && isPlaying) {
-      const interval = setInterval(() => {
-        setCurrentImageIndex((prev) =>
-          prev === selectedProject.images.length - 1 ? 0 : prev + 1
-        );
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [selectedProject, isPlaying]);
+ // Auto-play slideshow
+ useEffect(() => {
+ if (selectedProject && isPlaying) {
+ const interval = setInterval(() => {
+ setCurrentImageIndex((prev) =>
+ prev === selectedProject.images.length - 1 ? 0 : prev + 1
+ );
+}, 3000);
+ return () => clearInterval(interval);
+}
+}, [selectedProject, isPlaying]);
 
-  const nextImage = useCallback(() => {
-    if (selectedProject) {
-      setCurrentImageIndex((prev) =>
-        prev === selectedProject.images.length - 1 ? 0 : prev + 1
-      );
-    }
-  }, [selectedProject]);
+ const nextImage = useCallback(() => {
+ if (selectedProject) {
+ setCurrentImageIndex((prev) =>
+ prev === selectedProject.images.length - 1 ? 0 : prev + 1
+ );
+}
+}, [selectedProject]);
 
-  const prevImage = useCallback(() => {
-    if (selectedProject) {
-      setCurrentImageIndex((prev) =>
-        prev === 0 ? selectedProject.images.length - 1 : prev - 1
-      );
-    }
-  }, [selectedProject]);
+ const prevImage = useCallback(() => {
+ if (selectedProject) {
+ setCurrentImageIndex((prev) =>
+ prev === 0 ? selectedProject.images.length - 1 : prev - 1
+ );
+}
+}, [selectedProject]);
 
-  const handleProjectClick = useCallback((project: (typeof projects)[0]) => {
-    setSelectedProject(project);
-    setCurrentImageIndex(0);
-  }, []);
+ const handleProjectClick = useCallback((project: (typeof projects)[0]) => {
+ setSelectedProject(project);
+ setCurrentImageIndex(0);
+}, []);
 
-  const handleCloseModal = useCallback(() => {
-    setSelectedProject(null);
-  }, []);
+ const handleCloseModal = useCallback(() => {
+ setSelectedProject(null);
+}, []);
 
-  return (
-    <div className="min-h-screen relative pt-12 pb-24 sm:pb-28 px-2 sm:px-4 md:px-6">
-      <OSWindow
-        title="Projects"
-        subtitle="~/portfolio/projects"
-        icon={<Briefcase className="w-5 h-5" />}
-        onClose={onBack}
-        accentColor="cyan"
-        className="max-w-[1600px] mx-auto h-[calc(100vh-8rem)]"
-      >
-        <div className="h-[calc(100vh-12rem)] overflow-y-auto scrollbar-thin p-3 sm:p-4 md:p-6">
-          {/* Projects Grid - Optimized spacing */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: isMobile ? 10 : 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  delay: isMobile ? index * 0.02 : index * 0.05,
-                  duration: isMobile ? 0.2 : 0.3,
-                }}
-                onHoverStart={() => !isMobile && setHoveredProject(project.id)}
-                onHoverEnd={() => !isMobile && setHoveredProject(null)}
-                onClick={() => handleProjectClick(project)}
-                className="group cursor-pointer touch-manipulation"
-                style={{ willChange: "transform, opacity" }}
-              >
-                <div className="relative overflow-hidden rounded-lg sm:rounded-xl bg-black/50 backdrop-blur-sm border border-white/10 hover:border-cyan-500/50 transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/20 h-full flex flex-col">
-                  {/* Project Image - Reduced height */}
-                  <div className="relative h-40 sm:h-44 md:h-48 overflow-hidden flex-shrink-0">
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-20 transition-transform duration-500`}
-                      style={{
-                        transform:
-                          hoveredProject === project.id && !isMobile
-                            ? "scale(1.1)"
-                            : "scale(1)",
-                      }}
-                    />
-                    <Image
-                      src={project.image || "/placeholder.svg"}
-                      alt={project.title}
-                      width={500}
-                      height={300}
-                      priority={index < 3}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      style={{ width: "100%", height: "100%" }}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      loading={index < 3 ? "eager" : "lazy"}
-                      placeholder="blur"
-                      blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB8H/9k="
-                    />
+ return (
+ <div className="min-h-screen w-full bg-white dark:bg-black overflow-y-auto px-4 sm:px-6 lg:px-8">
+  <div className="max-w-6xl mx-auto py-8 sm:py-16">
+  {/* Minimalist Back Button */}
+  <div className="mb-12">
+  <button
+  onClick={onBack}
+  className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-sm text-sm font-medium"
+  aria-label="Back to Dashboard"
+  >
+  <ChevronLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+  </button>
+  </div>
 
-                    {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+  <div className="flex flex-col">
+  {projects.map((project, index) => (
+  <div key={project.id}>
+  <motion.div
+  initial={{ opacity: 0, y: 40}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-100px"}}
+  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1]}}
+  className={`flex flex-col ${
+  index % 2 === 0 ?"md:flex-row" :"md:flex-row-reverse"
+ } gap-8 sm:gap-16 items-center group py-16 sm:py-24`}
+  >
+  {/* Project Text Info */}
+  <div className="w-full md:w-1/2 flex flex-col justify-center">
+  <div className="inline-flex items-center space-x-2 mb-4">
+  <span className="text-xs font-mono tracking-widest uppercase text-zinc-500 dark:text-zinc-400">
+  Case Study {String(index + 1).padStart(2,"0")}
+  </span>
+  <span className="w-8 h-[1px] bg-zinc-300 dark:bg-zinc-700"></span>
+  </div>
+  
+  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white mb-6 group-hover:text-zinc-500 transition-colors duration-500">
+  {project.title}
+  </h2>
+  
+  <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8">
+  {project.description}
+  </p>
 
-                    {/* Hover Overlay - Only on desktop */}
-                    {!isMobile && (
-                      <div
-                        className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300"
-                        style={{
-                          opacity: hoveredProject === project.id ? 1 : 0,
-                          pointerEvents:
-                            hoveredProject === project.id ? "auto" : "none",
-                        }}
-                      >
-                        <div className="text-center">
-                          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 flex items-center justify-center mb-2 mx-auto">
-                            <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                          </div>
-                          <p className="text-white font-medium text-xs sm:text-sm">
-                            View Details
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+  <div className="flex flex-wrap gap-2 mb-10">
+  {project.tech.map((tech) => (
+  <span
+  key={tech}
+  className="px-4 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-xs font-medium tracking-wide uppercase"
+  >
+  {tech}
+  </span>
+  ))}
+  </div>
 
-                  {/* Project Info - Optimized padding */}
-                  <div className="p-3 sm:p-4 flex-1 flex flex-col">
-                    <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-400 transition-colors truncate mb-1.5">
-                      {project.title}
-                    </h3>
+  <button
+  onClick={() => handleProjectClick(project)}
+  className="inline-flex items-center text-sm font-bold uppercase tracking-wider text-zinc-900 dark:text-white hover:opacity-70 transition-opacity"
+  >
+  Explore Project
+  <ChevronRight className="w-4 h-4 ml-2" />
+  </button>
+  </div>
 
-                    <p className="text-gray-400 text-xs sm:text-sm mb-3 line-clamp-2 flex-1">
-                      {project.description}
-                    </p>
+  {/* Project Image */}
+  <div
+  className="w-full md:w-1/2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-2xl cursor-pointer"
+  onClick={() => handleProjectClick(project)}
+  >
+  <Image
+  src={project.image ||"/placeholder.svg"}
+  alt={project.title}
+  fill
+  priority={index < 2}
+  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+  sizes="(max-width: 768px) 100vw, 50vw"
+  />
+  <div className="absolute inset-0 bg-black/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+  </div>
+  </motion.div>
+  
+  {/* Divider between projects */}
+  {index !== projects.length - 1 && (
+  <div className="w-full h-[1px] bg-zinc-200 dark:bg-zinc-800" />
+  )}
+  </div>
+  ))}
+  </div>
+  </div>
 
-                    {/* Tech Stack - Compact */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tech.slice(0, 3).map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-0.5 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 text-[10px] sm:text-xs rounded-md border border-cyan-500/30 font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.tech.length > 3 && (
-                        <span className="px-2 py-0.5 bg-gray-500/20 text-gray-400 text-[10px] sm:text-xs rounded-md font-medium">
-                          +{project.tech.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </OSWindow>
+  {/* Project Detail Modal */}
+ <AnimatePresence>
+ {selectedProject && (
+ <motion.div
+ initial={{ opacity: 0}}
+ animate={{ opacity: 1}}
+ exit={{ opacity: 0}}
+ transition={{ duration: isMobile ? 0.15 : 0.2}}
+ className="fixed inset-0 bg-zinc-950/60 dark:bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+ onClick={handleCloseModal}
+ >
+ <motion.div
+ initial={{ opacity: 0, scale: 0.95, y: isMobile ? 20 : 0}}
+ animate={{ opacity: 1, scale: 1, y: 0}}
+ exit={{ opacity: 0, scale: 0.95, y: isMobile ? 20 : 0}}
+ transition={{ duration: 0.3, ease:"easeOut"}}
+ onClick={(e) => e.stopPropagation()}
+ className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto my-auto shadow-2xl relative"
+ style={{ willChange:"transform, opacity"}}
+ >
+ {/* Modal Header */}
+ <div className="flex items-center justify-between p-5 sm:p-8 border-b border-zinc-100 dark:border-zinc-800 sticky top-0 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md z-20">
+ <div className="flex items-center space-x-4 min-w-0 flex-1">
+ <div
+ className={`w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-950 ${selectedProject.color} flex items-center justify-center flex-shrink-0 shadow-inner`}
+ >
+ <span className="text-white font-bold text-xl">
+ {selectedProject.title.charAt(0)}
+ </span>
+ </div>
+ <div className="min-w-0 flex-1">
+ <h2 className="text-xl sm:text-3xl font-bold text-zinc-900 dark:text-white truncate">
+ {selectedProject.title}
+ </h2>
+ <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1 font-medium truncate">
+ {selectedProject.category} • {selectedProject.year}
+ </p>
+ </div>
+ </div>
+ <Button
+ variant="ghost"
+ size="icon"
+ onClick={handleCloseModal}
+ className="text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 rounded-full h-10 w-10 flex-shrink-0 transition-colors ml-4"
+ >
+ <X className="w-5 h-5" />
+ </Button>
+ </div>
 
-      {/* Project Detail Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: isMobile ? 0.15 : 0.2 }}
-            className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto"
-            onClick={handleCloseModal}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: isMobile ? 20 : 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: isMobile ? 20 : 50 }}
-              transition={{ duration: isMobile ? 0.2 : 0.3, ease: "easeOut" }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl sm:rounded-3xl max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto my-auto"
-              style={{ willChange: "transform, opacity" }}
-            >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-white/10 sticky top-0 bg-black/90 backdrop-blur-xl z-10">
-                <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
-                  <div
-                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gradient-to-r ${selectedProject.color} flex items-center justify-center flex-shrink-0`}
-                  >
-                    <span className="text-white font-bold text-base sm:text-lg">
-                      {selectedProject.title.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h2 className="text-lg sm:text-2xl font-bold text-white truncate">
-                      {selectedProject.title}
-                    </h2>
-                    <p className="text-gray-400 text-xs sm:text-sm truncate">
-                      {selectedProject.category} • {selectedProject.year}
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleCloseModal}
-                  className="text-gray-400 hover:text-white flex-shrink-0 touch-manipulation"
-                >
-                  <X className="w-5 h-5 sm:w-6 sm:h-6" />
-                </Button>
-              </div>
+ <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 p-5 sm:p-8">
+ {/* Image Gallery */}
+ <div className="space-y-4">
+ <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden bg-zinc-100 dark:bg-black border border-zinc-200 dark:border-zinc-800 group">
+ <AnimatePresence mode="wait">
+ <motion.img
+ key={currentImageIndex}
+ src={selectedProject.images[currentImageIndex]}
+ alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+ initial={{ opacity: 0, scale: 1.05}}
+ animate={{ opacity: 1, scale: 1}}
+ exit={{ opacity: 0}}
+ transition={{ duration: 0.4}}
+ className="w-full h-full object-cover"
+ loading="lazy"
+ />
+ </AnimatePresence>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 p-4 sm:p-6">
-                {/* Image Gallery */}
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="relative h-56 sm:h-72 md:h-80 rounded-xl sm:rounded-2xl overflow-hidden">
-                    <AnimatePresence mode="wait">
-                      <motion.img
-                        key={currentImageIndex}
-                        src={selectedProject.images[currentImageIndex]}
-                        alt={`${selectedProject.title} - Image ${
-                          currentImageIndex + 1
-                        }`}
-                        initial={{ opacity: 0, x: 100 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -100 }}
-                        transition={{ duration: 0.3 }}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    </AnimatePresence>
+ {/* Gallery Controls (Hover reveal on desktop) */}
+ <div className="absolute inset-0 flex items-center justify-between p-4 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+ <Button
+ variant="ghost"
+ size="icon"
+ onClick={prevImage}
+ className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
+ >
+ <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+ </Button>
+ <Button
+ variant="ghost"
+ size="icon"
+ onClick={nextImage}
+ className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
+ >
+ <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+ </Button>
+ </div>
 
-                    {/* Gallery Controls */}
-                    <div className="absolute inset-0 flex items-center justify-between p-2 sm:p-4">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={prevImage}
-                        className="bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 touch-manipulation w-10 h-10 sm:w-12 sm:h-12"
-                      >
-                        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={nextImage}
-                        className="bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 touch-manipulation w-10 h-10 sm:w-12 sm:h-12"
-                      >
-                        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-                      </Button>
-                    </div>
+ {/* Controls Bottom Row */}
+ <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+ <Button
+ variant="ghost"
+ size="icon"
+ onClick={() => setIsPlaying(!isPlaying)}
+ className="bg-white/80 dark:bg-black/50 backdrop-blur-md text-zinc-900 dark:text-white hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 rounded-full"
+ >
+ {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+ </Button>
+ <div className="bg-white/80 dark:bg-black/50 backdrop-blur-md rounded-full px-3 py-1.5 shadow-lg">
+ <span className="text-zinc-900 dark:text-white text-xs font-semibold">
+ {currentImageIndex + 1} / {selectedProject.images.length}
+ </span>
+ </div>
+ </div>
+ </div>
 
-                    {/* Play/Pause Button */}
-                    <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setIsPlaying(!isPlaying)}
-                        className="bg-black/50 backdrop-blur-sm text-white hover:bg-black/70 touch-manipulation w-9 h-9 sm:w-10 sm:h-10"
-                      >
-                        {isPlaying ? (
-                          <Pause className="w-4 h-4" />
-                        ) : (
-                          <Play className="w-4 h-4" />
-                        )}
-                      </Button>
-                    </div>
+ {/* Thumbnail Strip */}
+ <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-none py-1">
+ {selectedProject.images.map((image, idx) => (
+ <button
+ key={idx}
+ onClick={() => setCurrentImageIndex(idx)}
+ className={`relative flex-shrink-0 w-20 h-16 sm:w-24 sm:h-16 rounded-xl overflow-hidden transition-all touch-manipulation ${
+ currentImageIndex === idx
+ ?"ring-2 ring-zinc-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-900"
+ :"opacity-60 hover:opacity-100"
+}`}
+ >
+ <Image
+ src={image ||"/placeholder.svg"}
+ alt={`Thumbnail ${idx + 1}`}
+ fill
+ className="object-cover"
+ sizes="96px"
+ loading={idx === 0 ?"eager" :"lazy"}
+ />
+ </button>
+ ))}
+ </div>
+ </div>
 
-                    {/* Image Counter */}
-                    <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 bg-black/50 backdrop-blur-sm rounded-full px-2.5 py-1 sm:px-3 sm:py-1">
-                      <span className="text-white text-xs sm:text-sm">
-                        {currentImageIndex + 1} /{" "}
-                        {selectedProject.images.length}
-                      </span>
-                    </div>
-                  </div>
+ {/* Project Details */}
+ <div className="space-y-6 sm:space-y-8 flex flex-col justify-center">
+ <div>
+ <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
+ About This Project
+ </h3>
+ <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-sm sm:text-base">
+ {selectedProject.longDescription}
+ </p>
+ </div>
 
-                  {/* Thumbnail Strip */}
-                  <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-cyan-500/50">
-                    {selectedProject.images.map((image, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setCurrentImageIndex(idx)}
-                        className={`relative flex-shrink-0 w-16 h-12 sm:w-20 sm:h-16 rounded-md sm:rounded-lg overflow-hidden border-2 transition-all touch-manipulation ${
-                          currentImageIndex === idx
-                            ? "border-cyan-400 shadow-lg shadow-cyan-400/25"
-                            : "border-white/20 hover:border-white/40"
-                        }`}
-                      >
-                        <Image
-                          src={image || "/placeholder.svg"}
-                          alt={`Thumbnail ${idx + 1}`}
-                          fill
-                          className="object-cover"
-                          sizes="80px"
-                          loading={idx === 0 ? "eager" : "lazy"}
-                        />
-                      </button>
-                    ))}
-                  </div>
-                </div>
+ <div>
+ <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">
+ Technologies Used
+ </h3>
+ <div className="flex flex-wrap gap-2">
+ {selectedProject.tech.map((tech) => (
+ <span
+ key={tech}
+ className="px-3 py-1.5 bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg font-medium"
+ >
+ {tech}
+ </span>
+ ))}
+ </div>
+ </div>
 
-                {/* Project Details */}
-                <div className="space-y-4 sm:space-y-6">
-                  {/* Description */}
-                  <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">
-                      About This Project
-                    </h3>
-                    <p className="text-gray-300 leading-relaxed text-sm sm:text-base">
-                      {selectedProject.longDescription}
-                    </p>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div>
-                    <h3 className="text-base sm:text-lg font-semibold text-white mb-2 sm:mb-3">
-                      Technologies Used
-                    </h3>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {selectedProject.tech.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2.5 py-1.5 sm:px-3 sm:py-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 text-cyan-400 text-xs sm:text-sm rounded-lg border border-cyan-500/30"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-2">
-                    <Button
-                      onClick={() =>
-                        window.open(selectedProject.github, "_blank")
-                      }
-                      className="flex-1 bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white touch-manipulation h-11 sm:h-10"
-                    >
-                      <Github className="w-4 h-4 mr-2" />
-                      View Code
-                    </Button>
-                    <Button
-                      onClick={() =>
-                        window.open(selectedProject.live, "_blank")
-                      }
-                      className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white touch-manipulation h-11 sm:h-10"
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Live Demo
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
+ {/* Action Buttons */}
+ <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
+ <Button
+ onClick={() => window.open(selectedProject.github,"_blank")}
+ className="flex-1 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800 font-semibold shadow-sm h-12 text-base rounded-xl transition-all"
+ >
+ <FaGithub className="w-5 h-5 mr-2" />
+ View Source
+ </Button>
+ <Button
+ onClick={() => window.open(selectedProject.live,"_blank")}
+ className="flex-1 bg-zinc-900 hover:bg-black dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black font-semibold shadow-md h-12 text-base rounded-xl transition-all"
+ >
+ <ExternalLink className="w-5 h-5 mr-2" />
+ Live Preview
+ </Button>
+ </div>
+ </div>
+ </div>
+ </motion.div>
+ </motion.div>
+ )}
+ </AnimatePresence>
+ </div>
+ );
 }
 
 export default memo(ProjectsApp);

@@ -1,178 +1,169 @@
 "use client";
 
-import { memo } from "react";
-import { motion } from "framer-motion";
-import { FileText, Calendar, Clock, ArrowRight, Terminal } from "lucide-react";
-import { useState, useEffect } from "react";
-import OSWindow from "@/components/ui/os-window";
+import { memo, useState, useEffect} from"react";
+import { motion} from"framer-motion";
+import { FileText, Calendar, Clock, ArrowRight, Terminal, ChevronLeft} from"lucide-react";
 
 interface BlogAppProps {
-  onBack: () => void;
+ onBack: () => void;
 }
 
-// Detect mobile for simplified animations
 const isMobileDevice = () => {
-  if (typeof window === "undefined") return false;
-  return /Mobile|Android|iPhone/i.test(navigator.userAgent);
+ if (typeof window ==="undefined") return false;
+ return /Mobile|Android|iPhone/i.test(navigator.userAgent);
 };
 
 const blogPosts = [
-  {
-    id: 1,
-    title: "Getting Started with Next.js 14",
-    excerpt:
-      "Exploring the latest features and improvements in Next.js 14, including the new App Router and Server Components.",
-    date: "2024-01-15",
-    readTime: "5 min read",
-    tags: ["Next.js", "React", "Web Development"],
-  },
-  {
-    id: 2,
-    title: "Building Responsive UIs with Tailwind CSS",
-    excerpt:
-      "A comprehensive guide to creating beautiful, responsive user interfaces using Tailwind CSS utility classes.",
-    date: "2024-01-10",
-    readTime: "7 min read",
-    tags: ["CSS", "Tailwind", "UI/UX"],
-  },
-  {
-    id: 3,
-    title: "State Management in React Applications",
-    excerpt:
-      "Comparing different state management solutions for React apps, from useState to Redux and Zustand.",
-    date: "2024-01-05",
-    readTime: "8 min read",
-    tags: ["React", "State Management", "JavaScript"],
-  },
+ {
+ id: 1,
+ title:"Getting Started with Next.js 14",
+ excerpt:
+"Exploring the latest features and improvements in Next.js 14, including the new App Router and Server Components.",
+ date:"2024-01-15",
+ readTime:"5 min read",
+ tags: ["Next.js","React","Web Development"],
+},
+ {
+ id: 2,
+ title:"Mastering Tailwind CSS",
+ excerpt:
+"A comprehensive guide to creating beautiful, responsive user interfaces using Tailwind CSS utility classes.",
+ date:"2024-01-10",
+ readTime:"7 min read",
+ tags: ["CSS","Tailwind","UI/UX"],
+},
+ {
+ id: 3,
+ title:"State Management in React Applications",
+ excerpt:
+"Comparing different state management solutions for React apps, from useState to Redux and Zustand.",
+ date:"2024-01-05",
+ readTime:"8 min read",
+ tags: ["React","State Management","JavaScript"],
+},
 ];
 
-function BlogApp({ onBack }: BlogAppProps) {
-  const [terminalText, setTerminalText] = useState("");
-  const [comingSoon, setComingSoon] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const fullText = "> fetching latest blogs...";
+function BlogApp({ onBack}: BlogAppProps) {
+ const [terminalText, setTerminalText] = useState("");
+ const [comingSoon, setComingSoon] = useState(false);
+ const [isMobile, setIsMobile] = useState(false);
+ const fullText ="> fetching latest blogs...";
 
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-  }, []);
+ useEffect(() => {
+ setIsMobile(isMobileDevice());
+}, []);
 
-  useEffect(() => {
-    const speed = isMobile ? 20 : 10; // Faster on mobile
-    let index = 0;
-    const timer = setInterval(() => {
-      if (index < fullText.length) {
-        setTerminalText(fullText.slice(0, index + 1));
-        index++;
-      } else {
-        clearInterval(timer);
-        setTimeout(() => setComingSoon(true), 100);
-      }
-    }, speed);
+ useEffect(() => {
+ const speed = isMobile ? 20 : 10;
+ let index = 0;
+ const timer = setInterval(() => {
+ if (index < fullText.length) {
+ setTerminalText(fullText.slice(0, index + 1));
+ index++;
+} else {
+ clearInterval(timer);
+ setTimeout(() => setComingSoon(true), 500);
+}
+}, speed);
 
-    return () => clearInterval(timer);
-  }, [isMobile]);
+ return () => clearInterval(timer);
+}, [isMobile, fullText]);
 
-  return (
-    <div className="min-h-screen relative pt-12 pb-24 sm:pb-28 px-2 sm:px-4 md:px-6">
-      <OSWindow
-        title="Blog"
-        subtitle="~/portfolio/blog"
-        icon={<FileText className="w-5 h-5" />}
-        onClose={onBack}
-        accentColor="purple"
-        className="max-w-5xl mx-auto h-[calc(100vh-8rem)]"
-      >
-        <div className="h-[calc(100vh-12rem)] overflow-y-auto scrollbar-thin p-4 sm:p-5 md:p-6">
-          {/* Terminal Loading Animation - Compact */}
-          <div className="bg-slate-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-3 sm:p-4 font-mono mb-4 sm:mb-5 shadow-lg shadow-cyan-500/10">
-            <div className="flex items-center space-x-2 mb-1.5">
-              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="text-[10px] sm:text-xs text-gray-500">
-                darsh@devspace:~/blog$
-              </span>
-            </div>
-            <div className="text-cyan-400 text-xs sm:text-sm">
-              {terminalText}
-              <span className="animate-pulse">_</span>
-            </div>
-          </div>
+ return (
+  <div className="min-h-screen w-full bg-white dark:bg-black overflow-y-auto px-4 sm:px-6 lg:px-8">
+  <div className="max-w-4xl mx-auto py-12 sm:py-20">
+  {/* Minimalist Back Button */}
+  <div className="mb-12">
+  <button
+  onClick={onBack}
+  className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-sm text-sm font-medium"
+  aria-label="Back to Dashboard"
+  >
+  <ChevronLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+  </button>
+  </div>
+  <motion.div
+  initial={{ opacity: 0, y: 20}}
+  animate={{ opacity: 1, y: 0}}
+  transition={{ duration: 0.6}}
+  className="mb-16"
+  >
+  <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-zinc-900 dark:text-white mb-4">
+  Writing & Insights
+  </h1>
+  <p className="text-xl sm:text-2xl text-zinc-500 dark:text-zinc-400 font-medium">
+  Thoughts on software engineering, design patterns, and building products.
+  </p>
+  </motion.div>
 
-          {/* Blog Posts - Hidden for now */}
-          {false && (
-            <div className="space-y-3 sm:space-y-4">
-              {blogPosts.map((post, index) => (
-                <motion.article
-                  key={post.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.08, duration: 0.3 }}
-                  className="bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-lg sm:rounded-xl p-4 sm:p-5 hover:border-purple-500/50 transition-all duration-300 group cursor-pointer hover:shadow-lg hover:shadow-purple-500/10"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex-1 min-w-0">
-                      <h2 className="text-base sm:text-lg font-semibold text-white mb-1.5 group-hover:text-purple-400 transition-colors truncate">
-                        {post.title}
-                      </h2>
-                      <p className="text-gray-400 text-xs sm:text-sm mb-3 line-clamp-2">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5 mb-3">
-                        {post.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 bg-purple-500/20 text-purple-400 text-[10px] sm:text-xs rounded-md border border-purple-500/30"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex items-center space-x-3 text-[10px] sm:text-xs text-gray-500">
-                        <div className="flex items-center space-x-1">
-                          <Calendar className="w-3 h-3" />
-                          <span>
-                            {new Date(post.date).toLocaleDateString()}
-                          </span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock className="w-3 h-3" />
-                          <span>{post.readTime}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover:text-purple-400 transition-colors flex-shrink-0 mt-1" />
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-          )}
+  {/* Terminal Animation */}
+  <div className="mb-12">
+  <div className="font-mono text-zinc-500 text-sm">
+  <span className="text-zinc-400">guest@portfolio:~/blog$ </span>
+  {terminalText}
+  <span className="animate-pulse font-bold ml-1">_</span>
+  </div>
+  </div>
 
-          {/* Coming Soon Message - Compact */}
-          {comingSoon && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{
-                delay: isMobile ? 0.1 : 0.2,
-                duration: isMobile ? 0.2 : 0.3,
-              }}
-              className="text-center mt-6 sm:mt-8 p-6 sm:p-10 bg-gradient-to-br from-purple-500/10 to-fuchsia-500/10 backdrop-blur-sm border border-purple-500/30 rounded-xl shadow-lg shadow-purple-500/10"
-            >
-              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-fuchsia-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg shadow-purple-500/50">
-                <FileText className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-semibold bg-gradient-to-r from-purple-400 to-fuchsia-400 bg-clip-text text-transparent mb-2">
-                Coming Soon!
-              </h3>
-              <p className="text-gray-400 text-xs sm:text-sm max-w-md mx-auto">
-                Stay tuned for insightful articles and stories from my
-                development journey.
-              </p>
-            </motion.div>
-          )}
-        </div>
-      </OSWindow>
-    </div>
-  );
+  {/* Coming Soon State */}
+  {comingSoon && (
+  <motion.div
+  initial={{ opacity: 0, y: 10}}
+  animate={{ opacity: 1, y: 0}}
+  transition={{ delay: 0.1, duration: 0.4}}
+  className="py-12 border-t border-zinc-200 dark:border-zinc-800"
+  >
+  <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+  Writing in Progress
+  </h3>
+  <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed">
+  Stay tuned for insightful articles on web development, design patterns, and my tech journey.
+  </p>
+  </motion.div>
+  )}
+
+  {/* Hidden Blog Posts List for Future */}
+  {false && (
+  <div className="space-y-12 mt-12 border-t border-zinc-200 dark:border-zinc-800 pt-12">
+  {blogPosts.map((post, index) => (
+  <motion.article
+  key={post.id}
+  initial={{ opacity: 0, y: 20}}
+  animate={{ opacity: 1, y: 0}}
+  transition={{ delay: index * 0.1, duration: 0.6}}
+  className="group cursor-pointer"
+  >
+  <div className="flex items-center space-x-4 text-sm font-medium text-zinc-500 dark:text-zinc-400 mb-3">
+  <span>{new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric'})}</span>
+  <span>•</span>
+  <span>{post.readTime}</span>
+  </div>
+  
+  <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-3 group-hover:text-zinc-500 transition-colors">
+  {post.title}
+  </h2>
+  
+  <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed mb-4">
+  {post.excerpt}
+  </p>
+  
+  <div className="flex flex-wrap gap-2">
+  {post.tags.map((tag) => (
+  <span
+  key={tag}
+  className="text-sm font-medium text-zinc-900 dark:text-white underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-4"
+  >
+  {tag}
+  </span>
+  ))}
+  </div>
+  </motion.article>
+  ))}
+  </div>
+  )}
+  </div>
+  </div>
+ );
 }
 
 export default memo(BlogApp);
