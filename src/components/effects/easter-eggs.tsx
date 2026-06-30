@@ -528,67 +528,58 @@ export default function EasterEggs() {
  className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-[100] w-full max-w-md px-4"
  style={{ willChange:"transform, opacity"}}
  >
- <div
- className="border border-zinc-300 dark:border-zinc-700 rounded-xl shadow-2xl p-4"
- style={{
- backgroundColor: isMobile
- ?"rgba(2, 6, 23, 0.98)"
- :"rgba(2, 6, 23, 0.95)",
- backdropFilter: isMobile ?"blur(8px)" :"blur(24px)",
- WebkitBackdropFilter: isMobile ?"blur(8px)" :"blur(24px)",
-}}
- >
- <div className="flex items-center justify-between mb-2">
- <div className="flex items-center space-x-2">
- <Terminal className="w-4 h-4 text-zinc-500" />
- <span className="text-xs text-zinc-500 font-semibold">
- Secret Command Terminal
- </span>
- </div>
- <button
- onClick={() => {
- setCommandMode(false);
- setTypedCommand("");
-}}
- className="text-zinc-500 hover:text-white text-xs px-2 py-1 rounded hover:bg-zinc-900 transition-colors"
- >
- ESC
- </button>
- </div>
- <div className="flex items-center space-x-2 font-mono">
- <span className="text-zinc-500">$</span>
- <input
- type="text"
- value={typedCommand}
- onChange={(e) => setTypedCommand(e.target.value)}
- onKeyDown={(e) => {
- if (e.key ==="Enter") {
- checkCommand(typedCommand);
- setTypedCommand("");
- setCommandMode(false);
-} else if (e.key ==="Escape") {
- setCommandMode(false);
- setTypedCommand("");
-}
-}}
- autoFocus
- placeholder="Type command..."
- className="flex-1 bg-transparent text-white outline-none placeholder:text-zinc-600"
- />
- {!isMobile && (
- <motion.span
- animate={{ opacity: [1, 0]}}
- transition={{ duration: 0.8, repeat: Infinity}}
- className="text-zinc-500"
- >
- █
- </motion.span>
- )}
- </div>
- <p className="text-xs text-zinc-500 mt-2">
- Try: matrix, hack, rainbow, confetti, quote, help
- </p>
- </div>
+ <div className="bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-2xl p-4">
+  <div className="flex items-center justify-between mb-3">
+  <div className="flex items-center space-x-2">
+  <Terminal className="w-4 h-4 text-zinc-400 dark:text-zinc-500" />
+  <span className="text-xs text-zinc-500 font-semibold uppercase tracking-widest">
+  Developer Console
+  </span>
+  </div>
+  <button
+  onClick={() => {
+  setCommandMode(false);
+  setTypedCommand("");
+ }}
+  className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+  >
+  ESC
+  </button>
+  </div>
+  <div className="flex items-center space-x-2 font-mono bg-zinc-50 dark:bg-black/50 border border-zinc-100 dark:border-zinc-900 rounded-lg px-3 py-2">
+  <span className="text-zinc-400 dark:text-zinc-600 font-bold">$</span>
+  <input
+  type="text"
+  value={typedCommand}
+  onChange={(e) => setTypedCommand(e.target.value)}
+  onKeyDown={(e) => {
+  if (e.key ==="Enter") {
+  checkCommand(typedCommand);
+  setTypedCommand("");
+  setCommandMode(false);
+ } else if (e.key ==="Escape") {
+  setCommandMode(false);
+  setTypedCommand("");
+ }
+ }}
+  autoFocus
+  placeholder="Type a command..."
+  className="flex-1 bg-transparent text-zinc-900 dark:text-white outline-none placeholder-zinc-400 dark:placeholder-zinc-600 text-sm"
+  />
+  {!isMobile && (
+  <motion.span
+  animate={{ opacity: [1, 0]}}
+  transition={{ duration: 0.8, repeat: Infinity}}
+  className="text-zinc-400 dark:text-zinc-600"
+  >
+  █
+  </motion.span>
+  )}
+  </div>
+  <p className="text-[10px] text-zinc-400 dark:text-zinc-600 mt-3 uppercase tracking-widest font-semibold flex items-center gap-2">
+  Try: <span className="lowercase bg-zinc-100 dark:bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-zinc-600 dark:text-zinc-400">help</span> <span className="lowercase bg-zinc-100 dark:bg-zinc-900 px-1.5 py-0.5 rounded font-mono text-zinc-600 dark:text-zinc-400">clear</span>
+  </p>
+  </div>
  </motion.div>
  )}
  </AnimatePresence>

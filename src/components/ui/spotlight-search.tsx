@@ -141,92 +141,103 @@ export default function SpotlightSearch({
  onClick={(e) => e.stopPropagation()}
  className="w-full max-w-2xl"
  >
- {/* Search Box */}
- <div className="bg-zinc-950/95 backdrop-blur-xl border border-zinc-300 dark:border-zinc-700 rounded-2xl shadow-2xl overflow-hidden">
- {/* Input */}
- <div className="flex items-center px-4 py-4 border-b border-zinc-300 dark:border-zinc-700">
- <Search className="w-5 h-5 text-zinc-500 mr-3" />
- <input
- type="text"
- value={query}
- onChange={(e) => {
- setQuery(e.target.value);
- setSelectedIndex(0);
-}}
- placeholder="Search for projects, pages, or actions..."
- className="flex-1 bg-transparent text-white placeholder-slate-500 outline-none text-lg"
- autoFocus
- />
- <button
- onClick={() => setIsOpen(false)}
- className="ml-2 text-zinc-500 hover:text-white transition-colors"
- >
- <X className="w-5 h-5" />
- </button>
- </div>
+  {/* Search Box */}
+  <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden">
+  {/* Input */}
+  <div className="flex items-center px-4 py-4 border-b border-zinc-100 dark:border-zinc-900">
+  <Search className="w-5 h-5 text-zinc-400 mr-3" />
+  <input
+  type="text"
+  value={query}
+  onChange={(e) => {
+  setQuery(e.target.value);
+  setSelectedIndex(0);
+ }}
+  placeholder="Search for projects, pages, or actions..."
+  className="flex-1 bg-transparent text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 outline-none text-lg font-medium"
+  autoFocus
+  />
+  <button
+  onClick={() => setIsOpen(false)}
+  className="ml-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+  >
+  <X className="w-5 h-5" />
+  </button>
+  </div>
 
- {/* Results */}
- <div className="max-h-96 overflow-y-auto">
- {filteredItems.length > 0 ? (
- <div className="py-2">
- {filteredItems.map((item, index) => {
- const Icon = item.icon;
- return (
- <motion.button
- key={item.id}
- initial={{ opacity: 0, x: -10}}
- animate={{ opacity: 1, x: 0}}
- transition={{ delay: index * 0.05}}
- onClick={() => handleSelect(item.id)}
- onMouseEnter={() => setSelectedIndex(index)}
- className={`w-full flex items-center justify-between px-4 py-3 transition-colors ${
- selectedIndex === index
- ?"bg-zinc-800 dark:bg-zinc-200"
- :"hover:bg-zinc-800 dark:bg-zinc-200"
-}`}
- >
- <div className="flex items-center space-x-3">
- <div
- className={`w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-950 ${item.color} flex items-center justify-center`}
- >
- <Icon className="w-5 h-5 text-white" />
- </div>
- <div className="text-left">
- <div className="text-white font-medium">
- {item.name}
- </div>
- <div className="text-xs text-zinc-500">
- {item.category}
- </div>
- </div>
- </div>
- <ArrowRight className="w-4 h-4 text-zinc-500" />
- </motion.button>
- );
-})}
- </div>
- ) : (
- <div className="py-12 text-center">
- <p className="text-zinc-500">No results found</p>
- </div>
- )}
- </div>
+  {/* Results */}
+  <div className="max-h-96 overflow-y-auto">
+  {filteredItems.length > 0 ? (
+  <div className="py-2 px-2">
+  {filteredItems.map((item, index) => {
+  const Icon = item.icon;
+  return (
+  <motion.button
+  key={item.id}
+  initial={{ opacity: 0, x: -10}}
+  animate={{ opacity: 1, x: 0}}
+  transition={{ delay: index * 0.05}}
+  onClick={() => handleSelect(item.id)}
+  onMouseEnter={() => setSelectedIndex(index)}
+  className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-colors ${
+  selectedIndex === index
+  ?"bg-zinc-100 dark:bg-zinc-900"
+  :"hover:bg-zinc-50 dark:hover:bg-zinc-900"
+ }`}
+  >
+  <div className="flex items-center space-x-4">
+  <div
+  className={`w-10 h-10 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center`}
+  >
+  <Icon className="w-5 h-5 text-zinc-700 dark:text-zinc-300" />
+  </div>
+  <div className="text-left">
+  <div className="text-zinc-900 dark:text-white font-bold text-sm">
+  {item.name}
+  </div>
+  <div className="text-xs text-zinc-500 font-medium mt-0.5">
+  {item.category}
+  </div>
+  </div>
+  </div>
+  <ArrowRight className={`w-4 h-4 transition-colors ${selectedIndex === index ? "text-zinc-900 dark:text-white" : "text-transparent"}`} />
+  </motion.button>
+  );
+ })}
+  </div>
+  ) : (
+  <div className="py-16 text-center flex flex-col items-center justify-center">
+  <Search className="w-8 h-8 text-zinc-300 dark:text-zinc-700 mb-4" />
+  <p className="text-zinc-500 font-medium">No results found for "{query}"</p>
+  </div>
+  )}
+  </div>
 
- {/* Footer */}
- <div className="px-4 py-3 border-t border-zinc-300 dark:border-zinc-700 flex items-center justify-between text-xs text-zinc-500">
- <div className="flex items-center space-x-4">
- <span>↑↓ Navigate</span>
- <span>↵ Select</span>
- <span>ESC Close</span>
- </div>
- <div className="flex items-center space-x-1">
- <kbd className="px-2 py-1 bg-zinc-900 rounded border border-zinc-700">
- ⌘K
- </kbd>
- <span>to open</span>
- </div>
- </div>
- </div>
+  {/* Footer */}
+  <div className="px-5 py-3 border-t border-zinc-100 dark:border-zinc-900 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-500 font-medium bg-zinc-50 dark:bg-zinc-950">
+  <div className="flex items-center space-x-6">
+  <span className="flex items-center gap-2">
+  <span className="flex items-center gap-1">
+    <kbd className="px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-800 rounded font-mono text-[10px]">↑</kbd>
+    <kbd className="px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-800 rounded font-mono text-[10px]">↓</kbd>
+  </span>
+  Navigate
+  </span>
+  <span className="flex items-center gap-2">
+  <kbd className="px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-800 rounded font-mono text-[10px]">↵</kbd> Select
+  </span>
+  <span className="flex items-center gap-2">
+  <kbd className="px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-800 rounded font-mono text-[10px]">ESC</kbd> Close
+  </span>
+  </div>
+  <div className="flex items-center space-x-2">
+  <span>Quick Search</span>
+  <kbd className="px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-800 rounded font-mono text-[10px]">
+  ⌘K
+  </kbd>
+  </div>
+  </div>
+  </div>
  </motion.div>
  </motion.div>
  )}

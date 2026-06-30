@@ -8,6 +8,8 @@ import {
  Sparkles,
  Code2,
  Rocket,
+ BookOpen,
+ Download
 } from"lucide-react";
 import { motion} from"framer-motion";
 import { useState, useEffect} from"react";
@@ -15,6 +17,7 @@ import type { AppType} from"@/app/page";
 
 interface DashboardProps {
  onAppOpen: (app: AppType) => void;
+ showParticles?: boolean;
 }
 
 // Detect if device is low-end
@@ -37,7 +40,7 @@ const apps = [
  {
  id:"blog" as AppType,
  name:"Blog",
- icon: FileText,
+ icon: BookOpen,
  color:"",
  description:"Read articles",
 },
@@ -51,7 +54,7 @@ const apps = [
  {
  id:"resume" as AppType,
  name:"Resume",
- icon: FileText,
+ icon: Download,
  color:"",
  description:"Download CV",
 },
@@ -59,7 +62,7 @@ const apps = [
 
 const terminalCommand ="> select_application()";
 
-export default function Dashboard({ onAppOpen}: DashboardProps) {
+export default function Dashboard({ onAppOpen, showParticles = true }: DashboardProps) {
  const [isLowEnd, setIsLowEnd] = useState(false);
 
  useEffect(() => {
@@ -73,31 +76,31 @@ export default function Dashboard({ onAppOpen}: DashboardProps) {
  transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99]}}
  className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area bg-white dark:bg-transparent transition-colors duration-500"
  >
- {/* Floating Elements - Professional subtle theme - Simplified for low-end devices */}
- {!isLowEnd && (
- <>
- <motion.div
- className="absolute top-20 left-10 text-zinc-500 dark:text-zinc-500"
- animate={{
- y: [0, -20, 0],
- rotate: [0, 5, 0],
-}}
- transition={{ duration: 4, repeat: Infinity, ease:"easeInOut"}}
- >
- <Code2 size={60} />
- </motion.div>
- <motion.div
- className="absolute bottom-20 right-10 text-zinc-500 dark:text-zinc-500"
- animate={{
- y: [0, 20, 0],
- rotate: [0, -5, 0],
-}}
- transition={{ duration: 5, repeat: Infinity, ease:"easeInOut"}}
- >
- <Rocket size={60} />
- </motion.div>
- </>
- )}
+  {/* Floating Elements - Conditional based on showParticles */}
+  {showParticles && !isLowEnd && (
+  <>
+  <motion.div
+  className="absolute top-20 left-10 text-zinc-500 dark:text-zinc-500"
+  animate={{
+  y: [0, -20, 0],
+  rotate: [0, 5, 0],
+ }}
+  transition={{ duration: 4, repeat: Infinity, ease:"easeInOut"}}
+  >
+  <Code2 size={60} />
+  </motion.div>
+  <motion.div
+  className="absolute bottom-20 right-10 text-zinc-500 dark:text-zinc-500"
+  animate={{
+  y: [0, 20, 0],
+  rotate: [0, -5, 0],
+ }}
+  transition={{ duration: 5, repeat: Infinity, ease:"easeInOut"}}
+  >
+  <Rocket size={60} />
+  </motion.div>
+  </>
+  )}
 
   {/* Header */}
   <motion.div
@@ -124,14 +127,14 @@ export default function Dashboard({ onAppOpen}: DashboardProps) {
 
   {/* Main Headline */}
   <motion.h1
-  className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-zinc-900 dark:text-white mb-6"
+  className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-zinc-900 dark:text-white mb-4 sm:mb-6 leading-tight"
   >
   Dharshan S Kotian
   </motion.h1>
 
   {/* Subtitle / Role */}
   <motion.p
-  className="text-lg sm:text-xl md:text-2xl text-zinc-500 dark:text-zinc-400 font-medium max-w-2xl mx-auto mb-8"
+  className="text-base sm:text-xl md:text-2xl text-zinc-500 dark:text-zinc-400 font-medium max-w-2xl mx-auto mb-8 px-2"
   initial={{ opacity: 0}}
   animate={{ opacity: 1}}
   transition={{ delay: 0.4}}
@@ -141,18 +144,20 @@ export default function Dashboard({ onAppOpen}: DashboardProps) {
 
   {/* Terminal Command Simulation */}
   <motion.div
-  className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 font-mono text-sm sm:text-base shadow-inner"
+  className="flex flex-col sm:flex-row items-center sm:inline-flex gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 font-mono text-xs sm:text-sm md:text-base shadow-inner w-full sm:w-auto max-w-full overflow-hidden"
   initial={{ opacity: 0}}
   animate={{ opacity: 1}}
   transition={{ delay: 0.6}}
   >
-  <span className="text-zinc-400">darsh@devspace:~$</span>
-  <span className="text-zinc-700 dark:text-zinc-300">{terminalCommand}</span>
+  <span className="text-zinc-400 whitespace-nowrap">darsh@devspace:~$</span>
+  <div className="flex items-center break-all sm:break-normal text-center sm:text-left">
+  <span className="text-zinc-700 dark:text-zinc-300 mr-1">{terminalCommand}</span>
   <motion.span
-  className="w-2 h-4 bg-zinc-400 inline-block"
+  className="w-1.5 h-3 sm:w-2 sm:h-4 bg-zinc-400 inline-block"
   animate={{ opacity: [1, 0, 1]}}
   transition={{ duration: 1, repeat: Infinity}}
   />
+  </div>
   </motion.div>
   </motion.div>
 
@@ -205,8 +210,8 @@ export default function Dashboard({ onAppOpen}: DashboardProps) {
   whileTap={{ scale: 0.95}}
   style={{ willChange:"transform"}}
   >
-  {/* Enhanced Professional Glow Effect - Simplified for low-end */}
-  {!isLowEnd && (
+  {/* Enhanced Professional Glow Effect - Only if showParticles is true */}
+  {showParticles && !isLowEnd && (
   <motion.div
   className={`absolute -inset-1 bg-zinc-200 dark:bg-zinc-800 rounded-3xl blur-xl opacity-0 transition-opacity duration-500`}
   whileHover={{ opacity: 0.5}}
@@ -238,8 +243,8 @@ export default function Dashboard({ onAppOpen}: DashboardProps) {
  }
  }
   >
-  {/* Refined Animated Background - Only on high-end devices */}
-  {!isLowEnd && (
+  {/* Refined Animated Background - Only if showParticles is true */}
+  {showParticles && !isLowEnd && (
   <motion.div
   className="absolute inset-0 bg-zinc-50 dark:bg-zinc-800/20 opacity-50"
   animate={{
@@ -268,8 +273,8 @@ export default function Dashboard({ onAppOpen}: DashboardProps) {
   <app.icon className="w-full h-full text-zinc-900 dark:text-zinc-100" />
   </motion.div>
 
-  {/* Enhanced Shimmer Effect - Disabled on mobile */}
-  {!isLowEnd && (
+  {/* Enhanced Shimmer Effect - Only if showParticles is true */}
+  {showParticles && !isLowEnd && (
   <motion.div
   className="absolute inset-0 bg-gradient-to-r from-transparent via-zinc-200/50 dark:via-zinc-700/20 to-transparent"
   initial={{ x:"-100%"}}

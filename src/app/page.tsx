@@ -6,10 +6,9 @@ import BootScreen from"@/components/boot-screen";
 import Dashboard from"@/components/dashboard";
 import ContactModal from"@/components/contact-modal";
 import FloatingDock from"@/components/floating-dock";
+import MenuBar from"@/components/ui/menu-bar";
 import BackgroundEffects from"@/components/particles/background-effects";
 import CursorTrail from"@/components/animations/cursor-trail";
-import ContextMenu from"@/components/ui/context-menu";
-import MenuBar from"@/components/ui/menu-bar";
 import EasterEggs from"@/components/effects/easter-eggs";
 import SpotlightSearch from"@/components/ui/spotlight-search";
 import UIHints from"@/components/ui/ui-hints";
@@ -44,7 +43,7 @@ export default function DevSpaceOS() {
  const [isBooted, setIsBooted] = useState(false);
  const [currentApp, setCurrentApp] = useState<AppType>("dashboard");
  const [isContactOpen, setIsContactOpen] = useState(false);
- const [showParticles, setShowParticles] = useState(true);
+ const [showParticles, setShowParticles] = useState(false);
  const [isLowEnd, setIsLowEnd] = useState(false);
  const [mounted, setMounted] = useState(false);
 
@@ -97,17 +96,16 @@ export default function DevSpaceOS() {
  </div>
  )}
 
- {/* Background Effects - Only show after boot to prevent lag */}
- {isBooted && <BackgroundEffects showParticles={showParticles} />}
+  {/* Background Effects - Only show if effects are toggled on */}
+  {isBooted && showParticles && <BackgroundEffects showParticles={showParticles} />}
 
- {/* Cursor Trail Effect - Only on high-end devices and after boot */}
- {isBooted && !isLowEnd && <CursorTrail />}
+  {/* Cursor Trail Effect - Only if effects are toggled on */}
+  {isBooted && showParticles && !isLowEnd && <CursorTrail />}
 
  {/* Unique UI Enhancements */}
  {isBooted && (
  <>
  <MenuBar />
- <ContextMenu />
  <EasterEggs />
  <SpotlightSearch
  onNavigate={handleAppOpen}
@@ -137,7 +135,7 @@ export default function DevSpaceOS() {
  >
  <AnimatePresence mode="wait">
  {currentApp ==="dashboard" && (
- <Dashboard key="dashboard" onAppOpen={handleAppOpen} />
+  <Dashboard key="dashboard" onAppOpen={handleAppOpen} showParticles={showParticles} />
  )}
  {currentApp ==="projects" && (
  <Suspense fallback={<AppLoader />}>
