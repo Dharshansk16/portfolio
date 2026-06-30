@@ -7,7 +7,9 @@ import { FaGithub, FaLinkedin} from"react-icons/fa";
 import { skills, techGroups, stats, aboutMeText} from"@/constants/about";
 
 interface AboutAppProps {
- onBack: () => void;
+ onBack?: () => void;
+ isEmbedded?: boolean;
+ onViewAll?: () => void;
 }
 
 const isMobileDevice = () => {
@@ -15,17 +17,18 @@ const isMobileDevice = () => {
  return /Mobile|Android|iPhone/i.test(navigator.userAgent);
 };
 
-function AboutApp({ onBack}: AboutAppProps) {
+function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
  const [isMobile, setIsMobile] = useState(false);
 
  useEffect(() => {
  setIsMobile(isMobileDevice());
-}, []);
+ }, []);
 
   return (
-  <div className="min-h-screen w-full bg-white dark:bg-black overflow-y-auto px-4 sm:px-6 lg:px-8">
-  <div className="max-w-4xl mx-auto py-12 sm:py-20">
+  <div className={`w-full bg-white dark:bg-black px-4 sm:px-6 lg:px-8 ${isEmbedded ? 'py-16 border-t border-zinc-100 dark:border-zinc-900' : 'min-h-screen overflow-y-auto'}`}>
+  <div className={`max-w-4xl mx-auto ${isEmbedded ? '' : 'pt-20 pb-12 sm:pt-24 sm:pb-20'}`}>
   {/* Minimalist Back Button */}
+  {!isEmbedded && onBack && (
   <div className="mb-12">
   <button
   onClick={onBack}
@@ -35,7 +38,10 @@ function AboutApp({ onBack}: AboutAppProps) {
   <ChevronLeft className="w-4 h-4 mr-2" /> Back to Dashboard
   </button>
   </div>
+  )}
+
   {/* Header Section */}
+  {!isEmbedded ? (
   <motion.div
   initial={{ opacity: 0, y: 20}}
   animate={{ opacity: 1, y: 0}}
@@ -81,10 +87,17 @@ function AboutApp({ onBack}: AboutAppProps) {
   </div>
   </div>
   </motion.div>
+  ) : (
+  <div className="mb-16 text-center">
+  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white mb-4">About Me</h2>
+  <p className="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto text-lg">My background, core competencies, and the tools I use to build robust software.</p>
+  </div>
+  )}
 
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.2}}
   className="w-full h-[1px] bg-zinc-200 dark:bg-zinc-800 mb-16"
   />
@@ -92,7 +105,8 @@ function AboutApp({ onBack}: AboutAppProps) {
   {/* About Me Prose */}
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.3}}
   className="prose prose-lg dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 mb-16"
   >
@@ -104,7 +118,8 @@ function AboutApp({ onBack}: AboutAppProps) {
 
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.35}}
   className="w-full h-[1px] bg-zinc-200 dark:bg-zinc-800 mb-16"
   />
@@ -112,7 +127,8 @@ function AboutApp({ onBack}: AboutAppProps) {
   {/* Minimalist Stats/Experience */}
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.4}}
   className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16"
   >
@@ -134,9 +150,27 @@ function AboutApp({ onBack}: AboutAppProps) {
   ))}
   </motion.div>
 
+  {isEmbedded && onViewAll ? (
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
+  transition={{ duration: 0.6}}
+  className="flex justify-center mt-12 mb-8"
+  >
+  <button
+  onClick={onViewAll}
+  className="px-8 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold rounded-full hover:scale-105 transition-transform"
+  >
+  View Full Profile
+  </button>
+  </motion.div>
+  ) : (
+  <>
+  <motion.div
+  initial={{ opacity: 0, y: 20}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.45}}
   className="w-full h-[1px] bg-zinc-200 dark:bg-zinc-800 mb-16"
   />
@@ -145,7 +179,8 @@ function AboutApp({ onBack}: AboutAppProps) {
   {/* Skills */}
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.5}}
   >
   <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-8">Core Competencies</h2>
@@ -172,7 +207,8 @@ function AboutApp({ onBack}: AboutAppProps) {
 
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.55}}
   className="w-full h-[1px] bg-zinc-200 dark:bg-zinc-800"
   />
@@ -180,7 +216,8 @@ function AboutApp({ onBack}: AboutAppProps) {
   {/* Tech Arsenal */}
   <motion.div
   initial={{ opacity: 0, y: 20}}
-  animate={{ opacity: 1, y: 0}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
   transition={{ duration: 0.6, delay: 0.6}}
   >
   <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-8">Technology Stack</h2>
@@ -205,6 +242,8 @@ function AboutApp({ onBack}: AboutAppProps) {
   </div>
   </motion.div>
   </div>
+  </>
+  )}
   </div>
   </div>
   );

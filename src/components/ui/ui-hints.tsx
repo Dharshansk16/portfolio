@@ -21,7 +21,7 @@ export default function UIHints() {
  animate={{ opacity: 1, scale: 1}}
  whileHover={{ scale: 1.05}}
  onClick={() => setShowShortcutsPanel(!showShortcutsPanel)}
- className="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-[60] w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center shadow-sm border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all text-zinc-900 dark:text-white font-mono text-lg font-bold"
+ className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-[60] w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-900 hidden md:flex items-center justify-center shadow-sm border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all text-zinc-900 dark:text-white font-mono text-lg font-bold"
  title="Quick Actions"
  >
  ⌘

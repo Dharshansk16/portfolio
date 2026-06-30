@@ -74,16 +74,11 @@ export default function FloatingDock({
 },
  ];
 
- // Don't render floating dock on mobile devices
- if (isMobile) {
- return null;
-}
-
  return (
  <>
  <motion.div
  ref={dockRef}
- className="fixed bottom-6 right-4 sm:bottom-8 sm:right-8 z-50"
+ className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50"
  onHoverStart={() => setIsExpanded(true)}
  onHoverEnd={() => setIsExpanded(false)}
  >

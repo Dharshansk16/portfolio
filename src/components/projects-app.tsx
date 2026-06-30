@@ -17,7 +17,9 @@ import Image from"next/image";
 import { FaGithub} from"react-icons/fa";
 
 interface ProjectsAppProps {
- onBack: () => void;
+ onBack?: () => void;
+ isEmbedded?: boolean;
+ onViewAll?: () => void;
 }
 
 // Detect mobile for simplified animations
@@ -26,7 +28,7 @@ const isMobileDevice = () => {
  return /Mobile|Android|iPhone/i.test(navigator.userAgent);
 };
 
-function ProjectsApp({ onBack}: ProjectsAppProps) {
+function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps) {
  const [selectedProject, setSelectedProject] = useState<
  (typeof projects)[0] | null
  >(null);
@@ -77,9 +79,10 @@ function ProjectsApp({ onBack}: ProjectsAppProps) {
 }, []);
 
  return (
- <div className="min-h-screen w-full bg-white dark:bg-black overflow-y-auto px-4 sm:px-6 lg:px-8">
-  <div className="max-w-6xl mx-auto py-8 sm:py-16">
-  {/* Minimalist Back Button */}
+ <div className={`w-full bg-white dark:bg-black px-4 sm:px-6 lg:px-8 ${isEmbedded ? 'py-16 border-t border-zinc-100 dark:border-zinc-900' : 'min-h-screen overflow-y-auto'}`}>
+  <div className={`max-w-6xl mx-auto ${isEmbedded ? '' : 'pt-20 pb-8 sm:pt-24 sm:pb-16'}`}>
+  {/* Section Header for Embedded / Minimalist Back Button for Standalone */}
+  {!isEmbedded && onBack && (
   <div className="mb-12">
   <button
   onClick={onBack}
@@ -89,9 +92,16 @@ function ProjectsApp({ onBack}: ProjectsAppProps) {
   <ChevronLeft className="w-4 h-4 mr-2" /> Back to Dashboard
   </button>
   </div>
+  )}
+  {isEmbedded && (
+  <div className="mb-16 text-center">
+  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white mb-4">Selected Works</h2>
+  <p className="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto text-lg">A collection of my recent projects, demonstrating expertise in AI, architecture, and scalable systems.</p>
+  </div>
+  )}
 
   <div className="flex flex-col">
-  {projects.map((project, index) => (
+  {(isEmbedded ? projects.slice(0, 2) : projects).map((project, index) => (
   <div key={project.id}>
   <motion.div
   initial={{ opacity: 0, y: 40}}
@@ -157,12 +167,29 @@ function ProjectsApp({ onBack}: ProjectsAppProps) {
   </motion.div>
   
   {/* Divider between projects */}
-  {index !== projects.length - 1 && (
+  {index !== (isEmbedded ? 1 : projects.length - 1) && (
   <div className="w-full h-[1px] bg-zinc-200 dark:bg-zinc-800" />
   )}
   </div>
   ))}
   </div>
+
+  {isEmbedded && onViewAll && (
+  <motion.div
+  initial={{ opacity: 0, y: 20}}
+  whileInView={{ opacity: 1, y: 0}}
+  viewport={{ once: true, margin:"-50px"}}
+  transition={{ duration: 0.6}}
+  className="flex justify-center mt-8 mb-8"
+  >
+  <button
+  onClick={onViewAll}
+  className="px-8 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold rounded-full hover:scale-105 transition-transform"
+  >
+  View All Projects
+  </button>
+  </motion.div>
+  )}
   </div>
 
   {/* Project Detail Modal */}

@@ -64,9 +64,9 @@ export default function DevSpaceOS() {
  if (app ==="resume") {
  window.open("/resume_pdf.pdf","_blank");
  return;
-}
+ }
  setCurrentApp(app);
-};
+ };
 
  // Don't render until mounted on client
  if (!mounted) {
@@ -75,7 +75,7 @@ export default function DevSpaceOS() {
  <div className="animate-pulse text-zinc-500 dark:text-zinc-400">Loading...</div>
  </div>
  );
-}
+ }
 
  return (
  <div
@@ -96,11 +96,11 @@ export default function DevSpaceOS() {
  </div>
  )}
 
-  {/* Background Effects - Only show if effects are toggled on */}
-  {isBooted && showParticles && <BackgroundEffects showParticles={showParticles} />}
+ {/* Background Effects - Only show if effects are toggled on */}
+ {isBooted && showParticles && <BackgroundEffects showParticles={showParticles} />}
 
-  {/* Cursor Trail Effect - Only if effects are toggled on */}
-  {isBooted && showParticles && !isLowEnd && <CursorTrail />}
+ {/* Cursor Trail Effect - Only if effects are toggled on */}
+ {isBooted && showParticles && !isLowEnd && <CursorTrail />}
 
  {/* Unique UI Enhancements */}
  {isBooted && (
@@ -130,12 +130,37 @@ export default function DevSpaceOS() {
  transition={{
  duration: isLowEnd ? 0.2 : 0.5,
  ease:"easeOut",
-}}
- className="relative z-10"
+ }}
+ className="relative z-10 h-screen w-full overflow-y-auto overflow-x-hidden"
  >
  <AnimatePresence mode="wait">
  {currentApp ==="dashboard" && (
-  <Dashboard key="dashboard" onAppOpen={handleAppOpen} showParticles={showParticles} />
+ <motion.div
+ key="dashboard-scrollable"
+ initial={{ opacity: 0 }}
+ animate={{ opacity: 1 }}
+ exit={{ opacity: 0 }}
+ className="flex flex-col w-full"
+ >
+ <div id="dashboard">
+ <Dashboard onAppOpen={handleAppOpen} showParticles={showParticles} />
+ </div>
+ <div id="about">
+ <Suspense fallback={<AppLoader />}>
+ <AboutApp isEmbedded onViewAll={() => setCurrentApp("about")} />
+ </Suspense>
+ </div>
+ <div id="projects">
+ <Suspense fallback={<AppLoader />}>
+ <ProjectsApp isEmbedded onViewAll={() => setCurrentApp("projects")} />
+ </Suspense>
+ </div>
+ <div id="blog">
+ <Suspense fallback={<AppLoader />}>
+ <BlogApp isEmbedded onViewAll={() => setCurrentApp("blog")} />
+ </Suspense>
+ </div>
+ </motion.div>
  )}
  {currentApp ==="projects" && (
  <Suspense fallback={<AppLoader />}>
