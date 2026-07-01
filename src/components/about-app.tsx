@@ -349,7 +349,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                 >
                   {experience.map((exp, index) => (
                     <motion.div
-                      key={exp.company}
+                      key={`${exp.company}-${exp.role}`}
                       variants={itemVariants}
                       className="relative flex gap-6 group"
                     >
@@ -391,9 +391,17 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                         <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-2">
                           {exp.company}
                         </p>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                          {exp.description}
-                        </p>
+                        {Array.isArray(exp.description) ? (
+                          <ul className="list-disc list-outside ml-4 mt-2 space-y-2 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed marker:text-zinc-400 dark:marker:text-zinc-600">
+                            {exp.description.map((item, i) => (
+                              <li key={i} className="pl-1">{item}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                            {exp.description}
+                          </p>
+                        )}
                       </div>
                     </motion.div>
                   ))}
@@ -429,6 +437,13 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1 font-medium">
                         {edu.period}
                       </p>
+                      {/* @ts-ignore */}
+                      {edu.description && (
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
+                          {/* @ts-ignore */}
+                          {edu.description}
+                        </p>
+                      )}
                     </div>
                   </motion.div>
                 ))}
