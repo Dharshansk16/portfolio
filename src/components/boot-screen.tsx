@@ -61,8 +61,8 @@ export default function BootScreen() {
       </svg>
 
       {/* HUD: Connection Lifecycle Stream */}
-      <div className="absolute top-6 left-6 sm:top-10 sm:left-10 text-orange-500/80 text-[9px] sm:text-[10px] flex flex-col gap-2 tracking-widest z-20 font-mono bg-black/60 p-4 border border-orange-500/20 rounded-lg backdrop-blur-md shadow-2xl shadow-orange-500/10 min-w-[280px]">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.05 }} className="border-b border-orange-500/30 pb-2 mb-1">
+      <div className="absolute top-4 left-4 sm:top-10 sm:left-10 text-orange-500/80 text-[7px] sm:text-[10px] flex flex-col gap-1 sm:gap-2 tracking-widest z-20 font-mono bg-black/60 p-2.5 sm:p-4 border border-orange-500/20 rounded-lg backdrop-blur-md shadow-2xl shadow-orange-500/10 w-[200px] sm:w-auto sm:min-w-[280px]">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.05 }} className="border-b border-orange-500/30 pb-1 sm:pb-2 mb-0.5 sm:mb-1">
           <span className="text-white">user@device:~$</span> fetch https://dharshanskotian.me
         </motion.div>
         {nodes.map((node, i) => (
@@ -71,7 +71,7 @@ export default function BootScreen() {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: node.t * 2.8 }}
-            className={i === 5 ? "text-white font-bold mt-2 pt-2 border-t border-orange-500/30" : ""}
+            className={i === 5 ? "text-white font-bold mt-1 sm:mt-2 pt-1 sm:pt-2 border-t border-orange-500/30" : ""}
           >
             {i === 5 
               ? `[OK] ${node.log}`
@@ -82,20 +82,20 @@ export default function BootScreen() {
       </div>
 
       {/* HUD: System Status */}
-      <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 text-orange-500/70 text-[9px] sm:text-[10px] flex flex-col gap-2 tracking-widest text-right z-20 font-mono bg-black/60 p-4 border border-orange-500/20 rounded-lg backdrop-blur-md">
-        <div className="border-b border-orange-500/30 pb-2 mb-1">SYS.ENV // SECURE</div>
-        <div className="flex justify-end gap-6 text-orange-500/50">
+      <div className="absolute bottom-4 right-4 sm:bottom-10 sm:right-10 text-orange-500/70 text-[7px] sm:text-[10px] flex flex-col gap-1 sm:gap-2 tracking-widest text-right z-20 font-mono bg-black/60 p-2.5 sm:p-4 border border-orange-500/20 rounded-lg backdrop-blur-md">
+        <div className="border-b border-orange-500/30 pb-1 sm:pb-2 mb-0.5 sm:mb-1">SYS.ENV // SECURE</div>
+        <div className="flex justify-end gap-3 sm:gap-6 text-orange-500/50">
           <span>UPLINK: ACTIVE</span>
           <span>SEC: WPA3</span>
         </div>
-        <div className="flex justify-end gap-6 text-orange-500/50">
+        <div className="flex justify-end gap-3 sm:gap-6 text-orange-500/50">
           <span>PORT: 443</span>
           <span>PROT: TCP/IP</span>
         </div>
         <motion.div 
           animate={{ opacity: [1, 0.3, 1] }} 
           transition={{ duration: 2, repeat: Infinity }}
-          className="text-orange-400 mt-2 pt-2 border-t border-orange-500/30"
+          className="text-orange-400 mt-1 sm:mt-2 pt-1 sm:pt-2 border-t border-orange-500/30"
         >
           MAINTAINING SIGNAL INTEGRITY...
         </motion.div>
@@ -120,7 +120,7 @@ export default function BootScreen() {
               <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-orange-400 z-10 relative" />
               
               {/* Node Labels */}
-              <div className="absolute top-5 left-5 text-[7px] sm:text-[8px] text-orange-500/80 font-mono tracking-widest whitespace-nowrap bg-black/70 px-1.5 py-0.5 border-l-2 border-orange-500/50 backdrop-blur-sm shadow-md">
+              <div className="absolute top-4 left-4 sm:top-5 sm:left-5 text-[6px] sm:text-[8px] text-orange-500/80 font-mono tracking-widest whitespace-nowrap bg-black/70 px-1 sm:px-1.5 py-0.5 border-l-2 border-orange-500/50 backdrop-blur-sm shadow-md">
                 <span className="text-white font-bold">{node.id}</span>
                 <br />
                 <span className="text-orange-400">{node.action}</span>
