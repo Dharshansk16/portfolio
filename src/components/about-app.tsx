@@ -92,7 +92,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
     <div
       className={`w-full ${
         isEmbedded
-          ? "py-20 bg-white/40 dark:bg-white/[0.02] border-t border-white/40 dark:border-white/[0.05]"
+          ? "py-20 bg-white/40 dark:bg-white/[0.02] [.no-bg-image.dark_&]:bg-black border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
           : "bg-transparent min-h-screen overflow-y-auto"
       }`}
     >
@@ -195,7 +195,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href={personalInfo.socials.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <FaLinkedin className="w-4 h-4" />
                     LinkedIn
@@ -205,7 +205,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href="/resume_pdf.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group md:hidden inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group md:hidden inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <Download className="w-4 h-4" />
                     Resume
@@ -215,7 +215,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href={personalInfo.socials.leetcode}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <Code2 className="w-4 h-4" />
                     LeetCode
@@ -252,7 +252,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
           transition={{ duration: 0.6 }}
           className="mb-20"
         >
-          <div className="relative rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/30 p-6 sm:p-8 overflow-hidden">
+          <div className="relative rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/60 p-6 sm:p-8 overflow-hidden">
             {/* Subtle gradient accent */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-violet-500/5 via-transparent to-transparent rounded-bl-full pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-500/5 via-transparent to-transparent rounded-tr-full pointer-events-none" />
@@ -287,13 +287,13 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
               <motion.div
                 key={item.label}
                 variants={itemVariants}
-                className="group relative rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950 p-6 hover:border-white/80 dark:hover:border-zinc-700 transition-all duration-300 overflow-hidden"
+                className="group relative rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950/60 p-6 hover:border-white/80 dark:hover:border-zinc-700 transition-all duration-300 overflow-hidden"
               >
                 {/* Hover glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-violet-500/[0.03] to-cyan-500/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="w-5 h-5 text-zinc-700 dark:text-zinc-300" />
                   </div>
                   <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2">
@@ -359,7 +359,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                           className={`w-10 h-10 rounded-xl flex items-center justify-center border-2 transition-colors duration-300 ${
                             exp.current
                               ? "bg-zinc-900 dark:bg-white border-zinc-900 dark:border-white"
-                              : "bg-white/60 backdrop-blur-sm dark:bg-zinc-950 border-white/50 dark:border-zinc-700 group-hover:border-white/80 dark:group-hover:border-zinc-600"
+                              : "bg-white/60 backdrop-blur-sm dark:bg-zinc-950/60 border-white/50 dark:border-zinc-700 group-hover:border-white/80 dark:group-hover:border-zinc-600"
                           }`}
                         >
                           <Briefcase
@@ -373,7 +373,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       </div>
 
                       {/* Content card */}
-                      <div className="flex-1 rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950 p-5 sm:p-6 group-hover:border-white/80 dark:group-hover:border-zinc-700 transition-all duration-300">
+                      <div className="flex-1 rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950/60 p-5 sm:p-6 group-hover:border-white/80 dark:group-hover:border-zinc-700 transition-all duration-300">
                         <div className="flex flex-col h-full justify-between">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
                             <h3 className="text-base font-bold text-zinc-900 dark:text-white">
@@ -383,7 +383,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                               className={`text-xs font-semibold px-2.5 py-1 rounded-full w-fit ${
                                 exp.current
                                   ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50"
-                                  : "bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800"
+                                  : "bg-zinc-100 dark:bg-zinc-900/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800"
                               }`}
                             >
                               {exp.period}
@@ -424,9 +424,9 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                   <motion.div
                     key={edu.institution}
                     variants={itemVariants}
-                    className="group flex items-start gap-5 rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950 p-5 sm:p-6 hover:border-white/80 dark:hover:border-zinc-700 transition-all duration-300"
+                    className="group flex items-start gap-5 rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950/60 p-5 sm:p-6 hover:border-white/80 dark:hover:border-zinc-700 transition-all duration-300"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
                       <GraduationCap className="w-6 h-6 text-zinc-700 dark:text-zinc-300" />
                     </div>
                     <div>
@@ -475,7 +475,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                         {skill.level}%
                       </span>
                     </div>
-                    <div className="w-full bg-zinc-100 dark:bg-zinc-900 h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-zinc-100 dark:bg-zinc-900/60 h-2 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
@@ -514,7 +514,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       {techs.map((tech) => (
                         <span
                           key={tech.name}
-                          className="group relative px-3.5 py-1.5 rounded-lg text-xs font-semibold border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950 text-zinc-700 dark:text-zinc-300 hover:border-white/80 dark:hover:border-zinc-600 transition-all duration-300 cursor-default overflow-hidden"
+                          className="group relative px-3.5 py-1.5 rounded-lg text-xs font-semibold border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950/60 text-zinc-700 dark:text-zinc-300 hover:border-white/80 dark:hover:border-zinc-600 transition-all duration-300 cursor-default overflow-hidden"
                         >
                           {/* Colored accent on hover */}
                           <span
@@ -551,7 +551,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                   <motion.div
                     key={item.title}
                     variants={itemVariants}
-                    className="group rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950 p-6 hover:border-white/80 dark:hover:border-zinc-700 transition-all duration-300 text-center"
+                    className="group rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950/60 p-6 hover:border-white/80 dark:hover:border-zinc-700 transition-all duration-300 text-center"
                   >
                     <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
                       {item.emoji}

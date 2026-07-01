@@ -50,31 +50,21 @@ export default function TorchLight() {
     >
       {/* 1. Base Dark Ambient Depth / Static Background in Light Mode */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 dark:opacity-20"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 dark:opacity-10"
         style={{ backgroundImage: "var(--global-bg)" }}
       />
 
-      {/* 2. Razor Sharp Spotlight Masked Reveal / Static Background on Mobile */}
+      {/* 2. Scattered Ambient Reveal / Static Background on Mobile */}
       <div
-        className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-out hidden dark:block ${isMobile || isHovered ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-out hidden dark:block filter dark:brightness-90 ${isMobile || isHovered ? "opacity-100" : "opacity-0"}`}
         style={{
           backgroundImage: "var(--global-bg)",
           ...(isMobile ? {} : {
-            WebkitMaskImage: `radial-gradient(400px circle at var(--x) var(--y), black 0%, black 15%, rgba(0,0,0,0.6) 40%, transparent 80%)`,
-            maskImage: `radial-gradient(400px circle at var(--x) var(--y), black 0%, black 15%, rgba(0,0,0,0.6) 40%, transparent 80%)`,
+            WebkitMaskImage: `radial-gradient(800px circle at var(--x) var(--y), rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.05) 60%, transparent 100%)`,
+            maskImage: `radial-gradient(800px circle at var(--x) var(--y), rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.05) 60%, transparent 100%)`,
           }),
         }}
       />
-
-      {/* 3. Intense Center Glow of the Torch */}
-      {!isMobile && (
-        <div
-          className={`absolute inset-0 transition-opacity duration-500 mix-blend-screen hidden dark:block ${isHovered ? "opacity-100" : "opacity-0"}`}
-          style={{
-            background: `radial-gradient(400px circle at var(--x) var(--y), rgba(180, 255, 255, 0.15) 0%, rgba(120, 200, 255, 0.05) 30%, transparent 70%)`,
-          }}
-        />
-      )}
     </div>
   );
 }

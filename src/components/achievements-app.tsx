@@ -105,7 +105,7 @@ function ImageGallery({
   };
 
   return (
-    <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-2xl group bg-white/40 dark:bg-zinc-900">
+    <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-2xl group bg-white/40 dark:bg-zinc-900/60">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -192,7 +192,7 @@ function AchievementsApp({
     <div
       className={`w-full px-4 sm:px-6 lg:px-8 ${
         isEmbedded
-          ? "py-16 bg-white/40 dark:bg-white/[0.02] border-t border-white/40 dark:border-white/[0.05]"
+          ? "py-16 bg-white/40 dark:bg-white/[0.02] [.no-bg-image.dark_&]:bg-black border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
           : "bg-transparent min-h-screen overflow-y-auto"
       }`}
     >
@@ -202,7 +202,7 @@ function AchievementsApp({
           {!isEmbedded && onBack && (
             <button
               onClick={onBack}
-              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium mb-8"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium mb-8"
               aria-label="Back to Dashboard"
             >
               <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
@@ -248,7 +248,7 @@ function AchievementsApp({
                     onExpand={setSelectedImage}
                   />
                 ) : (
-                  <div className="w-full aspect-[4/5] sm:aspect-[3/4] rounded-2xl bg-white/40 dark:bg-zinc-900 border border-white/50 dark:border-zinc-800 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
+                  <div className="w-full aspect-[4/5] sm:aspect-[3/4] rounded-2xl bg-white/40 dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/20 dark:from-zinc-800/50 dark:to-zinc-900/10" />
                     <div className="w-16 h-16 rounded-full bg-white/70 backdrop-blur-sm dark:bg-black/50 shadow-sm flex items-center justify-center mb-4 z-10">
                       <Award className="w-8 h-8 text-zinc-400 dark:text-zinc-500" />
@@ -303,7 +303,7 @@ function AchievementsApp({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-white/60 dark:bg-black/95 p-4 sm:p-8 backdrop-blur-xl"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-white/60 dark:bg-black/60 p-4 sm:p-8 backdrop-blur-xl"
             onClick={() => setSelectedImage(null)}
           >
             <button

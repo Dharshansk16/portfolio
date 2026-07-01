@@ -67,7 +67,7 @@ export default function Dashboard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area bg-transparent transition-colors duration-500"
+      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area bg-transparent [.no-bg-image.dark_&]:bg-zinc-950 transition-colors duration-500"
     >
       {/* Floating Elements - Conditional based on showParticles */}
       {showParticles && !isLowEnd && (

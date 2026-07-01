@@ -116,6 +116,15 @@
   --sidebar-ring: #d4d4d8;
 }
 
+/* Background Image Toggle Styles */
+html.no-bg-image {
+  --global-bg: none !important;
+}
+
+html.no-bg-image.dark {
+  --background: #000000;
+}
+
 @layer base {
   * {
     box-sizing: border-box;

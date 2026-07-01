@@ -2,7 +2,7 @@
 
 import { useEffect, useState} from"react";
 import { motion} from"framer-motion";
-import { Battery, Wifi, Volume2, Clock, Moon, Sun} from"lucide-react";
+import { Battery, Wifi, Volume2, Clock, Moon, Sun, Image as ImageIcon} from"lucide-react";
 import { useTheme} from"next-themes";
 
 export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
@@ -11,6 +11,7 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  const [isCharging, setIsCharging] = useState(false);
  const { theme, setTheme} = useTheme();
  const [mounted, setMounted] = useState(false);
+ const [showBgImage, setShowBgImage] = useState(true);
 
  const handleLogoClick = () => {
  if (onLogoClick) {
@@ -21,6 +22,13 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
 };
 
  useEffect(() => {
+ // Check initial background state
+ const storedBg = localStorage.getItem("showBgImage");
+ if (storedBg === "false") {
+   setShowBgImage(false);
+   document.documentElement.classList.add("no-bg-image");
+ }
+
  // Update time
  const updateTime = () => {
  const now = new Date();
@@ -55,6 +63,17 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  return () => clearInterval(interval);
 }, []);
 
+ const toggleBgImage = () => {
+   const newVal = !showBgImage;
+   setShowBgImage(newVal);
+   localStorage.setItem("showBgImage", newVal.toString());
+   if (newVal) {
+     document.documentElement.classList.remove("no-bg-image");
+   } else {
+     document.documentElement.classList.add("no-bg-image");
+   }
+ };
+
  return (
  <motion.div
  initial={{ y: -100, opacity: 0}}
@@ -83,6 +102,19 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
 
  {/* Right Section - Status Icons */}
  <div className="flex items-center space-x-4 text-sm pointer-events-auto">
+ {/* Background Toggle */}
+ {mounted && (
+ <motion.div
+ whileHover={{ scale: 1.1}}
+ whileTap={{ scale: 0.9}}
+ onClick={toggleBgImage}
+ className={`flex items-center space-x-1.5 transition-colors cursor-pointer ${showBgImage ? 'text-zinc-900 dark:text-zinc-300' : 'text-zinc-400 dark:text-zinc-600'}`}
+ title="Toggle Background Image"
+ >
+ <ImageIcon className="w-4 h-4" />
+ </motion.div>
+ )}
+
  {/* Theme Toggle */}
  {mounted && (
  <motion.div

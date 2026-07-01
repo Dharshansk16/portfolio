@@ -77,7 +77,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
     <div
       className={`w-full px-4 sm:px-6 lg:px-8 ${
         isEmbedded
-          ? "py-16 bg-transparent border-t border-white/40 dark:border-white/[0.05]"
+          ? "py-16 bg-transparent [.no-bg-image.dark_&]:bg-zinc-950 border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
           : "bg-transparent min-h-screen overflow-y-auto"
       }`}
     >
@@ -91,7 +91,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
           <div className="mb-12">
             <button
               onClick={onBack}
-              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
               aria-label="Back to Dashboard"
             >
               <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
@@ -147,10 +147,10 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
             <div className="animate-pulse space-y-8">
               {[1, 2].map((i) => (
                 <div key={i} className="space-y-3">
-                  <div className="h-4 bg-zinc-200 dark:bg-zinc-800 w-1/4 rounded"></div>
-                  <div className="h-8 bg-zinc-200 dark:bg-zinc-800 w-3/4 rounded"></div>
-                  <div className="h-4 bg-zinc-200 dark:bg-zinc-800 w-full rounded"></div>
-                  <div className="h-4 bg-zinc-200 dark:bg-zinc-800 w-5/6 rounded"></div>
+                  <div className="h-4 bg-zinc-200 dark:bg-zinc-800/60 w-1/4 rounded"></div>
+                  <div className="h-8 bg-zinc-200 dark:bg-zinc-800/60 w-3/4 rounded"></div>
+                  <div className="h-4 bg-zinc-200 dark:bg-zinc-800/60 w-full rounded"></div>
+                  <div className="h-4 bg-zinc-200 dark:bg-zinc-800/60 w-5/6 rounded"></div>
                 </div>
               ))}
             </div>
