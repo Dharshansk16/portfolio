@@ -21,7 +21,7 @@ export const experience = [
     description: [
       "Built an event-driven pipeline auto-ingesting and normalising docs from GitHub, Confluence, and Jira.",
       "Designed an AI classification agent using multi-medoid clustering and vector pre-filtering to auto-group docs.",
-      "Deployed a 3-layer Dockerized RAG service on Azure with tracing, delivering source-cited answers over the Knowledge."
+      "Deployed a 3-layer Dockerized RAG service on Azure with tracing, delivering source-cited answers over the Knowledge.",
     ],
     icon: Flame,
     current: true,
@@ -33,7 +33,7 @@ export const experience = [
     description: [
       "Developing a scalable hostel management system supporting 3000+ students with role-based access control (RBAC).",
       "Engineering core modules including attendance tracking (biometric-integrated), bulk notifications, authentication.",
-      "Automated bulk student onboarding via Excel ingestion with flexible schema handling and room allocation workflows."
+      "Automated bulk student onboarding via Excel ingestion with flexible schema handling and room allocation workflows.",
     ],
     icon: Server,
     current: true,
@@ -43,7 +43,7 @@ export const experience = [
     company: "Finite Loop Club",
     period: "2026 - Present",
     description: [
-      "Advising and mentoring the core committee and students in advanced data structures and algorithms."
+      "Advising and mentoring the core committee and students in advanced data structures and algorithms.",
     ],
     icon: Users,
     current: true,
@@ -53,7 +53,7 @@ export const experience = [
     company: "Finite Loop Club",
     period: "2025 - 2026",
     description: [
-      "Led a comprehensive DSA sprint, mentoring peers and conducting Career Readiness Programs."
+      "Led a comprehensive DSA sprint, mentoring peers and conducting Career Readiness Programs.",
     ],
     icon: Users,
     current: false,
@@ -65,7 +65,8 @@ export const education = [
     degree: "B.E., Computer Science & Engineering",
     institution: "NMAM Institute of Technology",
     period: "2023 - 2027",
-    description: "CGPA: 9.65/10.00 - Course works: Object Oriented Programming, Database, Operating System, Networking",
+    description:
+      "CGPA: 9.65/10.00 - Course works: Object Oriented Programming, Database, Operating System, Networking",
     icon: GraduationCap,
   },
   {
@@ -74,7 +75,7 @@ export const education = [
     period: "2021 - 2023",
     description: "Aggregate: 97.67/100 - Karnataka State Board",
     icon: GraduationCap,
-  }
+  },
 ];
 
 export const highlights = [

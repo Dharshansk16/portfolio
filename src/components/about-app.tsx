@@ -279,7 +279,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true }}
             variants={containerVariants}
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
@@ -343,7 +343,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: true }}
                   variants={containerVariants}
                   className="space-y-8"
                 >
@@ -415,7 +415,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: true }}
                 variants={containerVariants}
               >
                 {education.map((edu) => (

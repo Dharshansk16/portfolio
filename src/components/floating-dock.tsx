@@ -57,7 +57,7 @@ export default function FloatingDock({
  {
  icon: Download,
  label:"Resume",
- action: () => window.open("/resume.pdf","_blank"),
+ action: () => window.open("/resume_pdf.pdf", "_blank"),
  color:"",
 },
  {
