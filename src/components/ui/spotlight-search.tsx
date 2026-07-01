@@ -155,7 +155,7 @@ export default function SpotlightSearch({
   setSelectedIndex(0);
  }}
   placeholder="Search for projects, pages, or actions..."
-  className="flex-1 bg-transparent text-zinc-900 dark:text-white placeholder-zinc-400 dark:placeholder-zinc-600 outline-none text-lg font-medium"
+  className="flex-1 bg-transparent text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 placeholder-zinc-400 dark:placeholder-zinc-600 outline-none text-lg font-medium"
   autoFocus
   />
   <button
@@ -193,7 +193,7 @@ export default function SpotlightSearch({
   <Icon className="w-5 h-5 text-zinc-700 dark:text-zinc-300" />
   </div>
   <div className="text-left">
-  <div className="text-zinc-900 dark:text-white font-bold text-sm">
+  <div className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-sm">
   {item.name}
   </div>
   <div className="text-xs text-zinc-500 font-medium mt-0.5">
@@ -201,7 +201,7 @@ export default function SpotlightSearch({
   </div>
   </div>
   </div>
-  <ArrowRight className={`w-4 h-4 transition-colors ${selectedIndex === index ? "text-zinc-900 dark:text-white" : "text-transparent"}`} />
+  <ArrowRight className={`w-4 h-4 transition-colors ${selectedIndex === index ? "text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500" : "text-transparent"}`} />
   </motion.button>
   );
  })}
@@ -215,7 +215,7 @@ export default function SpotlightSearch({
   </div>
 
   {/* Footer */}
-  <div className="px-5 py-3 border-t border-zinc-100 dark:border-zinc-900 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-500 font-medium bg-zinc-50 dark:bg-zinc-950">
+  <div className="px-5 py-3 border-t border-zinc-100 dark:border-zinc-900 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 font-medium bg-zinc-50 dark:bg-zinc-950">
   <div className="flex items-center space-x-6">
   <span className="flex items-center gap-2">
   <span className="flex items-center gap-1">

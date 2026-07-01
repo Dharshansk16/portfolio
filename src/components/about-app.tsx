@@ -69,11 +69,11 @@ function SectionHeading({
       transition={{ duration: 0.5 }}
       className="mb-10"
     >
-      <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 dark:text-white">
+      <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
         {title}
       </h2>
       {subtitle && (
-        <p className="mt-2 text-sm sm:text-base text-zinc-500 dark:text-zinc-400">
+        <p className="mt-2 text-sm sm:text-base text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500">
           {subtitle}
         </p>
       )}
@@ -92,7 +92,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
     <div
       className={`w-full ${
         isEmbedded
-          ? "py-20 bg-white/40 dark:bg-white/[0.02] [.no-bg-image.dark_&]:bg-black border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
+          ? "py-20 bg-white/40 dark:bg-white/[0.02] [.no-bg-image.dark_&]:bg-black [.no-bg-image:not(.dark)_&]:bg-white border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
           : "bg-transparent min-h-screen overflow-y-auto"
       }`}
     >
@@ -111,7 +111,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
           >
             <button
               onClick={onBack}
-              className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
               aria-label="Back to Dashboard"
             >
               <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
@@ -156,21 +156,21 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       Available for opportunities
                     </span>
                   </div>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white leading-[1.1]">
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 leading-[1.1]">
                     {personalInfo.name}
                   </h1>
                 </motion.div>
 
                 <motion.p
                   variants={itemVariants}
-                  className="text-lg sm:text-xl text-zinc-500 dark:text-zinc-400 font-medium max-w-xl"
+                  className="text-lg sm:text-xl text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 font-medium max-w-xl"
                 >
                   {personalInfo.tagline}
                 </motion.p>
 
                 <motion.div
                   variants={itemVariants}
-                  className="flex items-center justify-center md:justify-start gap-2 text-sm text-zinc-400 dark:text-zinc-500"
+                  className="flex items-center justify-center md:justify-start gap-2 text-sm text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500"
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{personalInfo.location}</span>
@@ -195,7 +195,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href={personalInfo.socials.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <FaLinkedin className="w-4 h-4" />
                     LinkedIn
@@ -205,7 +205,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href="/resume_pdf.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group md:hidden inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group md:hidden inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <Download className="w-4 h-4" />
                     Resume
@@ -215,7 +215,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href={personalInfo.socials.leetcode}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <Code2 className="w-4 h-4" />
                     LeetCode
@@ -233,10 +233,10 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white mb-4">
+              <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4">
                 About Me
               </h2>
-              <p className="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto text-lg">
+              <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 max-w-2xl mx-auto text-lg">
                 My background, core competencies, and the tools I use to build
                 robust software.
               </p>
@@ -259,11 +259,11 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
 
             <div className="relative">
               <div className="flex items-center gap-3 mb-5">
-                <h2 className="text-xl font-bold text-zinc-900 dark:text-white">
+                <h2 className="text-xl font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                   Background
                 </h2>
               </div>
-              <p className="text-base sm:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-base sm:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500">
                 {personalInfo.bio}
               </p>
             </div>
@@ -296,13 +296,13 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                   <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                     <item.icon className="w-5 h-5 text-zinc-700 dark:text-zinc-300" />
                   </div>
-                  <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-2">
+                  <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 mb-2">
                     {item.label}
                   </div>
-                  <div className="text-lg font-bold text-zinc-900 dark:text-white mb-2">
+                  <div className="text-lg font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
                     {item.value}
                   </div>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -366,7 +366,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                             className={`w-4 h-4 ${
                               exp.current
                                 ? "text-white dark:text-zinc-900"
-                                : "text-zinc-500 dark:text-zinc-400"
+                                : "text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500"
                             }`}
                           />
                         </div>
@@ -376,30 +376,30 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       <div className="flex-1 rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950/60 p-5 sm:p-6 group-hover:border-white/80 dark:group-hover:border-zinc-700 transition-all duration-300">
                         <div className="flex flex-col h-full justify-between">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                            <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+                            <h3 className="text-base font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                               {exp.role}
                             </h3>
                             <span
                               className={`text-xs font-semibold px-2.5 py-1 rounded-full w-fit ${
                                 exp.current
                                   ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50"
-                                  : "bg-zinc-100 dark:bg-zinc-900/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800"
+                                  : "bg-zinc-100 dark:bg-zinc-900/60 text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 border border-zinc-200 dark:border-zinc-800"
                               }`}
                             >
                               {exp.period}
                             </span>
                           </div>
-                          <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 mb-2">
+                          <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 mb-2">
                             {exp.company}
                           </p>
                           {Array.isArray(exp.description) ? (
-                            <ul className="list-disc list-outside ml-4 mt-2 space-y-2 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed marker:text-zinc-400 dark:marker:text-zinc-600">
+                            <ul className="list-disc list-outside ml-4 mt-2 space-y-2 text-sm text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 leading-relaxed marker:text-zinc-400 dark:marker:text-zinc-600">
                               {exp.description.map((item, i) => (
                                 <li key={i} className="pl-1">{item}</li>
                               ))}
                             </ul>
                           ) : (
-                            <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                            <p className="text-sm text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 leading-relaxed">
                               {exp.description}
                             </p>
                           )}
@@ -430,18 +430,18 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       <GraduationCap className="w-6 h-6 text-zinc-700 dark:text-zinc-300" />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+                      <h3 className="text-base font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                         {edu.degree}
                       </h3>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 mt-0.5">
                         {edu.institution}
                       </p>
-                      <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1 font-medium">
+                      <p className="text-xs text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 mt-1 font-medium">
                         {edu.period}
                       </p>
                       {/* @ts-ignore */}
                       {edu.description && (
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 mt-2 leading-relaxed">
                           {/* @ts-ignore */}
                           {edu.description}
                         </p>
@@ -468,10 +468,10 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                 {skills.map((skill) => (
                   <motion.div key={skill.name} variants={itemVariants}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-semibold text-zinc-900 dark:text-white">
+                      <span className="text-sm font-semibold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                         {skill.name}
                       </span>
-                      <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 tabular-nums">
+                      <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 tabular-nums">
                         {skill.level}%
                       </span>
                     </div>
@@ -507,7 +507,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
               >
                 {Object.entries(techGroups).map(([group, techs]) => (
                   <motion.div key={group} variants={itemVariants}>
-                    <h4 className="text-xs font-bold text-zinc-400 dark:text-zinc-500 mb-3 uppercase tracking-[0.15em]">
+                    <h4 className="text-xs font-bold text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 mb-3 uppercase tracking-[0.15em]">
                       {group}
                     </h4>
                     <div className="flex flex-wrap gap-2">
@@ -556,10 +556,10 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
                       {item.emoji}
                     </div>
-                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white mb-2">
+                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 leading-relaxed">
                       {item.description}
                     </p>
                   </motion.div>

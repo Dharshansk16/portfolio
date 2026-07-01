@@ -120,7 +120,7 @@ export default function FloatingDock({
  exit={{ opacity: 0, x: 20}}
  transition={{ delay: index * 0.08 + 0.1}}
  style={{ willChange:"transform, opacity"}}
- className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl text-zinc-900 dark:text-zinc-100 text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-lg dark:shadow-xl dark:shadow-zinc-900/50 flex items-center gap-2 whitespace-nowrap transition-colors duration-300"
+ className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 text-xs sm:text-sm font-medium px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-lg dark:shadow-xl dark:shadow-zinc-900/50 flex items-center gap-2 whitespace-nowrap transition-colors duration-300"
  >
  <span>{item.label}</span>
  </motion.div>
@@ -143,7 +143,7 @@ export default function FloatingDock({
  onClick={item.action}
  className={`relative w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white dark:bg-zinc-900 hover:shadow-xl transition-all duration-300 border border-zinc-200 dark:border-zinc-800 touch-manipulation`}
  >
- <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-900 dark:text-zinc-100 drop-shadow-sm" />
+ <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 drop-shadow-sm" />
  </Button>
  </motion.div>
  </motion.div>
@@ -174,7 +174,7 @@ export default function FloatingDock({
  <Button
  size="icon"
  onClick={() => setIsExpanded(!isExpanded)}
- className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white dark:bg-zinc-900 hover:shadow-xl hover:shadow-zinc-200 dark:hover:shadow-black transition-all duration-300 border border-zinc-200 dark:border-zinc-800 touch-manipulation text-zinc-900 dark:text-zinc-100"
+ className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white dark:bg-zinc-900 hover:shadow-xl hover:shadow-zinc-200 dark:hover:shadow-black transition-all duration-300 border border-zinc-200 dark:border-zinc-800 touch-manipulation text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500"
  >
  <motion.div
  animate={{ rotate: isExpanded ? 45 : 0}}

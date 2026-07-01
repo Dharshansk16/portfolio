@@ -102,8 +102,8 @@ export default function BootScreen() {
  <span
  className={`${
  isOk
- ?"text-zinc-900 dark:text-white font-bold"
- :"text-zinc-500 dark:text-zinc-500"
+ ?"text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold"
+ :"text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500"
  } tracking-tight`}
  >
  {msg}
@@ -121,7 +121,7 @@ export default function BootScreen() {
 
  {/* Network Progress Bar */}
  <div className="space-y-2 pt-4 border-t border-zinc-200 dark:border-zinc-800">
- <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-widest font-bold">
+ <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 uppercase tracking-widest font-bold">
  <span>Tracing Route...</span>
  <span>{Math.round(progress)}%</span>
  </div>

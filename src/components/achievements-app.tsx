@@ -132,7 +132,7 @@ function ImageGallery({
           e.stopPropagation();
           onExpand(images[currentIndex]);
         }}
-        className="absolute top-4 right-4 p-2 rounded-full bg-white/80 dark:bg-black/50 text-zinc-900 dark:text-white opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm z-20 hover:scale-105 active:scale-95 shadow-sm"
+        className="absolute top-4 right-4 p-2 rounded-full bg-white/80 dark:bg-black/50 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm z-20 hover:scale-105 active:scale-95 shadow-sm"
         aria-label="Expand image"
       >
         <Maximize2 className="w-4 h-4" />
@@ -143,14 +143,14 @@ function ImageGallery({
         <div className="absolute inset-0 flex items-center justify-between px-3 opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none">
           <button
             onClick={prevImage}
-            className="pointer-events-auto p-2 rounded-full bg-white/80 dark:bg-black/50 text-zinc-900 dark:text-white backdrop-blur-sm hover:scale-105 active:scale-95 transition-transform shadow-sm"
+            className="pointer-events-auto p-2 rounded-full bg-white/80 dark:bg-black/50 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 backdrop-blur-sm hover:scale-105 active:scale-95 transition-transform shadow-sm"
             aria-label="Previous image"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={nextImage}
-            className="pointer-events-auto p-2 rounded-full bg-white/80 dark:bg-black/50 text-zinc-900 dark:text-white backdrop-blur-sm hover:scale-105 active:scale-95 transition-transform shadow-sm"
+            className="pointer-events-auto p-2 rounded-full bg-white/80 dark:bg-black/50 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 backdrop-blur-sm hover:scale-105 active:scale-95 transition-transform shadow-sm"
             aria-label="Next image"
           >
             <ChevronRight className="w-5 h-5" />
@@ -192,7 +192,7 @@ function AchievementsApp({
     <div
       className={`w-full px-4 sm:px-6 lg:px-8 ${
         isEmbedded
-          ? "py-16 bg-white/40 dark:bg-white/[0.02] [.no-bg-image.dark_&]:bg-black border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
+          ? "py-16 bg-white/40 dark:bg-white/[0.02] [.no-bg-image.dark_&]:bg-black [.no-bg-image:not(.dark)_&]:bg-white border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
           : "bg-transparent min-h-screen overflow-y-auto"
       }`}
     >
@@ -202,7 +202,7 @@ function AchievementsApp({
           {!isEmbedded && onBack && (
             <button
               onClick={onBack}
-              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium mb-8"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium mb-8"
               aria-label="Back to Dashboard"
             >
               <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
@@ -213,7 +213,7 @@ function AchievementsApp({
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-white mb-4"
+            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4"
           >
             Achievements
           </motion.h2>
@@ -222,7 +222,7 @@ function AchievementsApp({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-zinc-500 dark:text-zinc-400 max-w-2xl"
+            className="text-lg text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 max-w-2xl"
           >
             A timeline of milestones, leadership roles, and recognitions in both
             technology and sports.
@@ -251,9 +251,9 @@ function AchievementsApp({
                   <div className="w-full aspect-[4/5] sm:aspect-[3/4] rounded-2xl bg-white/40 dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-white/60 to-white/20 dark:from-zinc-800/50 dark:to-zinc-900/10" />
                     <div className="w-16 h-16 rounded-full bg-white/70 backdrop-blur-sm dark:bg-black/50 shadow-sm flex items-center justify-center mb-4 z-10">
-                      <Award className="w-8 h-8 text-zinc-400 dark:text-zinc-500" />
+                      <Award className="w-8 h-8 text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500" />
                     </div>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium z-10">
+                    <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 text-sm font-medium z-10">
                       Achievement Badge
                     </p>
                   </div>
@@ -263,14 +263,14 @@ function AchievementsApp({
               {/* Text Side (Right) */}
               <div className="w-full md:w-7/12 flex flex-col justify-center py-4">
                 {achievement.date && (
-                  <span className="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 mb-4 block">
+                  <span className="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 mb-4 block">
                     {achievement.date}
                   </span>
                 )}
-                <h3 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-4 leading-tight">
+                <h3 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4 leading-tight">
                   {achievement.title}
                 </h3>
-                <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 leading-relaxed">
                   {achievement.description}
                 </p>
               </div>
@@ -308,7 +308,7 @@ function AchievementsApp({
           >
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 sm:top-8 sm:right-8 p-3 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors z-50"
+              className="absolute top-4 right-4 sm:top-8 sm:right-8 p-3 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors z-50"
             >
               <X className="w-6 h-6" />
             </button>

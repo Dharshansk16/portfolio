@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useRef, useState } from "react";
 
 export default function TorchLight() {
@@ -50,7 +49,7 @@ export default function TorchLight() {
     >
       {/* 1. Base Dark Ambient Depth / Static Background in Light Mode */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 dark:opacity-10"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 dark:opacity-[0.04]"
         style={{ backgroundImage: "var(--global-bg)" }}
       />
 

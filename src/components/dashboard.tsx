@@ -67,13 +67,13 @@ export default function Dashboard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area bg-transparent [.no-bg-image.dark_&]:bg-zinc-950 transition-colors duration-500"
+      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area bg-transparent [.no-bg-image.dark_&]:bg-zinc-950 [.no-bg-image:not(.dark)_&]:bg-zinc-50 transition-colors duration-500"
     >
       {/* Floating Elements - Conditional based on showParticles */}
       {showParticles && !isLowEnd && (
         <>
           <motion.div
-            className="absolute top-20 left-10 text-zinc-500 dark:text-zinc-500"
+            className="absolute top-20 left-10 text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500"
             animate={{
               y: [0, -20, 0],
               rotate: [0, 5, 0],
@@ -83,7 +83,7 @@ export default function Dashboard({
             <Code2 size={60} />
           </motion.div>
           <motion.div
-            className="absolute bottom-20 right-10 text-zinc-500 dark:text-zinc-500"
+            className="absolute bottom-20 right-10 text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500"
             animate={{
               y: [0, 20, 0],
               rotate: [0, -5, 0],
@@ -109,7 +109,7 @@ export default function Dashboard({
 
         {/* Subtitle / Role */}
         <motion.p
-          className="text-base sm:text-xl md:text-2xl text-zinc-500 dark:text-zinc-400 font-medium max-w-2xl mx-auto mb-8 px-2"
+          className="text-base sm:text-xl md:text-2xl text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 font-medium max-w-2xl mx-auto mb-8 px-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
@@ -249,7 +249,7 @@ export default function Dashboard({
                         }
                   }
                 >
-                  <app.icon className="w-full h-full text-zinc-900 dark:text-zinc-100" />
+                  <app.icon className="w-full h-full text-zinc-900 dark:text-zinc-100 dark:group-hover:text-orange-100 transition-colors duration-500" />
                 </motion.div>
 
                 {/* Enhanced Shimmer Effect - Only if showParticles is true */}
@@ -265,10 +265,10 @@ export default function Dashboard({
 
               {/* App Info with Better Typography */}
               <div className="text-center mt-3 sm:mt-4">
-                <p className="text-sm sm:text-base font-semibold text-zinc-800 dark:text-white mb-0.5 sm:mb-1 group-hover:text-zinc-500 dark:group-hover:text-zinc-500 transition-colors duration-300">
+                <p className="text-sm sm:text-base font-semibold text-zinc-800 dark:text-white mb-0.5 sm:mb-1 group-hover:text-zinc-500 dark:group-hover:text-orange-50 transition-colors duration-500">
                   {app.name}
                 </p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors duration-300">
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-700 dark:group-hover:text-orange-100/90 transition-colors duration-500">
                   {app.description}
                 </p>
               </div>

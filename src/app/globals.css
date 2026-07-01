@@ -81,7 +81,7 @@
 }
 
 .dark {
-  --global-bg: url('/global-bg.jpg');
+  --global-bg: url('/global-bg-orange.jpg');
   /* Dark mode - Sophisticated Zinc (No Pitch Black) */
   --background: #09090b; /* Zinc 950 */
   --foreground: #fafafa;

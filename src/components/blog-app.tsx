@@ -77,7 +77,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
     <div
       className={`w-full px-4 sm:px-6 lg:px-8 ${
         isEmbedded
-          ? "py-16 bg-transparent [.no-bg-image.dark_&]:bg-zinc-950 border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
+          ? "py-16 bg-transparent [.no-bg-image.dark_&]:bg-zinc-950 [.no-bg-image:not(.dark)_&]:bg-zinc-50 border-t border-white/40 dark:border-white/[0.05] [.no-bg-image.dark_&]:border-zinc-900"
           : "bg-transparent min-h-screen overflow-y-auto"
       }`}
     >
@@ -91,7 +91,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
           <div className="mb-12">
             <button
               onClick={onBack}
-              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
               aria-label="Back to Dashboard"
             >
               <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
@@ -110,14 +110,14 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
           <h1
             className={`${
               isEmbedded ? "text-4xl sm:text-5xl" : "text-4xl sm:text-6xl"
-            } font-black tracking-tight text-zinc-900 dark:text-white mb-4`}
+            } font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4`}
           >
             Writing & Insights
           </h1>
           <p
             className={`${
               isEmbedded ? "text-lg max-w-2xl mx-auto" : "text-xl sm:text-2xl"
-            } text-zinc-500 dark:text-zinc-400 font-medium`}
+            } text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 font-medium`}
           >
             Thoughts on software engineering, design patterns, and building
             products.
@@ -166,7 +166,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
                   className="group cursor-pointer"
                   onClick={() => handlePostClick(post.slug)}
                 >
-                  <div className="flex items-center space-x-4 text-sm font-medium text-zinc-500 dark:text-zinc-400 mb-3">
+                  <div className="flex items-center space-x-4 text-sm font-medium text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 mb-3">
                     <span>
                       {new Date(post.date).toLocaleDateString(undefined, {
                         year: "numeric",
@@ -178,11 +178,11 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
                     <span>{post.readTime}</span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-3 group-hover:text-zinc-500 transition-colors">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-3 group-hover:text-zinc-500 transition-colors">
                     {post.title}
                   </h2>
 
-                  <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed mb-4">
+                  <p className="text-zinc-600 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 text-lg leading-relaxed mb-4">
                     {post.excerpt}
                   </p>
 
@@ -190,7 +190,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-sm font-medium text-zinc-900 dark:text-white underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-4"
+                        className="text-sm font-medium text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 underline decoration-zinc-300 dark:decoration-zinc-700 underline-offset-4"
                       >
                         {tag}
                       </span>
@@ -202,7 +202,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
           )}
           
           {!loading && blogPosts.length === 0 && (
-             <p className="text-zinc-500 dark:text-zinc-400">No posts found.</p>
+             <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500">No posts found.</p>
           )}
         </div>
 

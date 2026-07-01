@@ -88,7 +88,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  >
  <div className="flex items-center justify-between p-5 sm:p-6 border-b border-zinc-100 dark:border-white/10 transition-colors">
  <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
- <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 truncate">
+ <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 truncate">
  Get In Touch
  </h2>
  </div>
@@ -115,11 +115,11 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  <>
  <div className="mb-5 sm:mb-6 space-y-2 sm:space-y-3">
  <div className="flex items-center space-x-3 text-sm text-zinc-600 dark:text-gray-300 transition-colors">
- <Mail className="w-4 h-4 text-zinc-500 dark:text-zinc-500 flex-shrink-0" />
+ <Mail className="w-4 h-4 text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 flex-shrink-0" />
  <span className="break-all">dcodecraft@gmail.com</span>
  </div>
  <div className="flex items-center space-x-3 text-sm text-zinc-600 dark:text-gray-300 transition-colors">
- <MapPin className="w-4 h-4 text-zinc-500 dark:text-zinc-500 flex-shrink-0" />
+ <MapPin className="w-4 h-4 text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 flex-shrink-0" />
  <span>India</span>
  </div>
  </div>
@@ -136,7 +136,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  value={formData.name}
  onChange={handleChange}
  required
- className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
+ className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
  />
  </div>
  <div>
@@ -147,7 +147,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  value={formData.email}
  onChange={handleChange}
  required
- className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
+ className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
  />
  </div>
  <div>
@@ -158,7 +158,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  onChange={handleChange}
  required
  rows={4}
- className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 resize-none touch-manipulation transition-colors shadow-sm"
+ className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 resize-none touch-manipulation transition-colors shadow-sm"
  />
  </div>
  <Button
@@ -199,7 +199,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  >
  <Check className="w-8 h-8 text-white dark:text-black" />
  </motion.div>
- <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
+ <h3 className="text-xl font-semibold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
  Message Sent!
  </h3>
  <p className="text-zinc-500 dark:text-gray-400 text-sm">
