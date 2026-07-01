@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Briefcase,
-  User,
-  Code2,
-  Rocket,
-  BookOpen,
-  Trophy,
-} from "lucide-react";
+import { Briefcase, User, Code2, Rocket, BookOpen, Trophy } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import type { AppType } from "@/app/page";
