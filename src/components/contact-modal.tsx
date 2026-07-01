@@ -88,7 +88,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  >
  <div className="flex items-center justify-between p-5 sm:p-6 border-b border-zinc-100 dark:border-white/10 transition-colors">
  <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
- <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 truncate">
+ <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 truncate">
  Get In Touch
  </h2>
  </div>
@@ -103,7 +103,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  variant="ghost"
  size="icon"
  onClick={onClose}
- className="text-zinc-500 dark:text-gray-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 touch-manipulation transition-colors"
+ className="text-zinc-500 dark:text-gray-400 hover:text-slate-800 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 touch-manipulation transition-colors"
  >
  <X className="w-5 h-5" />
  </Button>
@@ -136,7 +136,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  value={formData.name}
  onChange={handleChange}
  required
- className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
+ className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
  />
  </div>
  <div>
@@ -147,7 +147,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  value={formData.email}
  onChange={handleChange}
  required
- className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
+ className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 h-11 sm:h-10 touch-manipulation transition-colors shadow-sm"
  />
  </div>
  <div>
@@ -158,7 +158,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  onChange={handleChange}
  required
  rows={4}
- className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 resize-none touch-manipulation transition-colors shadow-sm"
+ className="bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-slate-800 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:border-zinc-400 dark:focus:border-zinc-600 resize-none touch-manipulation transition-colors shadow-sm"
  />
  </div>
  <Button
@@ -199,7 +199,7 @@ function ContactModal({ isOpen, onClose}: ContactModalProps) {
  >
  <Check className="w-8 h-8 text-white dark:text-black" />
  </motion.div>
- <h3 className="text-xl font-semibold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
+ <h3 className="text-xl font-semibold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
  Message Sent!
  </h3>
  <p className="text-zinc-500 dark:text-gray-400 text-sm">

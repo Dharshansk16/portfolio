@@ -76,7 +76,7 @@ function BlogListClient({ posts }: BlogListClientProps) {
           >
             <Link
               href="/"
-              className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-sm text-sm font-medium"
+              className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-slate-800 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-sm text-sm font-medium"
             >
               <ChevronLeft className="w-4 h-4 mr-2" /> Back to Dashboard
             </Link>
@@ -88,7 +88,7 @@ function BlogListClient({ posts }: BlogListClientProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-zinc-900 dark:text-white mb-6">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-slate-800 dark:text-white mb-6">
               Writing &<br />
               <span className="text-zinc-400 dark:text-zinc-600">Insights</span>
             </h1>
@@ -155,7 +155,7 @@ function BlogListClient({ posts }: BlogListClientProps) {
                   </div>
 
                   {/* Title */}
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors duration-300 leading-tight">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 dark:text-white mb-4 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors duration-300 leading-tight">
                     {post.title}
                     <ArrowUpRight className="inline-block w-5 h-5 sm:w-6 sm:h-6 ml-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </h2>

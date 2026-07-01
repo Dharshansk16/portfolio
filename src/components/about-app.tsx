@@ -69,7 +69,7 @@ function SectionHeading({
       transition={{ duration: 0.5 }}
       className="mb-10"
     >
-      <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
+      <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
         {title}
       </h2>
       {subtitle && (
@@ -111,7 +111,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
           >
             <button
               onClick={onBack}
-              className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
               aria-label="Back to Dashboard"
             >
               <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
@@ -155,7 +155,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       Available for opportunities
                     </span>
                   </div>
-                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 leading-[1.1]">
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 leading-[1.1]">
                     {personalInfo.name}
                   </h1>
                 </motion.div>
@@ -184,7 +184,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href={personalInfo.socials.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm shadow-lg shadow-zinc-900/10 dark:shadow-white/10"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-slate-800 font-medium hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm shadow-lg shadow-zinc-900/10 dark:shadow-white/10"
                   >
                     <FaGithub className="w-4 h-4" />
                     GitHub
@@ -194,7 +194,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href={personalInfo.socials.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <FaLinkedin className="w-4 h-4" />
                     LinkedIn
@@ -204,7 +204,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href="/resume_pdf.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group md:hidden inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group md:hidden inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <Download className="w-4 h-4" />
                     Resume
@@ -214,7 +214,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     href={personalInfo.socials.leetcode}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-900/60 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-medium border border-zinc-200 dark:border-zinc-800 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
                   >
                     <Code2 className="w-4 h-4" />
                     LeetCode
@@ -232,7 +232,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4">
+              <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4">
                 About Me
               </h2>
               <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 max-w-2xl mx-auto text-lg">
@@ -258,7 +258,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
 
             <div className="relative">
               <div className="flex items-center gap-3 mb-5">
-                <h2 className="text-xl font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                   Background
                 </h2>
               </div>
@@ -298,7 +298,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                   <div className="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 mb-2">
                     {item.label}
                   </div>
-                  <div className="text-lg font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
+                  <div className="text-lg font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
                     {item.value}
                   </div>
                   <p className="text-sm text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 leading-relaxed">
@@ -321,7 +321,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
           >
             <button
               onClick={onViewAll}
-              className="group px-8 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg shadow-zinc-900/10 dark:shadow-white/10 inline-flex items-center gap-2"
+              className="group px-8 py-3 bg-zinc-900 dark:bg-white text-white dark:text-slate-800 font-bold rounded-full hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg shadow-zinc-900/10 dark:shadow-white/10 inline-flex items-center gap-2"
             >
               View Full Profile
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -364,7 +364,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                           <Briefcase
                             className={`w-4 h-4 ${
                               exp.current
-                                ? "text-white dark:text-zinc-900"
+                                ? "text-white dark:text-slate-800"
                                 : "text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500"
                             }`}
                           />
@@ -375,7 +375,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       <div className="flex-1 rounded-2xl border border-white/50 dark:border-zinc-800 bg-white/60 backdrop-blur-md dark:bg-zinc-950/60 p-5 sm:p-6 group-hover:border-white/80 dark:group-hover:border-zinc-700 transition-all duration-300">
                         <div className="flex flex-col h-full justify-between">
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 mb-2">
-                            <h3 className="text-base font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
+                            <h3 className="text-base font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                               {exp.role}
                             </h3>
                             <span
@@ -429,7 +429,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                       <GraduationCap className="w-6 h-6 text-zinc-700 dark:text-zinc-300" />
                     </div>
                     <div>
-                      <h3 className="text-base font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
+                      <h3 className="text-base font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                         {edu.degree}
                       </h3>
                       <p className="text-sm text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 mt-0.5">
@@ -467,7 +467,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                 {skills.map((skill) => (
                   <motion.div key={skill.name} variants={itemVariants}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm font-semibold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
+                      <span className="text-sm font-semibold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                         {skill.name}
                       </span>
                       <span className="text-xs font-bold text-zinc-400 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 tabular-nums">
@@ -555,7 +555,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                     <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
                       {item.emoji}
                     </div>
-                    <h3 className="text-sm font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
+                    <h3 className="text-sm font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-2">
                       {item.title}
                     </h3>
                     <p className="text-xs text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 leading-relaxed">

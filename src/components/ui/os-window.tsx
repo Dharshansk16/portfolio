@@ -125,7 +125,7 @@ export default function OSWindow({
  {icon && <div className="flex-shrink-0 hidden sm:block">{icon}</div>}
  <div className="text-center min-w-0 flex-1">
  <h3
- className={`text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 drop-shadow-sm truncate`}
+ className={`text-xs sm:text-sm font-semibold text-slate-800 dark:text-zinc-100 dark:hover:text-orange-50 transition-colors duration-500 drop-shadow-sm truncate`}
  >
  {title}
  </h3>

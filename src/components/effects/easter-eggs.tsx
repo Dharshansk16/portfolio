@@ -125,9 +125,9 @@ export default function EasterEggs() {
             className={`fixed ${isMobile ? 'top-4 left-4 right-4' : 'top-20 right-6 w-96'} z-[100]`}
           >
             <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-xl overflow-hidden p-4 flex items-start space-x-3">
-              <Terminal className="w-5 h-5 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 shrink-0 mt-0.5" />
+              <Terminal className="w-5 h-5 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 shrink-0 mt-0.5" />
               <div className="flex-1">
-                <p className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-sm mb-1">
+                <p className="text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-sm mb-1">
                   {message.split(":")[0] || message.split(".")[0]}
                 </p>
                 <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 text-xs">
@@ -155,8 +155,8 @@ export default function EasterEggs() {
             <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-2xl p-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-2">
-                  <Terminal className="w-4 h-4 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500" />
-                  <span className="text-xs text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold uppercase tracking-widest">
+                  <Terminal className="w-4 h-4 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500" />
+                  <span className="text-xs text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold uppercase tracking-widest">
                     Developer Console
                   </span>
                 </div>
@@ -165,13 +165,13 @@ export default function EasterEggs() {
                     setCommandMode(false);
                     setTypedCommand("");
                   }}
-                  className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                  className="text-zinc-500 hover:text-slate-800 dark:hover:text-white text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
                 >
                   ESC
                 </button>
               </div>
               <div className="flex items-center space-x-2 font-mono bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-2">
-                <span className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold">$</span>
+                <span className="text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold">$</span>
                 <input
                   type="text"
                   value={typedCommand}
@@ -188,7 +188,7 @@ export default function EasterEggs() {
                   }}
                   autoFocus
                   placeholder="Type a command..."
-                  className="flex-1 bg-transparent text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 outline-none placeholder-zinc-400 dark:placeholder-zinc-600 text-sm"
+                  className="flex-1 bg-transparent text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 outline-none placeholder-zinc-400 dark:placeholder-zinc-600 text-sm"
                 />
               </div>
             </div>
@@ -216,14 +216,14 @@ export default function EasterEggs() {
             >
               <div className="border-b border-zinc-100 dark:border-zinc-900 px-6 py-5 flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <Terminal className="w-5 h-5 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500" />
-                  <h3 className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-lg">
+                  <Terminal className="w-5 h-5 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500" />
+                  <h3 className="text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-lg">
                     Developer Tools
                   </h3>
                 </div>
                 <button
                   onClick={() => setShowMobileMenu(false)}
-                  className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors flex items-center justify-center"
+                  className="w-8 h-8 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-500 hover:text-slate-800 dark:hover:text-white transition-colors flex items-center justify-center"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -245,11 +245,11 @@ export default function EasterEggs() {
                       }}
                       className="flex items-center space-x-4 w-full bg-transparent hover:bg-zinc-50 dark:hover:bg-zinc-900/50 p-3 rounded-xl transition-colors text-left"
                     >
-                      <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
+                      <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500">
                         <Icon className="w-5 h-5" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-sm">
+                        <p className="text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-sm">
                           {info.label}
                         </p>
                         <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 text-xs font-mono">

@@ -75,7 +75,7 @@ export default function DevSpaceOS() {
   // Don't render until mounted on client
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-white dark:bg-black text-zinc-900 dark:text-white flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-black text-slate-800 dark:text-white flex items-center justify-center">
         <div className="animate-pulse text-zinc-500 dark:text-zinc-400">
           Loading...
         </div>
@@ -85,7 +85,7 @@ export default function DevSpaceOS() {
 
   return (
     <div
-      className="min-h-screen bg-white dark:bg-black text-zinc-900 dark:text-white overflow-hidden relative"
+      className="min-h-screen bg-white dark:bg-black text-slate-800 dark:text-white overflow-hidden relative"
       style={{ willChange: "auto" }}
     >
       {/* Simplified Ambient Gradient Orbs - Only on high-end devices and reduced complexity */}

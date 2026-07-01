@@ -90,7 +90,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   <div className="mb-12">
   <button
   onClick={onBack}
-  className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
+  className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
   aria-label="Back to Dashboard"
   >
   <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
@@ -100,7 +100,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   )}
   {isEmbedded && (
   <div className="mb-16 text-center">
-  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4">Selected Works</h2>
+  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-4">Selected Works</h2>
   <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 dark:hover:text-orange-100/90 transition-colors duration-500 max-w-2xl mx-auto text-lg">A collection of my recent projects, demonstrating expertise in AI, architecture, and scalable systems.</p>
   </div>
   )}
@@ -128,7 +128,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   
   <h2 
     onClick={() => handleProjectClick(project)}
-    className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-6 cursor-pointer"
+    className="text-4xl sm:text-5xl font-black tracking-tight text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-6 cursor-pointer"
   >
   {project.title}
   </h2>
@@ -150,7 +150,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
 
   <button
   onClick={() => handleProjectClick(project)}
-  className="inline-flex items-center text-sm font-bold uppercase tracking-wider text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:opacity-70 transition-opacity"
+  className="inline-flex items-center text-sm font-bold uppercase tracking-wider text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:opacity-70 transition-opacity"
   >
   Explore Project
   <ChevronRight className="w-4 h-4 ml-2" />
@@ -201,7 +201,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   >
   <button
   onClick={onViewAll}
-  className="px-8 py-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold rounded-full hover:scale-105 transition-transform"
+  className="px-8 py-3 bg-zinc-900 dark:bg-white text-white dark:text-slate-800 font-bold rounded-full hover:scale-105 transition-transform"
   >
   View All Projects
   </button>
@@ -241,7 +241,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  </span>
  </div>
  <div className="min-w-0 flex-1">
- <h2 className="text-xl sm:text-3xl font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 truncate">
+ <h2 className="text-xl sm:text-3xl font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 truncate">
  {selectedProject.title}
  </h2>
  <p className="text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 dark:hover:text-orange-100/90 transition-colors duration-500 text-sm mt-1 font-medium truncate">
@@ -284,7 +284,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   variant="ghost"
   size="icon"
   onClick={prevImage}
-  className="bg-white/80 dark:bg-black/60 backdrop-blur-md text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
+  className="bg-white/80 dark:bg-black/60 backdrop-blur-md text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
   >
   <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
   </Button>
@@ -292,7 +292,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   variant="ghost"
   size="icon"
   onClick={nextImage}
-  className="bg-white/80 dark:bg-black/60 backdrop-blur-md text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
+  className="bg-white/80 dark:bg-black/60 backdrop-blur-md text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 sm:h-12 sm:w-12 rounded-full"
   >
   <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
   </Button>
@@ -304,12 +304,12 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   variant="ghost"
   size="icon"
   onClick={() => setIsPlaying(!isPlaying)}
-  className="bg-white/80 dark:bg-black/60 backdrop-blur-md text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 rounded-full"
+  className="bg-white/80 dark:bg-black/60 backdrop-blur-md text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hover:bg-white dark:hover:bg-black/70 shadow-lg h-10 w-10 rounded-full"
   >
   {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
   </Button>
   <div className="bg-white/80 dark:bg-black/60 backdrop-blur-md rounded-full px-3 py-1.5 shadow-lg">
-  <span className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 text-xs font-semibold">
+  <span className="text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 text-xs font-semibold">
   {currentImageIndex + 1} / {selectedProject.images.length}
   </span>
   </div>
@@ -356,7 +356,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  {/* Project Details */}
  <div className="space-y-6 sm:space-y-8 flex flex-col justify-center">
  <div>
- <h3 className="text-xl font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-3">
+ <h3 className="text-xl font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-3">
  About This Project
  </h3>
  <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-sm sm:text-base">
@@ -365,7 +365,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  </div>
 
  <div>
- <h3 className="text-xl font-bold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-3">
+ <h3 className="text-xl font-bold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 mb-3">
  Technologies Used
  </h3>
  <div className="flex flex-wrap gap-2">
@@ -384,7 +384,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
  <Button
  onClick={() => window.open(selectedProject.github,"_blank")}
- className="flex-1 bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 hover:bg-white/80 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 border border-white/50 dark:border-zinc-800 font-semibold shadow-sm h-12 text-base rounded-xl transition-all"
+ className="flex-1 bg-white/60 backdrop-blur-sm dark:bg-zinc-900/60 hover:bg-white/80 dark:hover:bg-zinc-800 text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 border border-white/50 dark:border-zinc-800 font-semibold shadow-sm h-12 text-base rounded-xl transition-all"
  >
  <FaGithub className="w-5 h-5 mr-2" />
  View Source

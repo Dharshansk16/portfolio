@@ -109,9 +109,9 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  transition={{ duration: 0.3}}
  className="w-6 h-6 rounded-lg bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center shadow-md group-hover:shadow-lg"
  >
- <span className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 text-xs font-bold">D</span>
+ <span className="text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 text-xs font-bold">D</span>
  </motion.div>
- <span className="text-sm font-semibold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hidden sm:inline group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
+ <span className="text-sm font-semibold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 hidden sm:inline group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
  DevSpace
  </span>
  </div>
@@ -124,7 +124,7 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  whileHover={{ scale: 1.1}}
  whileTap={{ scale: 0.9}}
  onClick={toggleBgImage}
- className={`flex items-center space-x-1.5 transition-colors cursor-pointer ${showBgImage ? 'text-zinc-900 dark:text-zinc-300' : 'text-zinc-400 dark:text-zinc-600'}`}
+ className={`flex items-center space-x-1.5 transition-colors cursor-pointer ${showBgImage ? 'text-slate-800 dark:text-zinc-300' : 'text-zinc-400 dark:text-zinc-600'}`}
  title="Toggle Background Image"
  >
  <ImageIcon className="w-4 h-4" />
@@ -137,7 +137,7 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  whileHover={{ scale: 1.1}}
  whileTap={{ scale: 0.9}}
  onClick={() => setTheme(theme ==="dark" ?"light" :"dark")}
- className="flex items-center space-x-1.5 text-zinc-600 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500 transition-colors cursor-pointer"
+ className="flex items-center space-x-1.5 text-zinc-600 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500 transition-colors cursor-pointer"
  title="Toggle theme"
  >
  {theme ==="dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -147,7 +147,7 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  {/* WiFi */}
  <motion.div
  whileHover={{ scale: 1.1}}
- className="flex items-center space-x-1.5 text-zinc-600 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500 transition-colors cursor-pointer"
+ className="flex items-center space-x-1.5 text-zinc-600 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500 transition-colors cursor-pointer"
  >
  <Wifi className="w-4 h-4" />
  </motion.div>
@@ -155,7 +155,7 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  {/* Volume */}
  <motion.div
  whileHover={{ scale: 1.1}}
- className="hidden sm:flex items-center space-x-1.5 text-zinc-600 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500 transition-colors cursor-pointer"
+ className="hidden sm:flex items-center space-x-1.5 text-zinc-600 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500 transition-colors cursor-pointer"
  >
  <Volume2 className="w-4 h-4" />
  </motion.div>
@@ -170,7 +170,7 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  isCharging
  ?"text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500"
  : batteryLevel > 20
- ?"text-zinc-600 hover:text-zinc-900 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500"
+ ?"text-zinc-600 hover:text-slate-800 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500 dark:hover:text-zinc-500"
  :"text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500"
 } transition-colors`}
  />

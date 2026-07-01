@@ -21,7 +21,7 @@ export default function UIHints() {
  animate={{ opacity: 1, scale: 1}}
  whileHover={{ scale: 1.05}}
  onClick={() => setShowShortcutsPanel(!showShortcutsPanel)}
- className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-[60] w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-900 hidden md:flex items-center justify-center shadow-sm border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-mono text-lg font-bold"
+ className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-[60] w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-900 hidden md:flex items-center justify-center shadow-sm border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-mono text-lg font-bold"
  title="Quick Actions"
  >
  ⌘
@@ -39,12 +39,12 @@ export default function UIHints() {
  >
  <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-2xl">
  <div className="flex items-center justify-between mb-8">
- <h3 className="text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-xs uppercase tracking-widest">
+ <h3 className="text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold text-xs uppercase tracking-widest">
  Quick Actions
  </h3>
  <button
  onClick={() => setShowShortcutsPanel(false)}
- className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors text-xs font-bold uppercase tracking-widest"
+ className="text-zinc-500 hover:text-slate-800 dark:hover:text-white transition-colors text-xs font-bold uppercase tracking-widest"
  >
  Close
  </button>
@@ -56,10 +56,10 @@ export default function UIHints() {
  key={index}
  className="flex items-center justify-between group"
  >
- <span className="text-zinc-600 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 text-sm font-medium group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
+ <span className="text-zinc-600 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 text-sm font-medium group-hover:text-slate-800 dark:group-hover:text-white transition-colors">
  {shortcut.description}
  </span>
- <kbd className="px-2.5 py-1 bg-zinc-100 dark:bg-zinc-900 rounded-md font-mono text-xs font-semibold text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 border border-zinc-200 dark:border-zinc-800">
+ <kbd className="px-2.5 py-1 bg-zinc-100 dark:bg-zinc-900 rounded-md font-mono text-xs font-semibold text-slate-800 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 border border-zinc-200 dark:border-zinc-800">
  {shortcut.key}
  </kbd>
  </div>

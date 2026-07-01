@@ -24,28 +24,24 @@ const apps = [
     id: "about" as AppType,
     name: "About",
     icon: User,
-    color: "",
     description: "Know me better",
   },
   {
     id: "projects" as AppType,
     name: "Projects",
     icon: Briefcase,
-    color: "",
     description: "View my work",
   },
   {
     id: "achievements" as AppType,
     name: "Achievements",
     icon: Trophy,
-    color: "",
     description: "My Awards",
   },
   {
     id: "blog" as AppType,
     name: "Blog",
     icon: BookOpen,
-    color: "",
     description: "Read articles",
   },
 ];
@@ -103,7 +99,7 @@ export default function Dashboard({
         className="text-center mb-12 sm:mb-14 md:mb-16 relative px-4 mt-8 sm:mt-12"
       >
         {/* Main Headline */}
-        <motion.h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-zinc-900 dark:text-white mb-4 sm:mb-6 leading-tight">
+        <motion.h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-slate-800 dark:text-white mb-4 sm:mb-6 leading-tight">
           Dharshan S Kotian
         </motion.h1>
 
@@ -247,7 +243,7 @@ export default function Dashboard({
                         }
                   }
                 >
-                  <app.icon className="w-full h-full text-zinc-900 dark:text-zinc-100 dark:group-hover:text-orange-100 transition-colors duration-500" />
+                  <app.icon className="w-full h-full text-slate-800 dark:text-white dark:group-hover:text-orange-50 transition-colors duration-500 group-hover:scale-110" />
                 </motion.div>
 
                 {/* Enhanced Shimmer Effect - Only if showParticles is true */}
