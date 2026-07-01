@@ -202,9 +202,10 @@ function AchievementsApp({
           {!isEmbedded && onBack && (
             <button
               onClick={onBack}
-              className="inline-flex items-center text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors mb-8 text-sm font-medium"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium mb-8"
+              aria-label="Back to Dashboard"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
               Back to Dashboard
             </button>
           )}

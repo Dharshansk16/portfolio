@@ -110,7 +110,7 @@ export default function DevSpaceOS() {
  {/* Unique UI Enhancements */}
  {isBooted && (
  <>
- <MenuBar />
+ <MenuBar onLogoClick={() => setCurrentApp("dashboard")} />
  <EasterEggs />
  <SpotlightSearch
  onNavigate={handleAppOpen}

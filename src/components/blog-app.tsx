@@ -91,10 +91,11 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
           <div className="mb-12">
             <button
               onClick={onBack}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors shadow-sm text-sm font-medium"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
               aria-label="Back to Dashboard"
             >
-              <ChevronLeft className="w-4 h-4 mr-2" /> Back to Dashboard
+              <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />
+              Back to Dashboard
             </button>
           </div>
         )}

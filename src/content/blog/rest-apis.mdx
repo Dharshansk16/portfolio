@@ -1,7 +1,7 @@
 ---
 title: "REST APIs"
 slug: "rest-apis"
-excerpt: "An introduction to REST APIs — the invisible bridge between frontend code and backend data, explaining how clients and servers communicate."
+excerpt: "An introduction to REST APIs, the invisible bridge between frontend code and backend data, explaining how clients and servers communicate."
 date: "2025-02-15"
 readTime: "7 min read"
 tags: ["APIs", "Backend", "Web Development"]
@@ -14,9 +14,9 @@ author: "Dharshan S Kotian"
 
 ## The Day Everything Disappeared
 
-I remember building my first proper web project — a simple To-Do List using HTML, CSS, and JavaScript. It wasn't easy. I jumped between YouTube tutorials, paused a hundred times, rewound even more, but somehow — I made it work. I was proud of it. I could add tasks, delete them. It felt like I had just built something real. But then... I refreshed the page. And everything was gone. All the to-do items I had created just vanished.
+I remember building my first proper web project, a simple To-Do List using HTML, CSS, and JavaScript. It wasn't easy. I jumped between YouTube tutorials, paused a hundred times, rewound even more, but somehow, I made it work. I was proud of it. I could add tasks, delete them. It felt like I had just built something real. But then... I refreshed the page. And everything was gone. All the to-do items I had created just vanished.
 
-At first, I thought I'd made a mistake. Maybe I forgot to save something? But no — that's just how it was. Every time I reloaded the page, all my hard work disappeared into thin air.
+At first, I thought I'd made a mistake. Maybe I forgot to save something? But no, that's just how it was. Every time I reloaded the page, all my hard work disappeared into thin air.
 
 I paused for a second and thought,
 
@@ -26,43 +26,43 @@ So I went back to Google and typed in the most beginner question ever:
 
 > **"How to make data not disappear on refresh in JavaScript"**
 
-I don't remember everything I read that day, but one word stuck in my mind — **"Databases"**.
+I don't remember everything I read that day, but one word stuck in my mind, **"Databases"**.
 
 Apparently, to remember things like tasks, you need to store them somewhere, and that's where databases come in. So I opened YouTube again, searched for "To-Do List with Database," and found a whole new world waiting for me. That's when I heard this sentence in a tutorial:
 
 > **"We'll need to create an API to fetch and send the data from the backend."**
 
-And just like that, I was introduced to **REST APIs** — the invisible bridge between the frontend code I write and the data stored on a server.
+And just like that, I was introduced to **REST APIs**, the invisible bridge between the frontend code I write and the data stored on a server.
 
 ---
 
 ## What Is a REST API?
 
-So there I was, a beginner web developer who had just discovered that building a frontend wasn't enough. I needed a way for my app to remember, to save, to fetch things — not just display them.
+So there I was, a beginner web developer who had just discovered that building a frontend wasn't enough. I needed a way for my app to remember, to save, to fetch things, not just display them.
 
-That's when it hit me: if my to-do list was going to be more than just a pretty interface, it needed to talk to something — a REST API.
+That's when it hit me: if my to-do list was going to be more than just a pretty interface, it needed to talk to something, a REST API.
 
 So... what even is a REST API?
 
-An **API** (Application Programming Interface) is how two pieces of software communicate — like a messenger that lets them send and receive data.
+An **API** (Application Programming Interface) is how two pieces of software communicate, like a messenger that lets them send and receive data.
 
 **REST** (Representational State Transfer) is a set of rules that defines how that communication happens, using standard web methods like GET and POST.
 
-Put together, a REST API allows your frontend to make requests to your backend and get structured responses — typically using HTTP and JSON.
+Put together, a REST API allows your frontend to make requests to your backend and get structured responses, typically using HTTP and JSON.
 
-Here's how I like to think of it: **you're the frontend (the client), the API is the waiter, the backend is the kitchen, and the menu represents the available endpoints.** You don't walk into the kitchen and cook your own meal — instead, you tell the waiter what you want from the menu. The waiter takes your order to the kitchen, the kitchen prepares it, and the waiter brings it back to you. You never see the kitchen or worry about how the meal is made — you just expect the right dish to arrive.
+Here's how I like to think of it: **you're the frontend (the client), the API is the waiter, the backend is the kitchen, and the menu represents the available endpoints.** You don't walk into the kitchen and cook your own meal, instead, you tell the waiter what you want from the menu. The waiter takes your order to the kitchen, the kitchen prepares it, and the waiter brings it back to you. You never see the kitchen or worry about how the meal is made, you just expect the right dish to arrive.
 
-That's exactly how a REST API works: **it takes your request from the frontend, passes it to the backend, and returns the result — clean, organized, and ready to serve.**
+That's exactly how a REST API works: **it takes your request from the frontend, passes it to the backend, and returns the result, clean, organized, and ready to serve.**
 
 ---
 
 ## Hello, Server! My First API Call
 
-I initially started my backend development journey with Django. Already fascinated by Python, Django offered a clear solution. With it, I could build full-stack applications that served dynamic content directly — no separate API needed. It tightly connected the backend and frontend, allowing me to render HTML pages with logic baked in.
+I initially started my backend development journey with Django. Already fascinated by Python, Django offered a clear solution. With it, I could build full-stack applications that served dynamic content directly, no separate API needed. It tightly connected the backend and frontend, allowing me to render HTML pages with logic baked in.
 
 I built several projects using Django and learned a lot. But eventually, I grew curious about frontend development. I wanted to explore React, but to build a full-stack app with it, I needed a separate backend. Although I considered switching to Node.js and Express (which I eventually did), at the time I didn't want to leave the comfort of Django.
 
-As always, I turned to YouTube and searched for a full-stack project using Django and React. That's when I found a blog tutorial built with React and Django REST Framework (DRF). It became my first real experience creating a proper REST API backend — and I still remember my first GET request returning the response:
+As always, I turned to YouTube and searched for a full-stack project using Django and React. That's when I found a blog tutorial built with React and Django REST Framework (DRF). It became my first real experience creating a proper REST API backend, and I still remember my first GET request returning the response:
 
 > **"Hello, Server!"**
 
@@ -75,26 +75,26 @@ For example:
 - For larger applications, **NestJS** adds a layer of structure with a modular, TypeScript-based design.
 - Java developers often prefer **Spring Boot**, and PHP developers might use **Laravel**.
 
-All of these tools have strong communities and rich ecosystems. Rather than searching for the perfect tool, it's better to pick one that aligns with your current skills and learn the core concepts of API design — they translate across frameworks.
+All of these tools have strong communities and rich ecosystems. Rather than searching for the perfect tool, it's better to pick one that aligns with your current skills and learn the core concepts of API design, they translate across frameworks.
 
 ---
 
 ## Why APIs Matter
 
-You might be wondering — are APIs just about connecting frontend and backend? That's what I thought in the beginning too. But once I started working on real-world projects, I discovered their true power.
+You might be wondering, are APIs just about connecting frontend and backend? That's what I thought in the beginning too. But once I started working on real-world projects, I discovered their true power.
 
-For one, APIs allow you to **reuse the same backend across multiple frontends** — whether it's a web app, mobile app, or even a third-party integration. They also help you **design cleaner, more maintainable code** by separating concerns between logic and UI. And REST APIs are naturally scalable and easier to deploy across different environments.
+For one, APIs allow you to **reuse the same backend across multiple frontends**, whether it's a web app, mobile app, or even a third-party integration. They also help you **design cleaner, more maintainable code** by separating concerns between logic and UI. And REST APIs are naturally scalable and easier to deploy across different environments.
 
-Tools like **Postman** made it super easy for me to test endpoints, send requests, and debug responses — without needing a full frontend. Along the way, I also learned the importance of following best practices — like using proper status codes, versioning APIs, adding authentication, and structuring error responses clearly.
+Tools like **Postman** made it super easy for me to test endpoints, send requests, and debug responses, without needing a full frontend. Along the way, I also learned the importance of following best practices, like using proper status codes, versioning APIs, adding authentication, and structuring error responses clearly.
 
-These are just a few of the advantages — there's much more to explore as you dive deeper into building modern, production-ready APIs.
+These are just a few of the advantages, there's much more to explore as you dive deeper into building modern, production-ready APIs.
 
-When it comes to designing efficient and scalable APIs, I personally follow the **Microsoft Azure Web API Architecture** guidelines along with other modern best practices — like stateless design, versioning, proper status codes, and layered architecture. These patterns have helped me build cleaner, more reliable APIs that scale well in real-world use.
+When it comes to designing efficient and scalable APIs, I personally follow the **Microsoft Azure Web API Architecture** guidelines along with other modern best practices, like stateless design, versioning, proper status codes, and layered architecture. These patterns have helped me build cleaner, more reliable APIs that scale well in real-world use.
 
 ---
 
 ## Final Word
 
-APIs might seem intimidating at first, but they're just tools — tools that, when used right, can power anything from simple apps to large-scale systems. The key is to stay curious, build consistently, and embrace the learning curve. Every API you design is a step toward becoming a better developer.
+APIs might seem intimidating at first, but they're just tools, tools that, when used right, can power anything from simple apps to large-scale systems. The key is to stay curious, build consistently, and embrace the learning curve. Every API you design is a step toward becoming a better developer.
 
-Keep building, keep refining — your journey has just begun.
+Keep building, keep refining, your journey has just begun.

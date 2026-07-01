@@ -5,12 +5,20 @@ import { motion} from"framer-motion";
 import { Battery, Wifi, Volume2, Clock, Moon, Sun} from"lucide-react";
 import { useTheme} from"next-themes";
 
-export default function MenuBar() {
+export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  const [currentTime, setCurrentTime] = useState("");
  const [batteryLevel, setBatteryLevel] = useState(100);
  const [isCharging, setIsCharging] = useState(false);
  const { theme, setTheme} = useTheme();
  const [mounted, setMounted] = useState(false);
+
+ const handleLogoClick = () => {
+ if (onLogoClick) {
+ onLogoClick();
+ } else {
+ window.location.href = "/";
+}
+};
 
  useEffect(() => {
  // Update time
@@ -57,15 +65,18 @@ export default function MenuBar() {
  <div className="bg-white/60 dark:bg-black/60 backdrop-blur-xl border-b border-zinc-200/50 dark:border-zinc-300 dark:border-zinc-700 shadow-sm dark:shadow-lg transition-colors">
  <div className="flex items-center justify-between px-4 sm:px-6 h-10">
  {/* Left Section - Logo */}
- <div className="flex items-center space-x-3 pointer-events-auto">
+ <div 
+ className="flex items-center space-x-3 pointer-events-auto cursor-pointer group"
+ onClick={handleLogoClick}
+ >
  <motion.div
  whileHover={{ scale: 1.1, rotate: 180}}
  transition={{ duration: 0.3}}
- className="w-6 h-6 rounded-lg bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center cursor-pointer shadow-md"
+ className="w-6 h-6 rounded-lg bg-zinc-100 dark:bg-zinc-950 flex items-center justify-center shadow-md group-hover:shadow-lg"
  >
- <span className="text-white text-xs font-bold">D</span>
+ <span className="text-zinc-900 dark:text-white text-xs font-bold">D</span>
  </motion.div>
- <span className="text-sm font-semibold text-zinc-900 dark:text-white hidden sm:inline">
+ <span className="text-sm font-semibold text-zinc-900 dark:text-white hidden sm:inline group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
  DevSpace
  </span>
  </div>
