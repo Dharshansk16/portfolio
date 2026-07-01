@@ -79,7 +79,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
 }, []);
 
  return (
- <div className={`w-full bg-transparent px-4 sm:px-6 lg:px-8 ${isEmbedded ? 'py-16 border-t border-zinc-100 dark:border-zinc-900' : 'min-h-screen overflow-y-auto'}`}>
+ <div className={`w-full px-4 sm:px-6 lg:px-8 ${isEmbedded ? 'py-16 bg-transparent border-t border-white/40 dark:border-white/[0.05]' : 'bg-transparent min-h-screen overflow-y-auto'}`}>
   <div className={`max-w-6xl mx-auto ${isEmbedded ? '' : 'pt-20 pb-8 sm:pt-24 sm:pb-16'}`}>
   {/* Section Header for Embedded / Minimalist Back Button for Standalone */}
   {!isEmbedded && onBack && (

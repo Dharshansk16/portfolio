@@ -48,9 +48,9 @@ export default function TorchLight() {
         } as React.CSSProperties
       }
     >
-      {/* 1. Base Pitch Black Void / Static Background in Light Mode */}
+      {/* 1. Base Dark Ambient Depth / Static Background in Light Mode */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 dark:opacity-[0.01]"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 dark:opacity-20"
         style={{ backgroundImage: "var(--global-bg)" }}
       />
 

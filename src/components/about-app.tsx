@@ -90,10 +90,10 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
 
   return (
     <div
-      className={`w-full bg-transparent ${
+      className={`w-full ${
         isEmbedded
-          ? "py-20 border-t border-zinc-100 dark:border-zinc-900"
-          : "min-h-screen overflow-y-auto"
+          ? "py-20 bg-white/40 dark:bg-white/[0.02] border-t border-white/40 dark:border-white/[0.05]"
+          : "bg-transparent min-h-screen overflow-y-auto"
       }`}
     >
       <div
