@@ -10,6 +10,7 @@ import {
   ArrowUpRight,
   Briefcase,
   GraduationCap,
+  Download,
 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import {
@@ -198,6 +199,16 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
                   >
                     <FaLinkedin className="w-4 h-4" />
                     LinkedIn
+                    <ArrowUpRight className="w-3 h-3 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  </a>
+                  <a
+                    href="/resume_pdf.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group md:hidden inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 font-medium border border-blue-200 dark:border-blue-800/50 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 text-sm"
+                  >
+                    <Download className="w-4 h-4" />
+                    Resume
                     <ArrowUpRight className="w-3 h-3 opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </a>
                   <a

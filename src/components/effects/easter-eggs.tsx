@@ -265,15 +265,6 @@ export default function EasterEggs() {
         )}
       </AnimatePresence>
 
-      <motion.button
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setShowMobileMenu(true)}
-        className="fixed bottom-4 left-4 z-[100] w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800 shadow-sm flex items-center justify-center lg:hidden transition-colors"
-      >
-        <Terminal className="w-5 h-5" />
-      </motion.button>
     </>
   );
 }

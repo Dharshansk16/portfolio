@@ -78,7 +78,7 @@ export default function FloatingDock({
  <>
  <motion.div
  ref={dockRef}
- className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50"
+ className="hidden md:block fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50"
  onHoverStart={() => setIsExpanded(true)}
  onHoverEnd={() => setIsExpanded(false)}
  >

@@ -10,6 +10,7 @@ import {
  User,
  FileText,
  Mail,
+ Trophy,
 } from"lucide-react";
 import type { AppType} from"@/app/page";
 
@@ -41,11 +42,11 @@ const searchItems = [
  color:"",
 },
  {
- id:"resume",
- name:"Resume",
- icon: FileText,
- category:"Navigate",
- color:"",
+ id: "achievements",
+ name: "Achievements",
+ icon: Trophy,
+ category: "Navigate",
+ color: "",
 },
  {
  id:"contact",

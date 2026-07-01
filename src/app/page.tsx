@@ -17,6 +17,7 @@ import UIHints from"@/components/ui/ui-hints";
 const ProjectsApp = lazy(() => import("@/components/projects-app"));
 const BlogApp = lazy(() => import("@/components/blog-app"));
 const AboutApp = lazy(() => import("@/components/about-app"));
+const AchievementsApp = lazy(() => import("@/components/achievements-app"));
 
 // Optimized loading component
 const AppLoader = () => (
@@ -28,7 +29,7 @@ const AppLoader = () => (
  </div>
 );
 
-export type AppType ="dashboard" |"projects" |"blog" |"about" |"resume";
+export type AppType ="dashboard" |"projects" |"blog" |"about" |"achievements";
 
 // Detect if device is low-end
 const isLowEndDevice = () => {
@@ -68,13 +69,9 @@ export default function DevSpaceOS() {
  }
 }, []);
 
- const handleAppOpen = (app: AppType) => {
- if (app ==="resume") {
- window.open("/resume_pdf.pdf","_blank");
- return;
- }
- setCurrentApp(app);
- };
+  const handleAppOpen = (app: AppType) => {
+    setCurrentApp(app);
+  };
 
  // Don't render until mounted on client
  if (!mounted) {
@@ -153,22 +150,27 @@ export default function DevSpaceOS() {
  <div id="dashboard">
  <Dashboard onAppOpen={handleAppOpen} showParticles={showParticles} />
  </div>
- <div id="about">
- <Suspense fallback={<AppLoader />}>
- <AboutApp isEmbedded onViewAll={() => setCurrentApp("about")} />
- </Suspense>
- </div>
- <div id="projects">
- <Suspense fallback={<AppLoader />}>
- <ProjectsApp isEmbedded onViewAll={() => setCurrentApp("projects")} />
- </Suspense>
- </div>
- <div id="blog">
- <Suspense fallback={<AppLoader />}>
- <BlogApp isEmbedded onViewAll={() => setCurrentApp("blog")} />
- </Suspense>
- </div>
- </motion.div>
+  <div id="about">
+  <Suspense fallback={<AppLoader />}>
+  <AboutApp isEmbedded onViewAll={() => setCurrentApp("about")} />
+  </Suspense>
+  </div>
+  <div id="projects">
+  <Suspense fallback={<AppLoader />}>
+  <ProjectsApp isEmbedded onViewAll={() => setCurrentApp("projects")} />
+  </Suspense>
+  </div>
+  <div id="achievements">
+  <Suspense fallback={<AppLoader />}>
+  <AchievementsApp isEmbedded onViewAll={() => setCurrentApp("achievements")} />
+  </Suspense>
+  </div>
+  <div id="blog">
+  <Suspense fallback={<AppLoader />}>
+  <BlogApp isEmbedded onViewAll={() => setCurrentApp("blog")} />
+  </Suspense>
+  </div>
+  </motion.div>
  )}
  {currentApp ==="projects" && (
  <Suspense fallback={<AppLoader />}>
@@ -192,8 +194,16 @@ export default function DevSpaceOS() {
  key="about"
  onBack={() => setCurrentApp("dashboard")}
  />
- </Suspense>
- )}
+  </Suspense>
+  )}
+  {currentApp ==="achievements" && (
+  <Suspense fallback={<AppLoader />}>
+  <AchievementsApp
+  key="achievements"
+  onBack={() => setCurrentApp("dashboard")}
+  />
+  </Suspense>
+  )}
  </AnimatePresence>
 
  <ContactModal

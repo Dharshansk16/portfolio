@@ -6,7 +6,7 @@ import {
   Code2,
   Rocket,
   BookOpen,
-  Download,
+  Trophy,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -28,20 +28,6 @@ const isLowEndDevice = () => {
 
 const apps = [
   {
-    id: "projects" as AppType,
-    name: "Projects",
-    icon: Briefcase,
-    color: "",
-    description: "View my work",
-  },
-  {
-    id: "blog" as AppType,
-    name: "Blog",
-    icon: BookOpen,
-    color: "",
-    description: "Read articles",
-  },
-  {
     id: "about" as AppType,
     name: "About",
     icon: User,
@@ -49,11 +35,25 @@ const apps = [
     description: "Know me better",
   },
   {
-    id: "resume" as AppType,
-    name: "Resume",
-    icon: Download,
+    id: "projects" as AppType,
+    name: "Projects",
+    icon: Briefcase,
     color: "",
-    description: "Download CV",
+    description: "View my work",
+  },
+  {
+    id: "achievements" as AppType,
+    name: "Achievements",
+    icon: Trophy,
+    color: "",
+    description: "My Awards",
+  },
+  {
+    id: "blog" as AppType,
+    name: "Blog",
+    icon: BookOpen,
+    color: "",
+    description: "Read articles",
   },
 ];
 
@@ -109,22 +109,6 @@ export default function Dashboard({
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-center mb-12 sm:mb-14 md:mb-16 relative px-4 mt-8 sm:mt-12"
       >
-        {/* Open to Work Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mb-8 shadow-sm"
-        >
-          <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-          </span>
-          <span className="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300">
-            Available for new opportunities
-          </span>
-        </motion.div>
-
         {/* Main Headline */}
         <motion.h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight text-zinc-900 dark:text-white mb-4 sm:mb-6 leading-tight">
           Dharshan S Kotian
