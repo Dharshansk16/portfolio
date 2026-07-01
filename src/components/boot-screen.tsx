@@ -1,143 +1,115 @@
 "use client";
 
-import { useEffect, useState} from"react";
-import { motion} from"framer-motion";
-
-// Detect if device is low-end
-const isLowEndDevice = () => {
- if (typeof window ==="undefined") return false;
- return (
- navigator.hardwareConcurrency <= 4 ||
- /Mobile|Android|iPhone/i.test(navigator.userAgent)
- );
-};
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function BootScreen() {
- const [bootMessages, setBootMessages] = useState<string[]>([]);
- const [progress, setProgress] = useState(0);
- const [isLowEnd, setIsLowEnd] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [randomIP, setRandomIP] = useState("192.168.1.1");
 
- useEffect(() => {
- setIsLowEnd(isLowEndDevice());
- }, []);
+  useEffect(() => {
+    setMounted(true);
+    setRandomIP(
+      `${Math.floor(Math.random() * 255)}.${Math.floor(
+        Math.random() * 255
+      )}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`
+    );
+  }, []);
 
- useEffect(() => {
- const messages = [
- { text: "[INFO] Resolving DNS for dharshanskotian.dev..."},
- { text: "[INFO] DNS resolved to 104.21.43.19"},
- { text: "[INFO] Initiating TCP handshake..."},
- { text: "[OK] TCP connection established"},
- { text: "[INFO] Negotiating TLS encryption..."},
- { text: "[OK] TLS 1.3 secured"},
- { text: "[INFO] Sending HTTP GET / ..."},
- { text: "[OK] HTTP/2 200 OK"},
- { text: "[INFO] Fetching assets..."},
- { text: "[OK] Stylesheets & JS bundles parsed"},
- { text: "[INFO] Initializing React DOM..."},
- { text: "[OK] DOM mounted"},
- { text: "[OK] System Ready. Welcome to DevSpace."},
- ];
+  if (!mounted) return null;
 
- let i = 0;
- // Fast interval to fit within the 2.8s boot time set in page.tsx
- const interval = setInterval(() => {
- if (i < messages.length) {
- const currentMessage = messages[i];
- if (currentMessage) {
- setBootMessages((prev) => [...prev, currentMessage.text]);
- setProgress(((i + 1) / messages.length) * 100);
- }
- i++;
- } else {
- clearInterval(interval);
- }
- }, 150);
- return () => clearInterval(interval);
- }, []);
+  return (
+    <motion.div
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="fixed inset-0 z-[200] bg-black overflow-hidden flex items-center justify-center font-mono selection:bg-transparent"
+    >
+      {/* HUD: Top Left */}
+      <div className="absolute top-6 left-6 sm:top-10 sm:left-10 text-orange-500/70 text-xs sm:text-sm flex flex-col gap-1 tracking-widest z-20">
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }}>
+          [SYS] INIT_SEQUENCE
+        </motion.div>
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}>
+          [NET] LOCATING_CLIENT...
+        </motion.div>
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 }}>
+          [NET] TARGET_IP: {randomIP}
+        </motion.div>
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.0 }}>
+          [SEC] SSL_HANDSHAKE_OK
+        </motion.div>
+      </div>
 
- return (
- <motion.div
- initial={{ opacity: 0}}
- animate={{ opacity: 1}}
- exit={{ opacity: 0}}
- transition={{ duration: 0.3}}
- className="flex items-center justify-center min-h-screen bg-zinc-100 dark:bg-black px-4 relative overflow-hidden transition-colors duration-500"
- >
- <motion.div
- initial={{ opacity: 0}}
- animate={{ opacity: 1}}
- transition={{ duration: 0.4}}
- className="w-full max-w-3xl relative text-left font-mono text-sm"
- >
- {/* Main Terminal Container */}
- <div className="relative bg-white dark:bg-zinc-950 p-6 sm:p-10 rounded-lg border border-zinc-200 dark:border-zinc-800 shadow-2xl transition-colors duration-500">
- <div className="relative z-10">
- {/* Minimalist Terminal Header */}
- <div className="flex items-center justify-between mb-8 pb-4 border-b border-zinc-200 dark:border-zinc-800">
- <div className="flex items-center space-x-3">
- <div className="flex space-x-1.5">
- <div className="w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700"></div>
- <div className="w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700"></div>
- <div className="w-3 h-3 rounded-full bg-zinc-300 dark:bg-zinc-700"></div>
- </div>
- <span className="text-zinc-400 font-bold ml-4 text-xs tracking-widest uppercase">
- Server.Log
- </span>
- </div>
- <span className="text-zinc-400 text-xs tracking-widest uppercase">Port 443</span>
- </div>
+      {/* HUD: Bottom Right */}
+      <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 text-orange-500/70 text-xs sm:text-sm flex flex-col gap-1 tracking-widest text-right z-20">
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 }}>
+          LATENCY: 12ms
+        </motion.div>
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9 }}>
+          PACKET_LOSS: 0.00%
+        </motion.div>
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.3 }}>
+          ROUTING_TO_DASHBOARD
+        </motion.div>
+        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.8 }}>
+          <span className="text-white font-bold animate-pulse">ESTABLISHING_LINK</span>
+        </motion.div>
+      </div>
 
- {/* Terminal Output Stream */}
- <div className="space-y-2 h-72 overflow-hidden mb-6 flex flex-col justify-end">
- {bootMessages.map((msg, idx) => {
- const isOk = msg.startsWith("[OK]");
- return (
- <motion.div
- key={idx}
- initial={{ opacity: 0, x: -10}}
- animate={{ opacity: 1, x: 0}}
- transition={{ duration: 0.15}}
- className="flex items-start"
- >
- <span
- className={`${
- isOk
- ?"text-zinc-900 dark:text-white dark:hover:text-orange-50 transition-colors duration-500 font-bold"
- :"text-zinc-500 dark:text-zinc-500 dark:hover:text-orange-200/90 transition-colors duration-500"
- } tracking-tight`}
- >
- {msg}
- </span>
- </motion.div>
- );
- })}
- {/* Blinking Cursor */}
- <motion.div
- animate={{ opacity: [1, 0, 1]}}
- transition={{ duration: 0.8, repeat: Infinity}}
- className="w-2.5 h-4 bg-zinc-900 dark:bg-white mt-2"
- />
- </div>
+      {/* The Tunnel (Concentric expanding rings simulating warp speed) */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-40">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full border border-orange-500/30"
+            initial={{ width: 0, height: 0, opacity: 0 }}
+            animate={{
+              width: ["0vw", "150vw"],
+              height: ["0vw", "150vw"],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.2,
+              repeat: Infinity,
+              delay: i * 0.2,
+              ease: "easeIn",
+            }}
+          />
+        ))}
+      </div>
 
- {/* Network Progress Bar */}
- <div className="space-y-2 pt-4 border-t border-zinc-200 dark:border-zinc-800">
- <div className="flex justify-between text-xs text-zinc-500 dark:text-zinc-400 dark:hover:text-orange-100/90 transition-colors duration-500 uppercase tracking-widest font-bold">
- <span>Tracing Route...</span>
- <span>{Math.round(progress)}%</span>
- </div>
- <div className="h-1 bg-zinc-200 dark:bg-zinc-900 overflow-hidden">
- <motion.div
- className="h-full bg-zinc-900 dark:bg-white"
- initial={{ width: 0}}
- animate={{ width:`${progress}%`}}
- transition={{ duration: 0.2}}
- />
- </div>
- </div>
+      {/* Central "Connection Reached" Flash */}
+      <motion.div
+        className="absolute z-30 text-white font-black tracking-[0.5em] text-lg sm:text-3xl text-center"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: [0, 1, 0], scale: [0.8, 1.2, 1.5] }}
+        transition={{ delay: 2.0, duration: 0.6 }}
+      >
+        ACCESS GRANTED
+      </motion.div>
 
- </div>
- </div>
- </motion.div>
- </motion.div>
- );
+      {/* The Packet (Glowing Orb) */}
+      <motion.div
+        className="relative z-10 w-2 h-2 sm:w-3 sm:h-3 bg-white rounded-full shadow-[0_0_40px_20px_rgba(249,115,22,1)]"
+        initial={{ scale: 0 }}
+        animate={{
+          scale: [0, 1, 0.8, 1.2, 1, 200],
+          opacity: [0, 1, 1, 1, 1, 1],
+        }}
+        transition={{
+          times: [0, 0.1, 0.4, 0.7, 0.8, 1],
+          duration: 2.8,
+          ease: "easeInOut",
+        }}
+      />
+      
+      {/* Final Flash Overlay to blend into the dashboard */}
+      <motion.div
+        className="absolute inset-0 bg-white z-40"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0, 1] }}
+        transition={{ times: [0, 0.9, 1], duration: 2.8 }}
+      />
+    </motion.div>
+  );
 }

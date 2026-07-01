@@ -9,70 +9,86 @@ export default function MenuBar({ onLogoClick }: { onLogoClick?: () => void }) {
  const [currentTime, setCurrentTime] = useState("");
  const [batteryLevel, setBatteryLevel] = useState(100);
  const [isCharging, setIsCharging] = useState(false);
- const { theme, setTheme} = useTheme();
- const [mounted, setMounted] = useState(false);
- const [showBgImage, setShowBgImage] = useState(true);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [showBgImage, setShowBgImage] = useState(true);
 
- const handleLogoClick = () => {
- if (onLogoClick) {
- onLogoClick();
- } else {
- window.location.href = "/";
-}
-};
+  const handleLogoClick = () => {
+    if (onLogoClick) {
+      onLogoClick();
+    } else {
+      window.location.href = "/";
+    }
+  };
 
- useEffect(() => {
- // Check initial background state
- const storedBg = localStorage.getItem("showBgImage");
- if (storedBg === "false") {
-   setShowBgImage(false);
-   document.documentElement.classList.add("no-bg-image");
- }
+  // Sync background image with theme
+  useEffect(() => {
+    if (!mounted || !resolvedTheme) return;
 
- // Update time
- const updateTime = () => {
- const now = new Date();
- setCurrentTime(
- now.toLocaleTimeString("en-US", {
- hour:"2-digit",
- minute:"2-digit",
- hour12: false,
-})
- );
-};
- updateTime();
- const interval = setInterval(updateTime, 1000);
+    const storageKey = `showBgImage_${resolvedTheme}`;
+    const storedVal = localStorage.getItem(storageKey);
 
- // Get battery info
- if ("getBattery" in navigator) {
- // eslint-disable-next-line @typescript-eslint/no-explicit-any
- (navigator as any).getBattery().then((battery: any) => {
- setBatteryLevel(Math.round(battery.level * 100));
- setIsCharging(battery.charging);
+    // Default: light mode = true, dark mode = false
+    let shouldShow = resolvedTheme === "light";
+    if (storedVal !== null) {
+      shouldShow = storedVal === "true";
+    }
 
- battery.addEventListener("levelchange", () => {
- setBatteryLevel(Math.round(battery.level * 100));
-});
- battery.addEventListener("chargingchange", () => {
- setIsCharging(battery.charging);
-});
-});
-}
+    setShowBgImage(shouldShow);
+    if (shouldShow) {
+      document.documentElement.classList.remove("no-bg-image");
+    } else {
+      document.documentElement.classList.add("no-bg-image");
+    }
+  }, [resolvedTheme, mounted]);
 
- setMounted(true);
- return () => clearInterval(interval);
-}, []);
+  useEffect(() => {
+    // Update time
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
 
- const toggleBgImage = () => {
-   const newVal = !showBgImage;
-   setShowBgImage(newVal);
-   localStorage.setItem("showBgImage", newVal.toString());
-   if (newVal) {
-     document.documentElement.classList.remove("no-bg-image");
-   } else {
-     document.documentElement.classList.add("no-bg-image");
-   }
- };
+    // Get battery info
+    if ("getBattery" in navigator) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (navigator as any).getBattery().then((battery: any) => {
+        setBatteryLevel(Math.round(battery.level * 100));
+        setIsCharging(battery.charging);
+
+        battery.addEventListener("levelchange", () => {
+          setBatteryLevel(Math.round(battery.level * 100));
+        });
+        battery.addEventListener("chargingchange", () => {
+          setIsCharging(battery.charging);
+        });
+      });
+    }
+
+    setMounted(true);
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleBgImage = () => {
+    const newVal = !showBgImage;
+    setShowBgImage(newVal);
+    if (resolvedTheme) {
+      localStorage.setItem(`showBgImage_${resolvedTheme}`, newVal.toString());
+    }
+    if (newVal) {
+      document.documentElement.classList.remove("no-bg-image");
+    } else {
+      document.documentElement.classList.add("no-bg-image");
+    }
+  };
 
  return (
  <motion.div

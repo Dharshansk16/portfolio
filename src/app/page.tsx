@@ -59,20 +59,13 @@ export default function DevSpaceOS() {
     setMounted(true);
     setIsLowEnd(isLowEndDevice());
 
-    // Check if we've already booted in this session
-    const hasBooted = sessionStorage.getItem("devspace_booted");
-
-    if (hasBooted === "true") {
+    // Always play the boot screen on load as requested
+    const bootTime = isLowEndDevice() ? 2000 : 2800;
+    const timer = setTimeout(() => {
       setIsBooted(true);
-    } else {
-      // Shorter boot time - optimized for faster loading
-      const bootTime = isLowEndDevice() ? 2000 : 2800;
-      const timer = setTimeout(() => {
-        setIsBooted(true);
-        sessionStorage.setItem("devspace_booted", "true");
-      }, bootTime);
-      return () => clearTimeout(timer);
-    }
+    }, bootTime);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const handleAppOpen = (app: AppType) => {
