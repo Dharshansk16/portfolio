@@ -4,8 +4,17 @@ import { useEffect, useRef, useState } from "react";
 export default function TorchLight() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detect if it's a touch device
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia("(any-pointer: coarse)").matches || window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const handleMouseMove = (e: MouseEvent) => {
       if (containerRef.current) {
         containerRef.current.style.setProperty("--x", `${e.clientX}px`);
@@ -22,6 +31,7 @@ export default function TorchLight() {
     document.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
+      window.removeEventListener("resize", checkMobile);
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
     };
@@ -30,7 +40,7 @@ export default function TorchLight() {
   return (
     <div
       ref={containerRef}
-      className="pointer-events-none fixed inset-0 z-0 h-full w-full transition-colors duration-500 bg-zinc-950"
+      className="pointer-events-none fixed inset-0 z-0 h-full w-full transition-colors duration-500 bg-background"
       style={
         {
           "--x": "50%",
@@ -38,29 +48,33 @@ export default function TorchLight() {
         } as React.CSSProperties
       }
     >
-      {/* 1. Base Pitch Black Void */}
+      {/* 1. Base Pitch Black Void / Static Background in Light Mode */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed opacity-[0.01]"
-        style={{ backgroundImage: "url('/global-bg.jpg')" }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100 dark:opacity-[0.01]"
+        style={{ backgroundImage: "var(--global-bg)" }}
       />
 
-      {/* 2. Razor Sharp Spotlight Masked Reveal */}
+      {/* 2. Razor Sharp Spotlight Masked Reveal / Static Background on Mobile */}
       <div
-        className={`absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed transition-opacity duration-700 ease-out ${isHovered ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-out hidden dark:block ${isMobile || isHovered ? "opacity-100" : "opacity-0"}`}
         style={{
-          backgroundImage: "url('/global-bg.jpg')",
-          WebkitMaskImage: `radial-gradient(400px circle at var(--x) var(--y), black 0%, black 15%, rgba(0,0,0,0.6) 40%, transparent 80%)`,
-          maskImage: `radial-gradient(400px circle at var(--x) var(--y), black 0%, black 15%, rgba(0,0,0,0.6) 40%, transparent 80%)`,
+          backgroundImage: "var(--global-bg)",
+          ...(isMobile ? {} : {
+            WebkitMaskImage: `radial-gradient(400px circle at var(--x) var(--y), black 0%, black 15%, rgba(0,0,0,0.6) 40%, transparent 80%)`,
+            maskImage: `radial-gradient(400px circle at var(--x) var(--y), black 0%, black 15%, rgba(0,0,0,0.6) 40%, transparent 80%)`,
+          }),
         }}
       />
 
       {/* 3. Intense Center Glow of the Torch */}
-      <div
-        className={`absolute inset-0 transition-opacity duration-500 mix-blend-screen dark:mix-blend-lighten ${isHovered ? "opacity-100" : "opacity-0"}`}
-        style={{
-          background: `radial-gradient(400px circle at var(--x) var(--y), rgba(180, 255, 255, 0.15) 0%, rgba(120, 200, 255, 0.05) 30%, transparent 70%)`,
-        }}
-      />
+      {!isMobile && (
+        <div
+          className={`absolute inset-0 transition-opacity duration-500 mix-blend-screen hidden dark:block ${isHovered ? "opacity-100" : "opacity-0"}`}
+          style={{
+            background: `radial-gradient(400px circle at var(--x) var(--y), rgba(180, 255, 255, 0.15) 0%, rgba(120, 200, 255, 0.05) 30%, transparent 70%)`,
+          }}
+        />
+      )}
     </div>
   );
 }

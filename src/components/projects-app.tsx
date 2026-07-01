@@ -79,7 +79,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
 }, []);
 
  return (
- <div className={`w-full bg-white dark:bg-black px-4 sm:px-6 lg:px-8 ${isEmbedded ? 'py-16 border-t border-zinc-100 dark:border-zinc-900' : 'min-h-screen overflow-y-auto'}`}>
+ <div className={`w-full bg-transparent px-4 sm:px-6 lg:px-8 ${isEmbedded ? 'py-16 border-t border-zinc-100 dark:border-zinc-900' : 'min-h-screen overflow-y-auto'}`}>
   <div className={`max-w-6xl mx-auto ${isEmbedded ? '' : 'pt-20 pb-8 sm:pt-24 sm:pb-16'}`}>
   {/* Section Header for Embedded / Minimalist Back Button for Standalone */}
   {!isEmbedded && onBack && (
@@ -122,7 +122,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   <span className="w-8 h-[1px] bg-zinc-300 dark:bg-zinc-700"></span>
   </div>
   
-  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white mb-6 group-hover:text-zinc-500 transition-colors duration-500">
+  <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white mb-6 transition-colors duration-500">
   {project.title}
   </h2>
   
@@ -134,7 +134,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   {project.tech.map((tech) => (
   <span
   key={tech}
-  className="px-4 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-xs font-medium tracking-wide uppercase"
+  className="px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-xs font-medium tracking-wide uppercase"
   >
   {tech}
   </span>
@@ -152,7 +152,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
 
   {/* Project Image */}
   <div
-  className="w-full md:w-1/2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-2xl cursor-pointer"
+  className="w-full md:w-1/2 relative aspect-[4/3] rounded-2xl overflow-hidden bg-white/40 dark:bg-zinc-900 shadow-2xl cursor-pointer"
   onClick={() => handleProjectClick(project)}
   >
   {project.image ? (
@@ -165,14 +165,14 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
     sizes="(max-width: 768px) 100vw, 50vw"
     />
   ) : (
-    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900 transition-transform duration-1000 group-hover:scale-105">
-      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white dark:bg-zinc-950 flex items-center justify-center shadow-lg mb-4">
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-white/60 to-white/20 dark:from-zinc-800 dark:to-zinc-900 transition-transform duration-1000 group-hover:scale-105">
+      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white/70 backdrop-blur-sm dark:bg-zinc-950 flex items-center justify-center shadow-lg mb-4">
         <span className="text-3xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-200">{project.title.charAt(0)}</span>
       </div>
       <span className="text-zinc-500 dark:text-zinc-400 font-medium px-4 text-center">Images coming soon</span>
     </div>
   )}
-  <div className="absolute inset-0 bg-black/5 dark:bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+  {/* Removed dark overlay on hover */}
   </div>
   </motion.div>
   
@@ -214,19 +214,19 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  onClick={handleCloseModal}
  >
  <motion.div
- initial={{ opacity: 0, scale: 0.95, y: isMobile ? 20 : 0}}
+ initial={{ scale: 0.9, opacity: 0, y: 20 }}
  animate={{ opacity: 1, scale: 1, y: 0}}
  exit={{ opacity: 0, scale: 0.95, y: isMobile ? 20 : 0}}
  transition={{ duration: 0.3, ease:"easeOut"}}
  onClick={(e) => e.stopPropagation()}
- className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto my-auto shadow-2xl relative"
+ className="bg-white/80 backdrop-blur-xl dark:bg-zinc-950 border border-white/50 dark:border-zinc-800 rounded-3xl max-w-5xl w-full max-h-[90vh] overflow-y-auto my-auto shadow-2xl relative"
  style={{ willChange:"transform, opacity"}}
  >
  {/* Modal Header */}
- <div className="flex items-center justify-between p-5 sm:p-8 border-b border-zinc-100 dark:border-zinc-800 sticky top-0 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md z-20">
- <div className="flex items-center space-x-4 min-w-0 flex-1">
+ <div className="flex items-center justify-between p-5 sm:p-8 border-b border-white/40 dark:border-zinc-800 sticky top-0 bg-white/50 dark:bg-zinc-950/90 backdrop-blur-md z-20">
+ <div className="flex items-center gap-4 min-w-0 flex-1">
  <div
- className={`w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-950 ${selectedProject.color} flex items-center justify-center flex-shrink-0 shadow-inner`}
+ className={`w-12 h-12 rounded-xl bg-white/60 backdrop-blur-sm dark:bg-zinc-950 ${selectedProject.color} flex items-center justify-center flex-shrink-0 shadow-inner`}
  >
  <span className="text-white font-bold text-xl">
  {selectedProject.title.charAt(0)}
@@ -255,7 +255,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  {/* Image Gallery */}
  {selectedProject.images && selectedProject.images.length > 0 ? (
   <div className="space-y-4">
-  <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden bg-zinc-100 dark:bg-black border border-zinc-200 dark:border-zinc-800 group">
+  <div className="relative h-64 sm:h-80 md:h-96 rounded-2xl overflow-hidden bg-white/40 dark:bg-black border border-white/50 dark:border-zinc-800 group">
   <AnimatePresence mode="wait">
   <motion.img
   key={currentImageIndex}
@@ -333,8 +333,9 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
   </div>
   </div>
   ) : (
-  <div className="flex flex-col items-center justify-center h-64 sm:h-80 md:h-96 rounded-2xl bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-800 dark:to-zinc-900 border border-zinc-200 dark:border-zinc-800 group relative">
-    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white dark:bg-zinc-950 flex items-center justify-center shadow-lg mb-6 z-10">
+  <div className="flex flex-col items-center justify-center h-64 sm:h-80 md:h-96 rounded-2xl bg-gradient-to-br from-white/60 to-white/20 dark:from-zinc-800 dark:to-zinc-900 border border-white/50 dark:border-zinc-800 group relative">
+    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white/70 backdrop-blur-sm dark:bg-zinc-950 flex items-center justify-center shadow-lg mb-6 z-10">
+      <ImageIcon className={`w-10 h-10 sm:w-12 sm:h-12 ${selectedProject.color}`} />
       <span className="text-3xl sm:text-4xl font-bold text-zinc-800 dark:text-zinc-200">{selectedProject.title.charAt(0)}</span>
     </div>
     <p className="text-zinc-500 dark:text-zinc-400 font-medium text-lg z-10">Project screenshots coming soon</p>
@@ -363,7 +364,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  {selectedProject.tech.map((tech) => (
  <span
  key={tech}
- className="px-3 py-1.5 bg-zinc-100 dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg font-medium"
+ className="px-3 py-1.5 bg-white/60 backdrop-blur-sm dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-sm rounded-lg font-medium"
  >
  {tech}
  </span>
@@ -375,7 +376,7 @@ function ProjectsApp({ onBack, isEmbedded = false, onViewAll }: ProjectsAppProps
  <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
  <Button
  onClick={() => window.open(selectedProject.github,"_blank")}
- className="flex-1 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800 font-semibold shadow-sm h-12 text-base rounded-xl transition-all"
+ className="flex-1 bg-white/60 backdrop-blur-sm dark:bg-zinc-900 hover:bg-white/80 dark:hover:bg-zinc-800 text-zinc-900 dark:text-white border border-white/50 dark:border-zinc-800 font-semibold shadow-sm h-12 text-base rounded-xl transition-all"
  >
  <FaGithub className="w-5 h-5 mr-2" />
  View Source

@@ -45,6 +45,7 @@
 
 :root {
   --radius: 0.75rem;
+  --global-bg: url('/global-bg-light.jpg');
   /* Light mode - Monochromatic Black & White */
   --background: #ffffff;
   --foreground: #09090b;
@@ -80,6 +81,7 @@
 }
 
 .dark {
+  --global-bg: url('/global-bg.jpg');
   /* Dark mode - Monochromatic Black & White */
   --background: #000000;
   --foreground: #fafafa;

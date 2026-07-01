@@ -133,7 +133,7 @@ export default function DevSpaceOS() {
       {/* Refined Vignette Overlay & Global Background */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <TorchLight />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white dark:via-zinc-950/80 dark:to-zinc-950" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent dark:via-zinc-950/80 dark:to-zinc-950" />
       </div>
 
       <AnimatePresence mode="wait">

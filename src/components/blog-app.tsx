@@ -75,7 +75,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
 
   return (
     <div
-      className={`w-full bg-white dark:bg-black px-4 sm:px-6 lg:px-8 ${
+      className={`w-full bg-transparent px-4 sm:px-6 lg:px-8 ${
         isEmbedded
           ? "py-16 border-t border-zinc-100 dark:border-zinc-900"
           : "min-h-screen overflow-y-auto"
@@ -91,7 +91,7 @@ function BlogApp({ onBack, isEmbedded = false, onViewAll }: BlogAppProps) {
           <div className="mb-12">
             <button
               onClick={onBack}
-              className="group inline-flex items-center px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
+              className="group inline-flex items-center px-4 py-2 rounded-full bg-white/60 backdrop-blur-sm dark:bg-zinc-900 border border-white/50 dark:border-zinc-800 text-zinc-900 dark:text-white hover:bg-white/80 dark:hover:bg-zinc-800 transition-all duration-300 shadow-sm text-sm font-medium"
               aria-label="Back to Dashboard"
             >
               <ChevronLeft className="w-4 h-4 mr-1.5 group-hover:-translate-x-0.5 transition-transform" />

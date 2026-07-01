@@ -67,7 +67,7 @@ export default function Dashboard({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.6, -0.05, 0.01, 0.99] }}
-      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area bg-white dark:bg-transparent transition-colors duration-500"
+      className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 pt-14 sm:pt-16 pb-24 sm:pb-28 relative safe-area bg-transparent transition-colors duration-500"
     >
       {/* Floating Elements - Conditional based on showParticles */}
       {showParticles && !isLowEnd && (
@@ -119,7 +119,7 @@ export default function Dashboard({
 
         {/* Terminal Command Simulation */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center sm:inline-flex gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-2xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 font-mono text-xs sm:text-sm md:text-base shadow-inner w-full sm:w-auto max-w-full overflow-hidden"
+          className="flex flex-col sm:flex-row items-center sm:inline-flex gap-2 sm:gap-3 px-4 sm:px-6 py-3 rounded-2xl bg-white/60 backdrop-blur-md dark:bg-zinc-900/50 border border-white/50 dark:border-zinc-800 font-mono text-xs sm:text-sm md:text-base shadow-inner w-full sm:w-auto max-w-full overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -192,7 +192,7 @@ export default function Dashboard({
             {/* Enhanced Professional Glow Effect - Only if showParticles is true */}
             {showParticles && !isLowEnd && (
               <motion.div
-                className={`absolute -inset-1 bg-zinc-200 dark:bg-zinc-800 rounded-3xl blur-xl opacity-0 transition-opacity duration-500`}
+                className={`absolute -inset-1 bg-white/40 dark:bg-zinc-800 rounded-3xl blur-xl opacity-0 transition-opacity duration-500`}
                 whileHover={{ opacity: 0.5 }}
                 animate={{
                   opacity: [0, 0.2, 0],
@@ -207,7 +207,7 @@ export default function Dashboard({
             <div className="relative">
               {/* Professional App Icon Container */}
               <motion.div
-                className={`mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-2xl sm:rounded-3xl bg-white dark:bg-zinc-900/80 p-4 sm:p-5 backdrop-blur-sm border border-zinc-200 dark:border-zinc-800 relative overflow-hidden touch-manipulation transition-all duration-300`}
+                className={`mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-2xl sm:rounded-3xl bg-white/70 dark:bg-zinc-900/80 p-4 sm:p-5 backdrop-blur-md border border-white/60 dark:border-zinc-800 relative overflow-hidden touch-manipulation transition-all duration-300`}
                 style={{
                   boxShadow: isLowEnd
                     ? "0 4px 12px 0 rgba(0, 0, 0, 0.05)"
@@ -225,7 +225,7 @@ export default function Dashboard({
                 {/* Refined Animated Background - Only if showParticles is true */}
                 {showParticles && !isLowEnd && (
                   <motion.div
-                    className="absolute inset-0 bg-zinc-50 dark:bg-zinc-800/20 opacity-50"
+                    className="absolute inset-0 bg-white/40 dark:bg-zinc-800/20 opacity-50"
                     animate={{
                       x: [-200, 200],
                       y: [-200, 200],
@@ -274,7 +274,7 @@ export default function Dashboard({
               </div>
 
               {/* Professional Hover Indicator */}
-              <motion.div className="absolute -bottom-1 sm:-bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 sm:h-1 bg-zinc-100 dark:bg-zinc-950 rounded-full group-hover:w-full transition-all duration-300" />
+              <motion.div className="absolute -bottom-1 sm:-bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 sm:h-1 bg-white/60 dark:bg-zinc-950 rounded-full group-hover:w-full transition-all duration-300" />
             </div>
           </motion.div>
         ))}
