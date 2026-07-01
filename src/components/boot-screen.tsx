@@ -61,7 +61,7 @@ export default function BootScreen() {
       </svg>
 
       {/* HUD: Connection Lifecycle Stream */}
-      <div className="absolute top-4 left-4 sm:top-10 sm:left-10 text-orange-500/80 text-[7px] sm:text-[10px] flex flex-col gap-1 sm:gap-2 tracking-widest z-20 font-mono bg-black/60 p-2.5 sm:p-4 border border-orange-500/20 rounded-lg backdrop-blur-md shadow-2xl shadow-orange-500/10 w-[200px] sm:w-auto sm:min-w-[280px]">
+      <div className="absolute top-4 left-4 sm:top-10 sm:left-10 text-orange-500/80 text-[8px] sm:text-[10px] flex flex-col gap-1.5 sm:gap-2 tracking-widest z-20 font-mono bg-black/60 p-3 sm:p-4 border border-orange-500/20 rounded-lg backdrop-blur-md shadow-2xl shadow-orange-500/10 w-[calc(100vw-32px)] sm:w-auto sm:min-w-[280px]">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.05 }} className="border-b border-orange-500/30 pb-1 sm:pb-2 mb-0.5 sm:mb-1">
           <span className="text-white">user@device:~$</span> fetch https://dharshanskotian.me
         </motion.div>
@@ -82,7 +82,7 @@ export default function BootScreen() {
       </div>
 
       {/* HUD: System Status */}
-      <div className="absolute bottom-4 right-4 sm:bottom-10 sm:right-10 text-orange-500/70 text-[7px] sm:text-[10px] flex flex-col gap-1 sm:gap-2 tracking-widest text-right z-20 font-mono bg-black/60 p-2.5 sm:p-4 border border-orange-500/20 rounded-lg backdrop-blur-md">
+      <div className="absolute bottom-4 right-4 sm:bottom-10 sm:right-10 text-orange-500/70 text-[8px] sm:text-[10px] flex flex-col gap-1.5 sm:gap-2 tracking-widest text-right z-20 font-mono bg-black/60 p-3 sm:p-4 border border-orange-500/20 rounded-lg backdrop-blur-md w-[calc(100vw-32px)] sm:w-auto">
         <div className="border-b border-orange-500/30 pb-1 sm:pb-2 mb-0.5 sm:mb-1">SYS.ENV // SECURE</div>
         <div className="flex justify-end gap-3 sm:gap-6 text-orange-500/50">
           <span>UPLINK: ACTIVE</span>
@@ -114,13 +114,13 @@ export default function BootScreen() {
           {i !== 5 && (
             <>
               {/* Sci-Fi Hardware Node */}
-              <div className="absolute w-5 h-5 sm:w-6 sm:h-6 border border-orange-500/40 bg-zinc-950/90 transform rotate-45 flex items-center justify-center shadow-lg">
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 border border-orange-500/30" />
+              <div className="absolute w-4 h-4 sm:w-6 sm:h-6 border border-orange-500/40 bg-zinc-950/90 transform rotate-45 flex items-center justify-center shadow-lg">
+                <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 border border-orange-500/30" />
               </div>
               <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-orange-400 z-10 relative" />
               
               {/* Node Labels */}
-              <div className="absolute top-4 left-4 sm:top-5 sm:left-5 text-[6px] sm:text-[8px] text-orange-500/80 font-mono tracking-widest whitespace-nowrap bg-black/70 px-1 sm:px-1.5 py-0.5 border-l-2 border-orange-500/50 backdrop-blur-sm shadow-md">
+              <div className="hidden sm:block absolute top-5 left-5 text-[8px] text-orange-500/80 font-mono tracking-widest whitespace-nowrap bg-black/70 px-1.5 py-0.5 border-l-2 border-orange-500/50 backdrop-blur-sm shadow-md">
                 <span className="text-white font-bold">{node.id}</span>
                 <br />
                 <span className="text-orange-400">{node.action}</span>
