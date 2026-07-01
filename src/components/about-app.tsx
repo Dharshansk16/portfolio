@@ -131,8 +131,7 @@ function AboutApp({ onBack, isEmbedded = false, onViewAll }: AboutAppProps) {
             {/* Avatar + Name */}
             <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-12">
               <motion.div variants={itemVariants} className="relative shrink-0">
-                {/* Animated ring */}
-                <div className="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-violet-500 via-fuchsia-500 to-cyan-500 opacity-60 blur-md animate-pulse" />
+                {/* Animated ring removed per request */}
                 <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full shadow-2xl ring-4 ring-white dark:ring-black overflow-hidden bg-zinc-100 dark:bg-zinc-900">
                   <Image
                     src="/profile/darsh_pfp.jpeg"

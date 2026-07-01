@@ -217,9 +217,7 @@ export default function Dashboard({
                 whileHover={
                   isLowEnd
                     ? {}
-                    : {
-                        boxShadow: "0 20px 60px 0 rgba(99, 102, 241, 0.4)",
-                      }
+                    : {}
                 }
               >
                 {/* Refined Animated Background - Only if showParticles is true */}
