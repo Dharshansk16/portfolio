@@ -6,8 +6,13 @@ export const projects = [
 "An AI assistant platform where users can create and train custom personas using their own data. Built with Next.js, LangChain, Azure AI Search, PostgreSQL, and Neo4j.",
  longDescription:
 "Built an AI assistant platform where users can create and train custom personas using their own data. Designed a hybrid RAG architecture combining knowledge graph (Neo4j) and vector database to enhance accuracy. Reduced hallucination rate by improving retrieval accuracy via hybrid RAG (vector + graph-based retrieval).",
- image: "",
- images: [],
+ image: "/projects/sophia/home.png",
+ images: [
+  "/projects/sophia/home.png",
+  "/projects/sophia/chat.png",
+  "/projects/sophia/personas.png",
+  "/projects/sophia/debate.png",
+ ],
  tech: [
 "Next.js",
 "LangChain",
@@ -77,5 +82,34 @@ export const projects = [
  year:"2024",
  duration:"1 month",
  team:"Solo Project",
-}
+},
+ {
+  id: 4,
+  title:"Next Auction",
+  description:
+ "A comprehensive IPL auction management platform for conducting live auctions, managing teams, and tracking player bids.",
+  longDescription:
+ "A comprehensive IPL auction management platform for conducting live auctions, managing teams, and tracking player bids in real-time. Features include a live dashboard, player management, and team settings.",
+  image: "/thumbnails/next-auction.png",
+  images: [
+ "/projects/next-auction/dashboard.png",
+ "/projects/next-auction/live-auction.png",
+ "/projects/next-auction/all-players.png",
+ "/projects/next-auction/manage-team.png",
+ "/projects/next-auction/settings.png",
+  ],
+  tech: [
+ "Next.js",
+ "TypeScript",
+ "TailwindCSS",
+  ],
+  github:"https://github.com/Dharshansk16",
+  live:"https://github.com/Dharshansk16",
+  color:"",
+  category:"Full Stack",
+  status:"Completed",
+  year:"2024",
+  duration:"1 month",
+  team:"Solo Project",
+ }
 ];
